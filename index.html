@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Full Circle | Integrative Medicine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Italiana&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              serif: ['"Playfair Display"', 'serif'],
+              display: ['"Italiana"', 'serif'], // Switched to Italiana for that elegant thin look
+              cinzel: ['"Cinzel"', 'serif'],
+              sans: ['"Lato"', 'sans-serif'],
+            },
+            colors: {
+              'cream': '#FDF6E3',
+              'peach': '#FFBE98',
+              'soft-pink': '#FFD1C1',
+              'dark-brown': '#2A1C19',
+              'clay': '#E6DACE',
+              'accent-orange': '#FF7E5F',
+              'gold': '#D4AF37',
+            },
+            animation: {
+              'spin-slow': 'spin 12s linear infinite',
+            },
+            keyframes: {}
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        background-color: #FDF6E3;
+        color: #2A1C19;
+      }
+      .text-outline-cream {
+        -webkit-text-stroke: 1px #FDF6E3;
+      }
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.12.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
