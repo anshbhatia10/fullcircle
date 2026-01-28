@@ -19,7 +19,7 @@ const Home: React.FC = () => {
           <div className="absolute bottom-10 md:bottom-16 flex flex-col items-center">
              <div className="w-[1.5px] h-12 md:h-16 bg-dark-brown/40 mb-8"></div>
              <p className="font-sans text-[11px] md:text-lg font-black uppercase tracking-[0.4em] text-dark-brown text-center px-10 leading-relaxed max-w-2xl">
-               USA Protocol Meets Antric Wisdom
+               USA Protocol Meets Ancient Wisdom
              </p>
           </div>
         </div>
