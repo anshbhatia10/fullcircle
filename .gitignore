@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+# Unused video files
+The_tree_featured_1080p_202602081543.mp4
+The_tree_featured_1080p_smooth_soft.mp4
+The_tree_featured_1080p_smooth_blur.mp4
+The_tree_featured_4k_denoised.mp4
+The_tree_featured_4k_denoised_strong.mp4
+dist/
