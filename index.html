@@ -26,11 +26,20 @@
               'clay': '#E6DACE',
               'accent-orange': '#FF7E5F',
               'gold': '#D4AF37',
+              'bronze': '#3D1E16',
+              'bronze-dark': '#1D0F0C',
+              'bronze-light': '#70362A',
             },
             animation: {
-              'spin-slow': 'spin 12s linear infinite',
+              'spin-slow': 'spin 20s linear infinite',
+              'marquee': 'marquee 25s linear infinite',
             },
-            keyframes: {}
+            keyframes: {
+              marquee: {
+                '0%': { transform: 'translateX(0%)' },
+                '100%': { transform: 'translateX(-100%)' },
+              }
+            }
           }
         }
       }

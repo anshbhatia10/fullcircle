@@ -1,121 +1,180 @@
-
-import React, { useState, useMemo } from 'react';
-import { Calendar as CalendarIcon, Clock, MessageCircle } from 'lucide-react';
+import React, { useState } from 'react';
 
 const Appointment: React.FC = () => {
-  const [selectedDate, setSelectedDate] = useState<string>(new Date().toISOString().split('T')[0]);
-  const [selectedTime, setSelectedTime] = useState<string>('11:00');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    date: '',
+    time: '11:00 AM',
+    service: 'Wellness Consultation (Dosha)',
+    notes: ''
+  });
 
-  const WHATSAPP_NUMBER = '916207221392';
+  const [error, setError] = useState('');
 
-  // Generate time slots from 11 AM to 8 PM (20:00)
-  const timeSlots = useMemo(() => {
-    const slots = [];
-    for (let hour = 11; hour < 20; hour++) {
-      slots.push(`${hour}:00`);
-      slots.push(`${hour}:30`);
+  const timeSlots = [
+    '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '01:00 PM', '01:30 PM',
+    '02:00 PM', '02:30 PM', '03:00 PM', '03:30 PM', '04:00 PM', '04:30 PM',
+    '05:00 PM', '05:30 PM', '06:00 PM', '06:30 PM', '07:00 PM', '07:30 PM', '08:00 PM'
+  ];
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    
+    if (name === 'date') {
+      const day = new Date(value).getUTCDay();
+      if (day === 0 || day === 6) {
+        setError('Please select a weekday (Monday to Friday). We are closed on weekends.');
+      } else {
+        setError('');
+      }
     }
-    slots.push('20:00');
-    return slots;
-  }, []);
-
-  const isWeekend = (dateString: string) => {
-    const day = new Date(dateString).getDay();
-    return day === 0 || day === 6; // 0 is Sunday, 6 is Saturday
+    
+    setFormData({ ...formData, [name]: value });
   };
 
-  const handleWhatsAppClick = () => {
-    const message = `Hello Full Circle, I would like to request an appointment for ${selectedDate} at ${selectedTime}.`;
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (error) {
+      alert(error);
+      return;
+    }
+
+    const phoneNumber = '916207221392';
+    const message = `I want to request a booking for ${formData.service} on ${formData.date} at ${formData.time}.
+Name: ${formData.name}
+Email: ${formData.email}
+Notes: ${formData.notes || 'None'}`;
+
     const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`, '_blank');
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    
+    window.open(whatsappUrl, '_blank');
   };
 
   return (
     <div className="bg-cream min-h-screen py-32 flex items-center justify-center px-6">
-      <div className="max-w-5xl w-full mx-auto grid grid-cols-1 md:grid-cols-2 gap-0 shadow-2xl rounded-[3rem] overflow-hidden border border-dark-brown/10">
+      <div className="max-w-4xl w-full mx-auto grid grid-cols-1 md:grid-cols-2 gap-0 shadow-2xl rounded-[3rem] overflow-hidden border border-dark-brown/5">
         
-        {/* Left Side: Information */}
-        <div className="bg-dark-brown text-cream p-12 flex flex-col justify-between relative overflow-hidden">
-          <div className="absolute top-0 right-0 p-10 opacity-5">
-            <CalendarIcon size={200} />
-          </div>
-          <div className="relative z-10">
-            <h2 className="font-display text-5xl mb-6">Book Your Session</h2>
-            <p className="font-serif italic text-xl text-accent-orange mb-8">
-              "We close the gap between patients and doctors."
+        {/* Info Side */}
+        <div className="bg-bronze-dark text-cream p-12 flex flex-col justify-between relative overflow-hidden">
+          <div className="absolute top-[-20%] right-[-20%] w-64 h-64 bg-accent-orange rounded-full opacity-20 filter blur-3xl"></div>
+          
+          <div>
+            <h2 className="font-display text-4xl mb-6 uppercase tracking-tighter">Begin Your Journey</h2>
+            <p className="font-serif italic text-lg opacity-80 mb-8 leading-relaxed">
+              "You will always have a doctor who knows your full circle."
             </p>
-            <div className="space-y-6 text-sm opacity-80">
-              <div className="flex items-start gap-4">
-                <Clock className="text-accent-orange mt-1 shrink-0" size={18} />
-                <div>
-                  <p className="font-bold uppercase tracking-widest text-[10px]">Availability</p>
-                  <p>Monday — Friday</p>
-                  <p>11:00 AM — 08:00 PM (IST)</p>
-                </div>
-              </div>
-              <p className="text-xs leading-relaxed italic border-t border-white/10 pt-6">
-                Appointments are confirmed via WhatsApp. Our team will verify your requested slot and provide pre-session guidelines.
-              </p>
+            <div className="space-y-6 text-sm opacity-90 font-sans">
+              <p><strong className="text-accent-orange uppercase tracking-widest text-[10px] block mb-1">Clinical:</strong> Expert diagnostics & treatment.</p>
+              <p><strong className="text-accent-orange uppercase tracking-widest text-[10px] block mb-1">Spiritual:</strong> Healing the subtle bodies.</p>
+              <p><strong className="text-accent-orange uppercase tracking-widest text-[10px] block mb-1">Aesthetic:</strong> Harmony in physical form.</p>
+            </div>
+          </div>
+
+          <div className="mt-12 space-y-4">
+            <div>
+              <p className="text-[10px] uppercase tracking-widest text-accent-orange mb-1 font-bold">Availability</p>
+              <p className="text-sm font-sans">Mon - Fri: 11:00 AM - 08:00 PM</p>
+            </div>
+            <div>
+              <p className="text-[10px] uppercase tracking-widest text-accent-orange mb-1 font-bold">Location</p>
+              <p className="text-sm font-sans">Full Circle Clinic, New Delhi, India</p>
             </div>
           </div>
         </div>
 
-        {/* Right Side: Selection */}
+        {/* Form Side */}
         <div className="bg-white p-12">
-          <div className="space-y-8">
-            {/* Date Selection */}
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-[10px] uppercase font-black tracking-widest text-dark-brown/40 mb-4 flex items-center gap-2">
-                <CalendarIcon size={14} /> 1. Select Date
-              </label>
+              <label className="block text-[10px] uppercase tracking-widest text-dark-brown/40 mb-2 font-bold font-sans">Full Name</label>
               <input 
-                type="date" 
-                value={selectedDate}
-                min={new Date().toISOString().split('T')[0]}
-                onChange={(e) => setSelectedDate(e.target.value)}
-                className="w-full border-b-2 border-dark-brown/10 py-3 focus:outline-none focus:border-accent-orange bg-transparent transition-colors font-sans font-bold text-dark-brown"
+                type="text" 
+                name="name" 
+                value={formData.name}
+                onChange={handleChange}
+                className="w-full border-b border-dark-brown/10 py-2 focus:outline-none focus:border-accent-orange bg-transparent transition-colors font-sans"
+                required
               />
-              {isWeekend(selectedDate) && (
-                <p className="text-[10px] text-red-500 font-bold uppercase mt-2">Note: Weekend slots may vary. Weekdays preferred.</p>
-              )}
             </div>
 
-            {/* Time Selection */}
             <div>
-              <label className="block text-[10px] uppercase font-black tracking-widest text-dark-brown/40 mb-4 flex items-center gap-2">
-                <Clock size={14} /> 2. Select Time (IST)
-              </label>
-              <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 max-h-48 overflow-y-auto pr-2 scrollbar-hide">
-                {timeSlots.map((time) => (
-                  <button
-                    key={time}
-                    onClick={() => setSelectedTime(time)}
-                    className={`py-2 rounded-xl text-[10px] font-bold transition-all border ${
-                      selectedTime === time 
-                        ? 'bg-dark-brown text-cream border-dark-brown' 
-                        : 'bg-cream/30 text-dark-brown border-dark-brown/5 hover:border-accent-orange'
-                    }`}
-                  >
-                    {time}
-                  </button>
-                ))}
+              <label className="block text-[10px] uppercase tracking-widest text-dark-brown/40 mb-2 font-bold font-sans">Email Address</label>
+              <input 
+                type="email" 
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full border-b border-dark-brown/10 py-2 focus:outline-none focus:border-accent-orange bg-transparent transition-colors font-sans"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-[10px] uppercase tracking-widest text-dark-brown/40 mb-2 font-bold font-sans">Service</label>
+              <select 
+                name="service"
+                value={formData.service}
+                onChange={handleChange}
+                className="w-full border-b border-dark-brown/10 py-2 focus:outline-none focus:border-accent-orange bg-transparent transition-colors font-sans appearance-none"
+              >
+                <option>Wellness Consultation (Dosha)</option>
+                <option>Acute/Medical Care</option>
+                <option>Spiritual Healing / Reiki</option>
+                <option>Palliative Support</option>
+                <option>Aesthetic Consultation</option>
+              </select>
+            </div>
+
+            <div className="grid grid-cols-2 gap-6">
+              <div>
+                <label className="block text-[10px] uppercase tracking-widest text-dark-brown/40 mb-2 font-bold font-sans">Preferred Date</label>
+                <input 
+                  type="date" 
+                  name="date"
+                  value={formData.date}
+                  onChange={handleChange}
+                  className={`w-full border-b py-2 focus:outline-none bg-transparent transition-colors font-sans ${error ? 'border-red-400 text-red-500' : 'border-dark-brown/10 focus:border-accent-orange'}`}
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-[10px] uppercase tracking-widest text-dark-brown/40 mb-2 font-bold font-sans">Preferred Time</label>
+                <select 
+                  name="time"
+                  value={formData.time}
+                  onChange={handleChange}
+                  className="w-full border-b border-dark-brown/10 py-2 focus:outline-none focus:border-accent-orange bg-transparent transition-colors font-sans appearance-none"
+                  required
+                >
+                  {timeSlots.map(slot => (
+                    <option key={slot} value={slot}>{slot}</option>
+                  ))}
+                </select>
               </div>
             </div>
 
-            {/* Request Button */}
-            <button 
-              onClick={handleWhatsAppClick}
-              className="w-full bg-accent-orange text-white py-6 rounded-full font-bold uppercase tracking-[0.2em] text-xs flex items-center justify-center gap-3 hover:bg-dark-brown transition-all shadow-xl hover:shadow-2xl transform hover:-translate-y-1"
-            >
-              <MessageCircle size={18} />
-              Request via WhatsApp
+            {error && <p className="text-[10px] text-red-500 font-bold uppercase tracking-tight">{error}</p>}
+
+             <div>
+              <label className="block text-[10px] uppercase tracking-widest text-dark-brown/40 mb-2 font-bold font-sans">Message (Optional)</label>
+              <textarea 
+                name="notes"
+                value={formData.notes}
+                onChange={handleChange}
+                rows={2}
+                className="w-full border-b border-dark-brown/10 py-2 focus:outline-none focus:border-accent-orange bg-transparent transition-colors resize-none font-sans"
+              />
+            </div>
+
+            <button type="submit" className="w-full bg-dark-brown text-cream py-4 rounded-full font-bold uppercase tracking-widest hover:bg-accent-orange transition-all mt-4 text-[10px] shadow-xl transform hover:-translate-y-1">
+              Request Booking on WhatsApp
             </button>
-            
-            <p className="text-[9px] text-center text-dark-brown/30 uppercase font-bold tracking-widest">
-              Instant Redirect to Business WhatsApp
-            </p>
-          </div>
+          </form>
         </div>
+
       </div>
     </div>
   );

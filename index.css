@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Utilities if needed, but keeping it minimal for now */
+body {
+  @apply bg-stone-50 text-slate-800;
+}
+
+.font-serif {
+  font-family: 'Playfair Display', serif;
+}
+
+.font-display {
+  font-family: 'Italiana', serif;
+}
+
+.font-sans {
+  font-family: 'Lato', sans-serif;
+}
