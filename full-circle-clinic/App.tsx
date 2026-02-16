@@ -8,6 +8,7 @@ import Partners from './pages/Partners';
 import Pledge from './pages/Pledge';
 import Appointment from './pages/Appointment';
 import Mission from './pages/Mission';
+import HealthGuidelines from './pages/HealthGuidelines';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -31,6 +32,7 @@ const App: React.FC = () => {
             <Route path="/partners" element={<Partners />} />
             <Route path="/pledge" element={<Pledge />} />
             <Route path="/appointment" element={<Appointment />} />
+            <Route path="/guidelines" element={<HealthGuidelines />} />
           </Routes>
         </main>
         <Footer />

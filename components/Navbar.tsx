@@ -11,6 +11,7 @@ const Navbar: React.FC = () => {
   // Links from the Old Website (Turn 3)
   const navLinks = [
     { label: 'Screening', path: '/screening-circle' },
+    { label: 'Guidelines', path: '/guidelines' },
     { label: 'PCP', path: '/full-circle-pcp' },
     { label: 'Aesthetics', path: '/aesthetic-circle' },
     { label: 'Mission', path: '/inverted-tree' },

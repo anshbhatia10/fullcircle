@@ -30,7 +30,7 @@ const Pledge: React.FC = () => {
           <p className="font-serif text-2xl italic text-accent-orange mb-8">"I have signed the circle."</p>
           <p className="text-dark-brown/70 mb-10 font-bold uppercase tracking-widest text-xs font-sans">Full Circle Conscious Donor</p>
           <div className="flex flex-col gap-4">
-             <a href="https://notto.abdm.gov.in" target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 px-10 py-4 bg-dark-brown text-cream rounded-full text-xs font-bold uppercase tracking-widest hover:bg-accent-orange transition-colors">
+            <a href="https://notto.abdm.gov.in" target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 px-10 py-4 bg-dark-brown text-cream rounded-full text-xs font-bold uppercase tracking-widest hover:bg-accent-orange transition-colors">
               Official ABDM NOTTO Registry <ExternalLink size={14} />
             </a>
             <button onClick={() => setSigned(false)} className="text-[10px] uppercase font-bold text-dark-brown/40 tracking-widest hover:text-accent-orange font-sans">Review the Pact</button>
@@ -51,7 +51,7 @@ const Pledge: React.FC = () => {
           </p>
           <div className="w-20 h-1 bg-accent-orange mx-auto"></div>
           <p className="text-dark-brown/80 leading-relaxed text-lg font-sans">
-            In our clinic, the **"Art of Dying"** is about the grace of the handoff. Dr. Prerna and every member of our staff are Pledged Organ Donors.
+            In our clinic, the <strong>"Art of Dying"</strong> is about the grace of the handoff. Dr. Prerna and every member of our staff are Pledged Organ Donors.
           </p>
         </div>
 
@@ -88,7 +88,7 @@ const Pledge: React.FC = () => {
               </div>
               <div>
                 <h3 className="font-display text-2xl text-dark-brown mb-3">3. The Art of Giving</h3>
-                <p className="text-dark-brown/60 text-sm italic font-serif">"I support the **EWS Fund**, financing medical evaluations for those in need."</p>
+                <p className="text-dark-brown/60 text-sm italic font-serif">"I support the <strong>EWS Fund</strong>, financing medical evaluations for those in need."</p>
               </div>
             </div>
 
@@ -101,21 +101,21 @@ const Pledge: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-           <div className="bg-white p-8 rounded-[3rem] border border-dark-brown/5 shadow-sm text-center">
-             <Zap size={24} className="text-accent-orange mx-auto mb-4" />
-             <h4 className="font-display text-xl mb-2 text-dark-brown">Neutralizing Karma</h4>
-             <p className="text-xs text-dark-brown/60 font-sans uppercase tracking-widest">Transforming transition into selfless merit.</p>
-           </div>
-           <div className="bg-[#1D1614] p-8 rounded-[3rem] text-cream shadow-xl text-center">
-             <ShieldCheck size={24} className="text-accent-orange mx-auto mb-4" />
-             <h4 className="font-display text-xl mb-2">EWS Support</h4>
-             <p className="text-xs text-cream/60 font-sans uppercase tracking-widest">United by biological hope. High Spiritual Quotient.</p>
-           </div>
-           <div className="bg-white p-8 rounded-[3rem] border border-dark-brown/5 shadow-sm text-center">
-             <Heart size={24} className="text-accent-orange mx-auto mb-4" />
-             <h4 className="font-display text-xl mb-2 text-dark-brown">Raising Frequency</h4>
-             <p className="text-xs text-dark-brown/60 font-sans uppercase tracking-widest">From scarcity to abundance and gift of life.</p>
-           </div>
+          <div className="bg-white p-8 rounded-[3rem] border border-dark-brown/5 shadow-sm text-center">
+            <Zap size={24} className="text-accent-orange mx-auto mb-4" />
+            <h4 className="font-display text-xl mb-2 text-dark-brown">Neutralizing Karma</h4>
+            <p className="text-xs text-dark-brown/60 font-sans uppercase tracking-widest">Transforming transition into selfless merit.</p>
+          </div>
+          <div className="bg-[#1D1614] p-8 rounded-[3rem] text-cream shadow-xl text-center">
+            <ShieldCheck size={24} className="text-accent-orange mx-auto mb-4" />
+            <h4 className="font-display text-xl mb-2">EWS Support</h4>
+            <p className="text-xs text-cream/60 font-sans uppercase tracking-widest">United by biological hope. High Spiritual Quotient.</p>
+          </div>
+          <div className="bg-white p-8 rounded-[3rem] border border-dark-brown/5 shadow-sm text-center">
+            <Heart size={24} className="text-accent-orange mx-auto mb-4" />
+            <h4 className="font-display text-xl mb-2 text-dark-brown">Raising Frequency</h4>
+            <p className="text-xs text-dark-brown/60 font-sans uppercase tracking-widest">From scarcity to abundance and gift of life.</p>
+          </div>
         </div>
       </div>
     </div>
