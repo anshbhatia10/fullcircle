@@ -13,6 +13,7 @@ import Services from './pages/Services';
 import Pledge from './pages/Pledge';
 import Appointment from './pages/Appointment';
 import HealthGuidelines from './pages/HealthGuidelines';
+import DrNKSharma from './pages/DrNKSharma';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -41,6 +42,7 @@ const App: React.FC = () => {
             <Route path="/pledge" element={<Pledge />} />
             <Route path="/appointment" element={<Appointment />} />
             <Route path="/guidelines" element={<HealthGuidelines />} />
+            <Route path="/dr-nk-sharma" element={<DrNKSharma />} />
           </Routes>
         </main>
         <Footer />
