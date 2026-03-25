@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Activity, Heart, Sparkles, Compass, ShieldCheck, Palette, Calendar } from 'lucide-react';
 import treeVideo from '../The_tree_featured_1080p_smooth.mp4';
+import drImage from '../1456482892.jpg';
 
 const Home: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -259,7 +260,7 @@ const Home: React.FC = () => {
               <div className="absolute inset-0 bg-[#E5989B]/10 rounded-full blur-[100px] -z-10"></div>
               <div className="relative w-64 h-64 md:w-96 md:h-96 rounded-full overflow-hidden border-[12px] border-white shadow-2xl">
                 <img 
-                  src="/1456482892.jpg" 
+                  src={drImage} 
                   alt="Dr. N.K. Sharma" 
                   className="w-full h-full object-cover"
                 />
