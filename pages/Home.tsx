@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Activity, Heart, Sparkles, Compass, ShieldCheck, Palette, Calendar } from 'lucide-react';
 import treeVideo from '../The_tree_featured_1080p_smooth.mp4';
+import ownerImage from '../PHOTO-2026-04-05-16-06-43.jpg';
 import drImage from '../1456482892.jpg';
 
 const Home: React.FC = () => {
@@ -124,7 +125,62 @@ const Home: React.FC = () => {
         <div className="h-[2px] w-full bg-gradient-to-r from-[#B5838D] via-[#E5989B] via-[#FFD8CC] to-[#DDBEA9] relative z-20"></div>
       </section>
 
-      {/* 3. INVERTED TREE THEORY SECTION */}
+      {/* 3. DR PRERNA KUMAR (OWNER) SECTION */}
+      <section className="bg-white py-32 px-6 border-b border-dark-brown/5">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="space-y-8 order-2 lg:order-1">
+              <span className="text-accent-orange uppercase tracking-widest font-black text-xs">Founder & Medical Director</span>
+              <h2 className="font-display text-5xl md:text-7xl text-dark-brown leading-tight">
+                Dr. Prerna <span className="italic">Kumar</span>
+              </h2>
+              <div className="space-y-4 text-dark-brown/70 leading-relaxed font-sans">
+                <p className="text-lg font-serif italic text-dark-brown/90 mb-6">
+                  "Healing is not just the absence of disease, but the presence of harmony between the physical and the spiritual."
+                </p>
+                <p>
+                  Dr. Prerna Kumar is a distinguished Internist and Nephrologist with extensive clinical expertise from premier institutions in the United States and India. A graduate of Internal Medicine from Montefiore Medical Center at Albert Einstein College of Medicine in New York, she pursued her DM in Nephrology at the University of Iowa, followed by specialized fellowship training in Transplant Nephrology.
+                </p>
+                <p>
+                  Before returning to India, Dr. Kumar served as an Assistant Professor of Medicine and Surgery in Transplant Nephrology at the University of Illinois, Chicago. Her practice focuses on adult medicine, specializing in the management of complex chronic conditions, acute illnesses, and preventive care.
+                </p>
+                <p>
+                  With a dedicated focus on hypertension and kidney health—ranging from chronic kidney disease to transplant care—Dr. Kumar believes in a holistic approach. She integrates yoga, meditation, and spiritual well-being into her medical philosophy, ensuring a comprehensive path to healing for every patient.
+                </p>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-6 pt-4">
+                <Link to="/dr-prerna-kumar" className="inline-flex justify-center items-center gap-2 bg-dark-brown text-cream px-8 py-4 rounded-full font-bold uppercase tracking-widest text-[10px] hover:bg-accent-orange transition-all shadow-lg transform hover:-translate-y-1">
+                  Read Biography
+                </Link>
+                <Link to="/appointment" className="inline-flex justify-center items-center gap-2 border border-dark-brown/20 text-dark-brown px-8 py-4 rounded-full font-bold uppercase tracking-widest text-[10px] hover:bg-dark-brown hover:text-white transition-all">
+                  Book Consultation
+                </Link>
+              </div>
+            </div>
+            <div className="relative flex justify-center order-1 lg:order-2">
+              <div className="absolute inset-0 bg-[#B5838D]/5 rounded-full blur-[100px] -z-10"></div>
+              <div className="relative w-64 h-64 md:w-96 md:h-96 rounded-full overflow-hidden border-[12px] border-cream shadow-2xl">
+                <img 
+                  src={ownerImage} 
+                  alt="Dr. Prerna Kumar" 
+                  className="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700"
+                />
+              </div>
+              {/* Badge adjusted for mobile: relative on mobile, absolute on lg+ screens */}
+              <div className="mt-8 lg:mt-0 lg:absolute lg:-bottom-6 lg:left-10 bg-cream p-6 rounded-3xl shadow-xl border border-dark-brown/5 max-w-[240px] z-10 mx-auto lg:mx-0">
+                <div className="flex items-center gap-2 text-accent-orange mb-2">
+                  <ShieldCheck size={16} />
+                  <span className="text-[10px] font-black uppercase tracking-widest">Board Certified</span>
+                </div>
+                <p className="font-display text-xl text-dark-brown">Internal Medicine & Nephrology</p>
+                <p className="text-[10px] text-dark-brown/40 font-bold uppercase tracking-widest mt-1">USA & India Licensed</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. INVERTED TREE THEORY SECTION */}
       <section className="relative overflow-hidden py-32 px-6 flex flex-col items-center min-h-[900px] border-b border-dark-brown/20 shadow-inner bg-soft-pink">
         <div className="absolute inset-0 opacity-20 pointer-events-none mix-blend-soft-light" 
              style={{backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`}}></div>
@@ -221,7 +277,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* 4. MISSION SECTION */}
+      {/* 5. MISSION SECTION */}
       <section className="bg-cream py-32 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
@@ -252,7 +308,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* 5. DR NK SHARMA FEATURED SECTION */}
+      {/* 6. DR NK SHARMA FEATURED SECTION */}
       <section className="bg-peach py-32 px-6 border-y border-dark-brown/5">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -303,7 +359,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* 6. CTA SECTION */}
+      {/* 7. CTA SECTION */}
       <section className="relative overflow-hidden py-32 px-6 flex flex-col items-center min-h-[500px] border-b border-dark-brown/20 shadow-inner text-center bg-soft-pink">
          <div className="absolute inset-0 opacity-10 pointer-events-none mix-blend-soft-light" 
              style={{backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`}}></div>

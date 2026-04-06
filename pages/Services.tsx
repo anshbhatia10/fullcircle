@@ -44,7 +44,7 @@ const Services: React.FC = () => {
                 </div>
               </div>
             </div>
-            <div className="bg-[#1D1614] rounded-[3rem] aspect-square flex items-center justify-center p-12 relative overflow-hidden group">
+            <div className="bg-bronze-dark rounded-[3rem] aspect-square flex items-center justify-center p-12 relative overflow-hidden group">
                <div className="absolute inset-0 opacity-20 group-hover:opacity-40 transition-opacity">
                  <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1920&auto=format&fit=crop" alt="Wellness" className="w-full h-full object-cover grayscale" />
                </div>
@@ -54,7 +54,7 @@ const Services: React.FC = () => {
 
           {/* 2. Acute & Interventional */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="order-2 lg:order-1 bg-[#1D1614] rounded-[3rem] aspect-square flex items-center justify-center p-12 relative overflow-hidden group">
+            <div className="order-2 lg:order-1 bg-bronze-dark rounded-[3rem] aspect-square flex items-center justify-center p-12 relative overflow-hidden group">
                <div className="absolute inset-0 opacity-20 group-hover:opacity-40 transition-opacity">
                  <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=1920&auto=format&fit=crop" alt="Medical" className="w-full h-full object-cover grayscale" />
                </div>
@@ -112,7 +112,7 @@ const Services: React.FC = () => {
                 </div>
               </div>
             </div>
-            <div className="bg-[#1D1614] rounded-[3rem] aspect-square flex items-center justify-center p-12 relative overflow-hidden group">
+            <div className="bg-bronze-dark rounded-[3rem] aspect-square flex items-center justify-center p-12 relative overflow-hidden group">
                <div className="absolute inset-0 opacity-20 group-hover:opacity-40 transition-opacity">
                  <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1920&auto=format&fit=crop" alt="Spiritual" className="w-full h-full object-cover grayscale" />
                </div>
