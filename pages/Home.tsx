@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Activity, Heart, Sparkles, Compass, ShieldCheck, Palette, Calendar } from 'lucide-react';
+import { ArrowRight, Activity, Heart, Sparkles, Compass, ShieldCheck, Palette, Calendar, Circle } from 'lucide-react';
 import treeVideo from '../The_tree_featured_1080p_smooth.mp4';
 import ownerImage from '../PHOTO-2026-04-05-16-06-43.jpg';
 import drImage from '../1456482892.jpg';
@@ -359,7 +359,72 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* 7. CTA SECTION */}
+      {/* 7. THE PLEDGE SECTION (NEW) */}
+      <section className="bg-white py-32 px-6 border-b border-dark-brown/5 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-accent-orange/5 -skew-x-12 transform translate-x-1/2"></div>
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div className="space-y-10">
+              <div className="inline-flex items-center gap-3 px-4 py-2 bg-accent-orange/10 rounded-full">
+                <Heart size={16} className="text-accent-orange fill-accent-orange" />
+                <span className="text-accent-orange uppercase tracking-[0.2em] font-black text-[10px]">A Pact of Consciousness</span>
+              </div>
+              <h2 className="font-display text-6xl md:text-7xl text-dark-brown leading-tight">
+                The Living <span className="italic">Legacy</span>
+              </h2>
+              <p className="text-xl text-dark-brown/70 leading-relaxed font-serif italic">
+                "At Full Circle, we believe the highest expression of 'Consciousness' is the recognition that we are all connected."
+              </p>
+              <div className="space-y-6 text-dark-brown/60 leading-relaxed">
+                <p>
+                  Every member of our clinical staff, including Dr. Prerna, is a Pledged Organ Donor. We invite you to join this circle of biological hope and spiritual merit.
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div className="flex items-start gap-4 p-6 bg-cream rounded-3xl border border-dark-brown/5">
+                    <div className="w-8 h-8 rounded-full bg-accent-orange/10 flex items-center justify-center shrink-0">
+                      <Sparkles size={16} className="text-accent-orange" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-xs uppercase tracking-widest text-dark-brown mb-1">Selfless Merit</h4>
+                      <p className="text-[10px]">Neutralize karma through the gift of life.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4 p-6 bg-cream rounded-3xl border border-dark-brown/5">
+                    <div className="w-8 h-8 rounded-full bg-accent-orange/10 flex items-center justify-center shrink-0">
+                      <ShieldCheck size={16} className="text-accent-orange" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-xs uppercase tracking-widest text-dark-brown mb-1">EWS Support</h4>
+                      <p className="text-[10px]">Direct support for medical evaluations.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <Link to="/pledge" className="inline-flex items-center gap-4 bg-dark-brown text-cream px-12 py-5 rounded-full font-bold uppercase tracking-[0.2em] text-[10px] hover:bg-accent-orange transition-all shadow-xl group">
+                <span>Sign the Circle</span>
+                <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
+              </Link>
+            </div>
+            <div className="relative">
+              <div className="aspect-square bg-dark-brown rounded-[4rem] flex flex-col items-center justify-center p-12 text-cream text-center relative overflow-hidden group">
+                <div className="absolute inset-0 bg-gradient-to-tr from-accent-orange/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                <Circle size={300} strokeWidth={0.5} className="absolute text-cream/5 animate-spin-slow" />
+                <Heart size={80} strokeWidth={1} className="mb-10 text-accent-orange animate-pulse" />
+                <h3 className="font-display text-4xl mb-6 relative z-10">"I have signed the circle."</h3>
+                <p className="text-cream/50 uppercase tracking-[0.3em] font-bold text-xs relative z-10 font-sans">Full Circle Conscious Donor</p>
+                <div className="mt-12 pt-12 border-t border-cream/10 w-full relative z-10">
+                  <p className="font-serif italic text-lg text-cream/70">"My transition becomes another's beginning."</p>
+                </div>
+              </div>
+              <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-accent-orange rounded-full flex items-center justify-center shadow-2xl border-[12px] border-white transform rotate-12">
+                <span className="text-white font-black uppercase tracking-tighter text-3xl leading-none text-center">JOIN<br/>US</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 8. CTA SECTION */}
       <section className="relative overflow-hidden py-32 px-6 flex flex-col items-center min-h-[500px] border-b border-dark-brown/20 shadow-inner text-center bg-soft-pink">
          <div className="absolute inset-0 opacity-10 pointer-events-none mix-blend-soft-light" 
              style={{backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`}}></div>

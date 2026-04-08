@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Circle, Aperture } from 'lucide-react';
+import { Menu, X, Circle, Aperture, Heart } from 'lucide-react';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,6 +15,7 @@ const Navbar: React.FC = () => {
     { label: 'Aesthetics', path: '/aesthetic-circle' },
     { label: 'Mission', path: '/inverted-tree' },
     { label: 'Partners', path: '/partners' },
+    { label: 'Pledge', path: '/pledge' },
   ];
 
   return (
@@ -59,6 +60,13 @@ const Navbar: React.FC = () => {
             {/* Right: Actions */}
             <div className="hidden md:flex items-center space-x-3 lg:space-x-4">
               <Link 
+                to="/pledge"
+                className="flex items-center gap-2 px-4 py-2 bg-accent-orange/10 text-accent-orange rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-accent-orange hover:text-white transition-all group"
+              >
+                <Heart size={14} className="group-hover:fill-current" />
+                <span>The Pledge</span>
+              </Link>
+              <Link 
                 to="/appointment"
                 className="px-5 lg:px-6 py-2 border border-[#4A314D]/20 rounded-full text-[#4A314D] text-[10px] lg:text-xs font-bold uppercase tracking-widest hover:bg-[#4A314D] hover:text-white transition-all whitespace-nowrap"
               >
@@ -66,7 +74,10 @@ const Navbar: React.FC = () => {
               </Link>
             </div>
 
-             <div className="md:hidden">
+             <div className="md:hidden flex items-center gap-2">
+                <Link to="/pledge" className="p-2 bg-accent-orange/10 text-accent-orange rounded-full">
+                  <Heart size={18} fill="currentColor" />
+                </Link>
                 <Link to="/appointment" className="text-[10px] font-bold uppercase border border-[#4A314D]/20 bg-[#4A314D] text-white rounded-full px-4 py-2">Book</Link>
              </div>
 
@@ -90,6 +101,10 @@ const Navbar: React.FC = () => {
           ))}
           
           <div className="pt-10 w-full flex flex-col space-y-4">
+            <Link to="/pledge" onClick={toggleMenu} className="w-full py-4 bg-accent-orange text-white rounded-full font-bold uppercase tracking-widest text-sm flex items-center justify-center gap-2">
+              <Heart size={18} fill="white" />
+              <span>Sign The Pledge</span>
+            </Link>
             <Link to="/appointment" onClick={toggleMenu} className="w-full py-4 bg-[#4A314D] text-white rounded-full font-bold uppercase tracking-widest text-sm">Book Appointment</Link>
           </div>
         </div>
