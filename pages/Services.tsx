@@ -1,26 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Heart, Activity, Star, Compass, Zap, ShieldCheck } from 'lucide-react';
-import { client, urlFor } from '../lib/sanity';
+import servicesContent from '../content/services.json';
 
 interface ServiceData {
   title: string;
   category: string;
   description: string;
   features: string[];
-  image?: any;
+  image: string;
 }
 
 const Services: React.FC = () => {
-  const [services, setServices] = useState<ServiceData[]>([]);
-
-  useEffect(() => {
-    client.fetch('*[_type == "service"]').then((res) => {
-      if (res && res.length > 0) {
-        setServices(res);
-      }
-    }).catch(err => console.error("Sanity fetch error:", err));
-  }, []);
-
   const getIcon = (category: string) => {
     const cat = category.toLowerCase();
     if (cat.includes('foundation') || cat.includes('preventive')) return <Heart size={14} />;
@@ -53,44 +43,7 @@ const Services: React.FC = () => {
     return 'bg-dark-brown';
   };
 
-  // Default content if Sanity is empty
-  const defaultServices: ServiceData[] = [
-    {
-      title: "Preventive & Wellness Care",
-      category: "Foundation",
-      description: "Prevention is the cornerstone of our practice. Our team works with you to build a personalized wellness plan centered on Naturopathy and Ayurvedic principles of diet and lifestyle.",
-      features: [
-        "Cutting-edge Nadi gear to detect exact Dosha percentages.",
-        "Curated diets and nutrition based on constitution results.",
-        "Daily routines, herbal remedies, Yoga, and Pranayama."
-      ],
-      image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1920&auto=format&fit=crop"
-    },
-    {
-        title: "Acute & Interventional Care",
-        category: "Intervention",
-        description: "Our board-certified oncologist and intensivist provide expert care for critical conditions, ensuring the highest standard of medical treatment when you need it most.",
-        features: [
-            "State-of-the-art diagnostics and interventional procedures.",
-            "Stabilization integrated with supportive integrative therapies.",
-            "Compassionate critical care with a human-centered approach."
-        ],
-        image: "https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=1920&auto=format&fit=crop"
-    },
-    {
-        title: "Spiritual & Chronic Care",
-        category: "Transcendence",
-        description: "Focus shifts to healing beyond the physical. From end-stage renal disease to metastatic cancer, we offer therapies to soothe the mind and spirit.",
-        features: [
-            "Reiki, Past-Life Regression, and Energy Healing.",
-            "Sound healing, Mantras, Gita verses, and Simple Pranayama.",
-            "Holotropic breathing to address karmic imprints."
-        ],
-        image: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1920&auto=format&fit=crop"
-    }
-  ];
-
-  const displayServices = services.length > 0 ? services : defaultServices;
+  const displayServices: ServiceData[] = servicesContent;
 
   return (
     <div className="bg-cream min-h-screen pt-32 pb-20 px-6">
@@ -130,7 +83,7 @@ const Services: React.FC = () => {
                   <div className={`bg-bronze-dark rounded-[3rem] aspect-square flex items-center justify-center p-12 relative overflow-hidden group ${index % 2 !== 0 ? 'order-2 lg:order-1' : ''}`}>
                     <div className="absolute inset-0 opacity-20 group-hover:opacity-40 transition-opacity">
                         <img 
-                            src={service.image?.asset ? urlFor(service.image).url() : (typeof service.image === 'string' ? service.image : '')} 
+                            src={service.image} 
                             alt={service.title} 
                             className="w-full h-full object-cover grayscale" 
                         />

@@ -1,0 +1,18 @@
+{
+  "hero": {
+    "titlePart1": "Full",
+    "titlePart2": "Circle",
+    "subtitle": "Where evidence-based protocol meets ancient wisdom."
+  },
+  "founder": {
+    "quote": "Healing is not just the absence of disease, but the presence of harmony between the physical and the spiritual.",
+    "image": "/PHOTO-2026-04-05-16-06-43.jpg",
+    "bio": "Dr. Prerna Kumar is a distinguished Internist and Nephrologist with extensive clinical expertise from premier institutions in the United States and India. A graduate of Internal Medicine from Montefiore Medical Center at Albert Einstein College of Medicine in New York, she pursued her DM in Nephrology at the University of Iowa, followed by specialized fellowship training in Transplant Nephrology.\n\nBefore returning to India, Dr. Kumar served as an Assistant Professor of Medicine and Surgery in Transplant Nephrology at the University of Illinois, Chicago. Her practice focuses on adult medicine, specializing in the management of complex chronic conditions, acute illnesses, and preventive care.\n\nWith a dedicated focus on hypertension and kidney health—ranging from chronic kidney disease to transplant care—Dr. Kumar believes in a holistic approach. She integrates yoga, meditation, and spiritual well-being into her medical philosophy, ensuring a comprehensive path to healing for every patient."
+  },
+  "philosophy": {
+    "hinduismText": "The material universe is an eternal, upside-down tree (Ashvattha) with roots in the heavens and branches extending downwards. It is a reflection of the spiritual world.",
+    "ayurvedaText": "The physical body is an inverted tree, with the head acting as the trunk and the limbs as branches. Healing starts at the \"root\" (the mind and soul).",
+    "rootSoulText": "In Full Circle, we map the clinical and the subtle. We understand that physical imbalances are often manifestations of deeper energetic or spiritual imprints carried by the soul.",
+    "branchSymptomText": "By locating the root cause, we build a plan that treats the whole person. We do not chase symptoms alone; we align the branches by healing the roots."
+  }
+}

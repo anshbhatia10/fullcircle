@@ -1,44 +1,21 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Activity, Heart, Sparkles, Compass, ShieldCheck, Palette, Calendar, Circle } from 'lucide-react';
-import { PortableText } from '@portabletext/react';
-import { client, urlFor } from '../lib/sanity';
 import treeVideo from '../The_tree_featured_1080p_smooth.mp4';
 import ownerImage from '../PHOTO-2026-04-05-16-06-43.jpg';
 import drImage from '../1456482892.jpg';
-
-interface HomeData {
-  hero?: {
-    titlePart1?: string;
-    titlePart2?: string;
-    subtitle?: string;
-  };
-  founder?: {
-    quote?: string;
-    image?: any;
-    bio?: any;
-  };
-  philosophy?: {
-    hinduismText?: string;
-    ayurvedaText?: string;
-    rootSoulText?: string;
-    branchSymptomText?: string;
-  };
-}
+import homeContent from '../content/home.json';
 
 const Home: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [data, setData] = useState<HomeData | null>(null);
 
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.playbackRate = 0.6;
     }
-
-    client.fetch('*[_type == "home"][0]').then((res) => {
-      if (res) setData(res);
-    }).catch(err => console.error("Sanity fetch error:", err));
   }, []);
+
+  const { hero, founder, philosophy } = homeContent;
 
   return (
     <div className="w-full bg-cream min-h-screen flex flex-col overflow-x-hidden pt-20">
@@ -116,17 +93,17 @@ const Home: React.FC = () => {
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] md:w-[480px] md:h-[480px] lg:w-[580px] lg:h-[580px] rounded-full bg-gradient-to-b from-[#E5989B] to-[#FFD8CC] z-0 pointer-events-none transition-all duration-500"></div>
             <div className="relative z-10 flex flex-col items-center select-none cursor-default">
               <h1 className="font-display text-[6.5rem] md:text-[13rem] lg:text-[16rem] leading-[0.7] text-dark-brown tracking-tighter mix-blend-multiply transition-all duration-500">
-                {data?.hero?.titlePart1 || "Full"}
+                {hero.titlePart1}
               </h1>
               <h1 className="font-display text-[6.5rem] md:text-[13rem] lg:text-[16rem] leading-[0.7] text-dark-brown tracking-tighter mix-blend-multiply italic -mt-4 md:-mt-10 transition-all duration-500">
-                {data?.hero?.titlePart2 || "Circle"}
+                {hero.titlePart2}
               </h1>
             </div>
           </div>
           <div className="absolute bottom-10 md:bottom-16 flex flex-col items-center">
              <div className="w-[1.5px] h-12 md:h-16 bg-dark-brown/40 mb-8"></div>
              <p className="font-sans text-[11px] md:text-lg font-black uppercase tracking-[0.4em] text-dark-brown text-center px-10 transition-all leading-relaxed max-w-2xl">
-               {data?.hero?.subtitle || "Where evidence-based protocol meets ancient wisdom."}
+               {hero.subtitle}
              </p>
           </div>
         </div>
@@ -162,25 +139,11 @@ const Home: React.FC = () => {
               </h2>
               <div className="space-y-4 text-dark-brown/70 leading-relaxed font-sans">
                 <p className="text-lg font-serif italic text-dark-brown/90 mb-6">
-                  "{data?.founder?.quote || "Healing is not just the absence of disease, but the presence of harmony between the physical and the spiritual."}"
+                  "{founder.quote}"
                 </p>
-                {data?.founder?.bio ? (
-                    <div className="prose prose-sm text-dark-brown/70 max-w-none">
-                        <PortableText value={data.founder.bio} />
-                    </div>
-                ) : (
-                    <>
-                    <p>
-                    Dr. Prerna Kumar is a distinguished Internist and Nephrologist with extensive clinical expertise from premier institutions in the United States and India. A graduate of Internal Medicine from Montefiore Medical Center at Albert Einstein College of Medicine in New York, she pursued her DM in Nephrology at the University of Iowa, followed by specialized fellowship training in Transplant Nephrology.
-                    </p>
-                    <p>
-                    Before returning to India, Dr. Kumar served as an Assistant Professor of Medicine and Surgery in Transplant Nephrology at the University of Illinois, Chicago. Her practice focuses on adult medicine, specializing in the management of complex chronic conditions, acute illnesses, and preventive care.
-                    </p>
-                    <p>
-                    With a dedicated focus on hypertension and kidney health—ranging from chronic kidney disease to transplant care—Dr. Kumar believes in a holistic approach. She integrates yoga, meditation, and spiritual well-being into her medical philosophy, ensuring a comprehensive path to healing for every patient.
-                    </p>
-                    </>
-                )}
+                {founder.bio.split('\n\n').map((paragraph, i) => (
+                    <p key={i}>{paragraph}</p>
+                ))}
               </div>
               <div className="flex flex-col sm:flex-row gap-6 pt-4">
                 <Link to="/dr-prerna-kumar" className="inline-flex justify-center items-center gap-2 bg-dark-brown text-cream px-8 py-4 rounded-full font-bold uppercase tracking-widest text-[10px] hover:bg-accent-orange transition-all shadow-lg transform hover:-translate-y-1">
@@ -195,7 +158,7 @@ const Home: React.FC = () => {
               <div className="absolute inset-0 bg-[#B5838D]/5 rounded-full blur-[100px] -z-10"></div>
               <div className="relative w-64 h-64 md:w-96 md:h-96 rounded-full overflow-hidden border-[12px] border-cream shadow-2xl">
                 <img 
-                  src={data?.founder?.image ? urlFor(data.founder.image).url() : ownerImage} 
+                  src={ownerImage} 
                   alt="Dr. Prerna Kumar" 
                   className="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700"
                 />
@@ -227,7 +190,7 @@ const Home: React.FC = () => {
                   <div className="absolute -bottom-2 left-0 w-full h-[1px] bg-dark-brown/20"></div>
                 </h2>
                 <p className="font-sans text-dark-brown/70 text-base leading-relaxed max-w-sm">
-                  {data?.philosophy?.hinduismText || "The material universe is an eternal, upside-down tree (Ashvattha) with roots in the heavens and branches extending downwards. It is a reflection of the spiritual world."}
+                  {philosophy.hinduismText}
                 </p>
              </div>
              <div className="mt-8">
@@ -266,7 +229,7 @@ const Home: React.FC = () => {
                   <div className="absolute -bottom-2 left-0 w-full h-[1px] bg-dark-brown/20"></div>
                 </h2>
                 <p className="font-sans text-dark-brown/70 text-base leading-relaxed">
-                  {data?.philosophy?.ayurvedaText || "The physical body is an inverted tree, with the head acting as the trunk and the limbs as branches. Healing starts at the \"root\" (the mind and soul)."}
+                  {philosophy.ayurvedaText}
                 </p>
                 <div className="absolute -top-12 -right-12 md:-right-20">
                    <div className="relative w-28 h-28 flex items-center justify-center animate-spin-slow">
@@ -293,13 +256,13 @@ const Home: React.FC = () => {
           <div className="space-y-6">
             <h3 className="font-display text-3xl text-accent-orange uppercase tracking-wide">The Root (The Soul)</h3>
             <p className="font-sans text-base leading-relaxed opacity-80">
-              {data?.philosophy?.rootSoulText || "In Full Circle, we map the clinical and the subtle. We understand that physical imbalances are often manifestations of deeper energetic or spiritual imprints carried by the soul."}
+              {philosophy.rootSoulText}
             </p>
           </div>
           <div className="space-y-6">
             <h3 className="font-display text-3xl text-accent-orange uppercase tracking-wide">The Branch (The Symptom)</h3>
             <p className="font-sans text-base leading-relaxed opacity-80">
-              {data?.philosophy?.branchSymptomText || "By locating the root cause, we build a plan that treats the whole person. We do not chase symptoms alone; we align the branches by healing the roots."}
+              {philosophy.branchSymptomText}
             </p>
           </div>
         </div>

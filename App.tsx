@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -15,7 +15,6 @@ import Appointment from './pages/Appointment';
 import HealthGuidelines from './pages/HealthGuidelines';
 import DrNKSharma from './pages/DrNKSharma';
 import DrPrernaKumar from './pages/DrPrernaKumar';
-import StudioPage from './pages/StudioPage';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -27,41 +26,30 @@ const ScrollToTop = () => {
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <ScrollToTop />
       <div className="flex flex-col min-h-screen bg-cream font-sans text-dark-brown overflow-x-hidden selection:bg-accent-orange selection:text-white">
-        <Routes>
-          {/* Studio is at the TOP LEVEL now for better Sanity auth handling */}
-          <Route path="/studio/*" element={<StudioPage />} />
-          <Route
-            path="*"
-            element={
-              <>
-                <Navbar />
-                <main className="flex-grow">
-                  <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/mission" element={<Mission />} />
-                    <Route path="/partners" element={<Partners />} />
-                    <Route path="/services" element={<Services />} />
-                    <Route path="/screening-circle" element={<ScreeningCircle />} />
-                    <Route path="/aesthetic-circle" element={<AestheticCircle />} />
-                    <Route path="/full-circle-pcp" element={<FullCirclePCP />} />
-                    <Route path="/inverted-tree" element={<InvertedTree />} />
-                    <Route path="/pledge" element={<Pledge />} />
-                    <Route path="/appointment" element={<Appointment />} />
-                    <Route path="/guidelines" element={<HealthGuidelines />} />
-                    <Route path="/dr-nk-sharma" element={<DrNKSharma />} />
-                    <Route path="/dr-prerna-kumar" element={<DrPrernaKumar />} />
-                  </Routes>
-                </main>
-                <Footer />
-              </>
-            }
-          />
-        </Routes>
+        <Navbar />
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/mission" element={<Mission />} />
+            <Route path="/partners" element={<Partners />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/screening-circle" element={<ScreeningCircle />} />
+            <Route path="/aesthetic-circle" element={<AestheticCircle />} />
+            <Route path="/full-circle-pcp" element={<FullCirclePCP />} />
+            <Route path="/inverted-tree" element={<InvertedTree />} />
+            <Route path="/pledge" element={<Pledge />} />
+            <Route path="/appointment" element={<Appointment />} />
+            <Route path="/guidelines" element={<HealthGuidelines />} />
+            <Route path="/dr-nk-sharma" element={<DrNKSharma />} />
+            <Route path="/dr-prerna-kumar" element={<DrPrernaKumar />} />
+          </Routes>
+        </main>
+        <Footer />
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 

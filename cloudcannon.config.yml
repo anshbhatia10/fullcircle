@@ -1,0 +1,49 @@
+# CloudCannon Configuration
+source: .
+output: dist
+
+# Tell CloudCannon how to build your site
+build:
+  install: npm install
+  command: npm run build
+
+# Define where your editable content lives
+collections_config:
+  data:
+    path: content
+    output: false
+    icon: settings
+    filter:
+      base: none
+      include:
+        - home.json
+        - services.json
+
+# Configure the editor experience
+_inputs:
+  hero.subtitle:
+    type: textarea
+  founder.bio:
+    type: textarea
+  founder.quote:
+    type: textarea
+  philosophy.hinduismText:
+    type: textarea
+  philosophy.ayurvedaText:
+    type: textarea
+  philosophy.rootSoulText:
+    type: textarea
+  philosophy.branchSymptomText:
+    type: textarea
+  image:
+    type: image
+  features:
+    type: array
+    options:
+      item_type: string
+
+# Global Metadata
+_enabled_editors:
+  - visual
+  - content
+  - data
