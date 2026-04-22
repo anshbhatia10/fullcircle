@@ -10,7 +10,7 @@ export default defineConfig({
   projectId: '4oa2a2gd',
   dataset: 'production',
 
-  // basePath: '/studio', // HashRouter manages the URL base; removing this for local/live consistency
+  basePath: '/studio', // Matches the route in App.tsx
 
   plugins: [deskTool(), visionTool()],
 

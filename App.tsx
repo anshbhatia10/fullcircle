@@ -1,5 +1,5 @@
-import React from 'react';
-import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { HashRouter, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -25,10 +25,24 @@ const ScrollToTop = () => {
   return null;
 };
 
+// This component handles the Sanity auth callback redirect
+const SanityAuthRedirect = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    const search = window.location.search;
+    if (search.includes('code=') || search.includes('state=') || search.includes('error=')) {
+      // Move query params to the hash route
+      navigate(`/studio/${search}`, { replace: true });
+    }
+  }, [navigate]);
+  return null;
+};
+
 const App: React.FC = () => {
   return (
     <HashRouter>
       <ScrollToTop />
+      <SanityAuthRedirect />
       <div className="flex flex-col min-h-screen bg-cream font-sans text-dark-brown overflow-x-hidden selection:bg-accent-orange selection:text-white">
         <Routes>
           <Route path="/studio/*" element={<StudioPage />} />
