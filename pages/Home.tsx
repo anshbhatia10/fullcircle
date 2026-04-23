@@ -4,9 +4,36 @@ import { ArrowRight, Activity, Heart, Sparkles, Compass, ShieldCheck, Palette, C
 import treeVideo from '../The_tree_featured_1080p_smooth.mp4';
 import ownerImage from '../PHOTO-2026-04-05-16-06-43.jpg';
 import drImage from '../1456482892.jpg';
+import { useTina } from "tinacms/dist/react";
 import homeContent from '../content/home.json';
 
-const Home: React.FC = () => {
+const Home: React.FC = (props) => {
+  const { data } = useTina({
+    query: `{
+      home(relativePath: "home.json") {
+        hero {
+          titlePart1
+          titlePart2
+          subtitle
+        }
+        founder {
+          quote
+          image
+          bio
+        }
+        philosophy {
+          hinduismText
+          ayurvedaText
+          rootSoulText
+          branchSymptomText
+        }
+      }
+    }`,
+    variables: {},
+    data: { home: homeContent },
+  });
+
+  const { hero, founder, philosophy } = data.home;
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -14,8 +41,6 @@ const Home: React.FC = () => {
       videoRef.current.playbackRate = 0.6;
     }
   }, []);
-
-  const { hero, founder, philosophy } = homeContent;
 
   return (
     <div className="w-full bg-cream min-h-screen flex flex-col overflow-x-hidden pt-20">

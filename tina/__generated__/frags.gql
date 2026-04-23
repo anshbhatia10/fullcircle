@@ -1,0 +1,34 @@
+fragment HomeParts on Home {
+  __typename
+  hero {
+    __typename
+    titlePart1
+    titlePart2
+    subtitle
+  }
+  founder {
+    __typename
+    quote
+    image
+    bio
+  }
+  philosophy {
+    __typename
+    hinduismText
+    ayurvedaText
+    rootSoulText
+    branchSymptomText
+  }
+}
+
+fragment ServicesParts on Services {
+  __typename
+  items {
+    __typename
+    title
+    category
+    description
+    features
+    image
+  }
+}

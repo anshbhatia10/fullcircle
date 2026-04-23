@@ -1,5 +1,6 @@
 import React from 'react';
 import { Heart, Activity, Star, Compass, Zap, ShieldCheck } from 'lucide-react';
+import { useTina } from "tinacms/dist/react";
 import servicesContent from '../content/services.json';
 
 interface ServiceData {
@@ -10,7 +11,23 @@ interface ServiceData {
   image: string;
 }
 
-const Services: React.FC = () => {
+const Services: React.FC = (props) => {
+  const { data } = useTina({
+    query: `{
+      services(relativePath: "services.json") {
+        items {
+          title
+          category
+          description
+          features
+          image
+        }
+      }
+    }`,
+    variables: {},
+    data: { services: { items: servicesContent } },
+  });
+
   const getIcon = (category: string) => {
     const cat = category.toLowerCase();
     if (cat.includes('foundation') || cat.includes('preventive')) return <Heart size={14} />;
@@ -43,7 +60,7 @@ const Services: React.FC = () => {
     return 'bg-dark-brown';
   };
 
-  const displayServices: ServiceData[] = servicesContent;
+  const displayServices: ServiceData[] = data.services.items;
 
   return (
     <div className="bg-cream min-h-screen pt-32 pb-20 px-6">
