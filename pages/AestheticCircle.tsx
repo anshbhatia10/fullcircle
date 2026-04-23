@@ -1,16 +1,38 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Sparkles, Droplets, ScanFace, HeartPulse, Leaf, Wand2, ArrowRight } from 'lucide-react';
+import { useTina, tinaField } from 'tinacms/dist/react';
+import aestheticData from '../content/pages/aesthetic-circle.json';
 
 const AestheticCircle: React.FC = () => {
+  const { data } = useTina({
+    query: `{
+      aesthetics(relativePath: "aesthetic-circle.json") {
+        tagline
+        title
+        subtitle
+        services {
+          title
+          description
+          image
+        }
+      }
+    }`,
+    variables: { relativePath: "aesthetic-circle.json" },
+    data: { aesthetics: aestheticData },
+  });
+
+  const { tagline, title, subtitle, services } = data.aesthetics;
+  const mainService = services[0] || { title: "Aesthetic Skin Assessment", description: "Our comprehensive skin analysis looks beyond the surface." };
+
   return (
-    <div className="bg-cream min-h-screen pt-32 pb-20 px-6">
+    <div className="bg-cream min-h-screen pt-32 pb-20 px-6 font-sans">
       <div className="max-w-7xl mx-auto">
         <header className="text-center mb-16">
-          <span className="uppercase tracking-widest font-black text-xs text-accent-orange mb-3 block">The Aesthetic Circle</span>
-          <h1 className="font-display text-5xl md:text-8xl text-dark-brown mt-4 mb-6">Beautiful Inside Out</h1>
-          <p className="max-w-3xl mx-auto text-dark-brown/70 font-serif italic text-xl md:text-2xl leading-relaxed">
-            "True beauty is not just skin deep. It is a reflection of your inner vitality."
+          <span data-tina-field={tinaField(data.aesthetics, 'tagline')} className="uppercase tracking-widest font-black text-xs text-accent-orange mb-3 block">{tagline}</span>
+          <h1 data-tina-field={tinaField(data.aesthetics, 'title')} className="font-display text-5xl md:text-8xl text-dark-brown mt-4 mb-6 leading-tight">{title}</h1>
+          <p data-tina-field={tinaField(data.aesthetics, 'subtitle')} className="max-w-3xl mx-auto text-dark-brown/70 font-serif italic text-xl md:text-2xl leading-relaxed">
+            {subtitle}
           </p>
         </header>
 
@@ -20,14 +42,13 @@ const AestheticCircle: React.FC = () => {
               <div className="w-16 h-16 rounded-2xl bg-orange-50 text-accent-orange flex items-center justify-center">
                 <ScanFace size={32} />
               </div>
-              <div>
+              <div data-tina-field={tinaField(services[0])}>
                 <p className="text-[10px] uppercase tracking-widest font-black text-dark-brown/40 mb-1">Assessment</p>
-                <h2 className="font-display text-4xl text-dark-brown">Aesthetic Skin Assessment</h2>
+                <h2 data-tina-field={tinaField(services[0], 'title')} className="font-display text-4xl text-dark-brown">{mainService.title}</h2>
               </div>
             </div>
-            <p className="text-dark-brown/70 text-lg leading-relaxed mb-10">
-              Our comprehensive skin analysis looks beyond the surface. We evaluate what you see, and what is shaping it
-              underneath.
+            <p data-tina-field={tinaField(services[0], 'description')} className="text-dark-brown/70 text-lg leading-relaxed mb-10">
+              {mainService.description}
             </p>
             <div className="space-y-6 text-dark-brown/80">
               <div className="flex gap-4 items-start">
@@ -48,7 +69,7 @@ const AestheticCircle: React.FC = () => {
           </div>
 
           <div className="lg:col-span-5 bg-bronze-dark text-cream rounded-[3rem] p-10 md:p-14 shadow-2xl relative overflow-hidden flex flex-col justify-between min-h-[400px]">
-            <div className="absolute -top-24 -right-24 w-64 h-64 bg-accent-orange/10 rounded-full blur-3xl" />
+            <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/5 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none" />
             <div>
               <h3 className="font-display text-4xl mb-6 relative z-10 leading-tight">The Full Circle Beauty Synergy</h3>
               <p className="text-cream/70 leading-relaxed relative z-10 mb-10 italic font-serif text-lg">

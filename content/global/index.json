@@ -1,0 +1,20 @@
+{
+  "navbar": {
+    "logoText": "FULL CIRCLE",
+    "navLinks": [
+      { "label": "Screening", "path": "/screening-circle" },
+      { "label": "Guidelines", "path": "/guidelines" },
+      { "label": "PCP", "path": "/full-circle-pcp" },
+      { "label": "Aesthetics", "path": "/aesthetic-circle" },
+      { "label": "Mission", "path": "/inverted-tree" },
+      { "label": "Partners", "path": "/partners" },
+      { "label": "Pledge", "path": "/pledge" }
+    ]
+  },
+  "footer": {
+    "quote": "My body is a temple; when I leave it, I leave the doors open for someone else to find shelter.",
+    "description": "We bridge evidence-based protocol with ancient wisdom to provide a complete health map for your life.",
+    "instagram": "https://instagram.com/fullcircle369",
+    "facebook": "#"
+  }
+}

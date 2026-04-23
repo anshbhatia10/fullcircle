@@ -10,9 +10,12 @@ if (!rootElement) {
 }
 
 const root = ReactDOM.createRoot(rootElement);
+
+const cms = new TinaCMS(config);
+
 root.render(
   <React.StrictMode>
-    <TinaProvider cms={new TinaCMS(config)}>
+    <TinaProvider cms={cms}>
       <App />
     </TinaProvider>
   </React.StrictMode>

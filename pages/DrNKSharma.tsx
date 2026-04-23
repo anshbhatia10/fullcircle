@@ -1,9 +1,34 @@
 import React from 'react';
-import { ShieldCheck, Heart, Sparkles, Activity, Clock, Calendar, MapPin, ExternalLink, Quote } from 'lucide-react';
+import { ShieldCheck, Heart, Sparkles, Activity, Clock, Calendar, MapPin, ExternalLink, Quote, Award, Globe, BookOpen } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import drImage from '../1456482892.jpg';
+import { useTina } from 'tinacms/dist/react';
+import drData from '../content/doctors/nk-sharma.json';
 
 const DrNKSharma: React.FC = () => {
+  const { data } = useTina({
+    query: `{
+      doctors(relativePath: "nk-sharma.json") {
+        name
+        lastName
+        title
+        quote
+        tags
+        image
+        academicBio
+        excellence {
+          title
+          description
+        }
+        philosophy
+      }
+    }`,
+    variables: { relativePath: "nk-sharma.json" },
+    data: { doctors: drData },
+  });
+
+  const { name, lastName, title, quote, tags, image, academicBio, excellence, philosophy } = data.doctors;
+
   return (
     <div className="bg-[#FAF3F0] min-h-screen pt-32 pb-20 px-6 overflow-x-hidden">
       <div className="max-w-7xl mx-auto">
@@ -13,18 +38,20 @@ const DrNKSharma: React.FC = () => {
           <div className="relative">
             <div className="absolute -top-10 -left-10 w-40 h-40 bg-[#E5989B]/10 rounded-full blur-3xl"></div>
             <div className="relative z-10">
-              <span className="text-[#8E5D52] uppercase tracking-widest font-black text-xs mb-4 block italic">Specialist Physician & Spiritual Guide</span>
+              <span className="text-[#8E5D52] uppercase tracking-widest font-black text-xs mb-4 block italic">{title}</span>
               <h1 className="font-display text-6xl md:text-8xl text-[#4A314D] mb-8 leading-none">
-                Dr. N.K. <br />
-                <span className="italic text-[#B5838D]">Sharma</span>
+                {name} <br />
+                <span className="italic text-[#B5838D]">{lastName}</span>
               </h1>
               <p className="text-xl text-[#4A314D]/80 font-serif italic leading-relaxed mb-8">
-                "Where the science of the kidney meets the wisdom of the soul."
+                "{quote}"
               </p>
               <div className="flex flex-wrap gap-4 mb-10">
-                <div className="bg-[#4A314D] text-[#FAF3F0] px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest">Founder, Reiki Healing Foundation</div>
-                <div className="bg-[#B5838D] text-white px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest">Naturopath</div>
-                <div className="bg-[#8E5D52] text-white px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest">Spiritual Healer</div>
+                {tags && tags.map((tag: string, i: number) => (
+                  <div key={i} className={`px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest ${i === 0 ? 'bg-[#4A314D] text-[#FAF3F0]' : i === 1 ? 'bg-[#B5838D] text-white' : 'bg-[#8E5D52] text-white'}`}>
+                    {tag}
+                  </div>
+                ))}
               </div>
               <a 
                 href="https://wa.me/919910930108?text=I%20would%20like%20to%20book%20a%20consultation%20with%20Dr.%20NK%20Sharma" 
@@ -43,8 +70,8 @@ const DrNKSharma: React.FC = () => {
               <div className="absolute inset-0 bg-[#E5989B]/20 rounded-full blur-2xl"></div>
               <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-8 border-white shadow-2xl">
                 <img 
-                  src={drImage} 
-                  alt="Dr. N.K. Sharma" 
+                  src={image || drImage} 
+                  alt={`${name} ${lastName}`} 
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -54,24 +81,14 @@ const DrNKSharma: React.FC = () => {
 
         {/* CLINICAL HOURS & INFO */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-32">
-          <div className="bg-white p-10 rounded-[3rem] border border-[#4A314D]/5 shadow-sm hover:shadow-xl transition-all">
-            <Calendar className="text-[#B5838D] mb-6" size={32} />
-            <h3 className="font-display text-2xl text-[#4A314D] mb-2">Consultation Days</h3>
-            <p className="text-[#4A314D]/60 uppercase tracking-widest font-bold text-xs">Wednesdays Only</p>
-          </div>
-          <div className="bg-white p-10 rounded-[3rem] border border-[#4A314D]/5 shadow-sm hover:shadow-xl transition-all">
-            <Clock className="text-[#B5838D] mb-6" size={32} />
-            <h3 className="font-display text-2xl text-[#4A314D] mb-2">Clinical Hours</h3>
-            <p className="text-[#4A314D]/60 uppercase tracking-widest font-bold text-xs">10:00 AM – 7:00 PM</p>
-          </div>
-          <div className="bg-[#B5838D] p-10 rounded-[3rem] text-[#FAF3F0] shadow-2xl relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl"></div>
-            <MapPin className="text-white mb-6" size={32} />
-            <h3 className="font-display text-2xl mb-2">Location</h3>
-            <p className="text-white/80 uppercase tracking-widest font-bold text-xs leading-relaxed">
-              Full Circle Consciousness Clinic, Gurgaon
-            </p>
-          </div>
+          {excellence && excellence.map((item: any, i: number) => (
+             <div key={i} className={`p-10 rounded-[3rem] shadow-sm hover:shadow-xl transition-all ${i === 2 ? 'bg-[#B5838D] text-[#FAF3F0] relative overflow-hidden group' : 'bg-white border border-[#4A314D]/5'}`}>
+                {i === 2 && <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl"></div>}
+                {i === 0 ? <Calendar className={i === 2 ? "text-white mb-6" : "text-[#B5838D] mb-6"} size={32} /> : i === 1 ? <Clock className={i === 2 ? "text-white mb-6" : "text-[#B5838D] mb-6"} size={32} /> : <MapPin className="text-white mb-6" size={32} />}
+                <h3 className={`font-display text-2xl mb-2 ${i === 2 ? '' : 'text-[#4A314D]'}`}>{item.title}</h3>
+                <p className={`${i === 2 ? 'text-white/80' : 'text-[#4A314D]/60'} uppercase tracking-widest font-bold text-xs leading-relaxed`}>{item.description}</p>
+             </div>
+          ))}
         </div>
 
         {/* PHILOSOPHY & LEGACY */}
@@ -83,15 +100,9 @@ const DrNKSharma: React.FC = () => {
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="font-display text-4xl md:text-6xl text-[#4A314D] mb-12">Bridging Spirituality <br />& Science</h2>
             <div className="space-y-8 font-serif text-lg md:text-2xl text-[#4A314D]/70 leading-relaxed italic">
-              <p>
-                Dr. N.K. Sharma’s teachings transcend the technicalities of healing. He serves as a guide for those seeking self-discovery and profound spiritual evolution.
-              </p>
-              <p>
-                By anchoring ancient traditions in modern scientific understanding, he offers a comprehensive roadmap that addresses the totality of human experience—from cellular health to cosmic consciousness.
-              </p>
-              <p>
-                His legacy as a mentor and source of inspiration has touched millions, illuminating the path toward a fulfilling and enlightened existence.
-              </p>
+              {philosophy && philosophy.map((p: string, i: number) => (
+                <p key={i}>{p}</p>
+              ))}
             </div>
           </div>
         </div>
@@ -101,7 +112,7 @@ const DrNKSharma: React.FC = () => {
           <div className="space-y-8">
             <h2 className="font-display text-5xl text-[#4A314D]">A Global Legacy</h2>
             <p className="text-lg text-[#4A314D]/70 leading-relaxed">
-              As a world-renowned speaker and mentor, Dr. Sharma shares his insights across international conferences and workshops. His dedication to spreading enlightenment has earned him global respect, inspiring individuals to unlock their true potential.
+              {academicBio}
             </p>
             <div className="flex gap-8">
               <div className="flex flex-col">

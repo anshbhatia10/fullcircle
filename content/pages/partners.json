@@ -1,0 +1,31 @@
+{
+  "title": "Partners",
+  "blocks": [
+    {
+      "_template": "hero",
+      "tagline": "Closing the Gap",
+      "title": "Meet Our Partners",
+      "subtitle": "Prevention - Intervention - Transition"
+    },
+    {
+      "_template": "grid",
+      "items": [
+        {
+          "title": "Dr. N.K. Sharma",
+          "description": "A world-renowned authority on Reiki and Naturopathy, bringing deep spiritual wisdom to clinical diagnostics. Founder of the Reiki Healing Foundation.",
+          "icon": "Star"
+        },
+        {
+          "title": "The Intensivist",
+          "description": "An expert in critical care who ensures the highest level of medical intervention for acute patients, while advocating for a human-centered approach.",
+          "icon": "Activity"
+        },
+        {
+          "title": "Dr. Prerna",
+          "description": "USA Board certified Internal medicine, nephrologist and a transplant nephrologist. A passionate advocate for organ donation, working to make India an \"OPT-OUT\" nation.",
+          "icon": "Heart"
+        }
+      ]
+    }
+  ]
+}

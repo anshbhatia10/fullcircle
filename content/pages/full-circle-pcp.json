@@ -1,0 +1,22 @@
+{
+  "tagline": "The Full Circle PCP",
+  "title": "One Doctor. The Whole Picture.",
+  "subtitle": "\"In a system where patients often juggle multiple specialists who do not coordinate, Full Circle introduces the USA Primary Care Physician concept.\"",
+  "features": [
+    {
+      "title": "Medically",
+      "description": "A clinical expert managing general medicine, nephrology, and transplant needs with USA-standard protocols and evidence-based rigor.",
+      "icon": "Stethoscope"
+    },
+    {
+      "title": "Spiritually",
+      "description": "A guide who understands how your Doshas (Vata, Pitta, Kapha) and stress patterns influence physical pathology and subtle energetic balance.",
+      "icon": "Flower2"
+    },
+    {
+      "title": "Aesthetically",
+      "description": "Preventive and regenerative care to ensure your external vitality matches your internal health, creating a complete harmony of form.",
+      "icon": "ShieldCheck"
+    }
+  ]
+}

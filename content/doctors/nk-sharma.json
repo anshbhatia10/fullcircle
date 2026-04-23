@@ -1,0 +1,20 @@
+{
+  "name": "Dr. N.K.",
+  "lastName": "Sharma",
+  "title": "Specialist Physician & Spiritual Guide",
+  "quote": "Where the science of the kidney meets the wisdom of the soul.",
+  "tags": ["Founder, Reiki Healing Foundation", "Naturopath", "Spiritual Healer"],
+  "image": "1456482892.jpg",
+  "academicBio": "As a world-renowned speaker and mentor, Dr. Sharma shares his insights across international conferences and workshops. His dedication to spreading enlightenment has earned him global respect, inspiring individuals to unlock their true potential.",
+  "excellence": [
+    { "title": "Consultation Days", "description": "Wednesdays Only" },
+    { "title": "Clinical Hours", "description": "10:00 AM – 7:00 PM" },
+    { "title": "Location", "description": "Full Circle Consciousness Clinic, Gurgaon" }
+  ],
+  "expertise": [],
+  "philosophy": [
+    "Dr. N.K. Sharma’s teachings transcend the technicalities of healing. He serves as a guide for those seeking self-discovery and profound spiritual evolution.",
+    "By anchoring ancient traditions in modern scientific understanding, he offers a comprehensive roadmap that addresses the totality of human experience—from cellular health to cosmic consciousness.",
+    "His legacy as a mentor and source of inspiration has touched millions, illuminating the path toward a fulfilling and enlightened existence."
+  ]
+}

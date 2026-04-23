@@ -54,15 +54,39 @@ type Query {
   collections: [Collection!]!
   node(id: String): Node!
   document(collection: String, relativePath: String): DocumentNode!
+  global(relativePath: String): Global!
+  globalConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: GlobalFilter): GlobalConnection!
   home(relativePath: String): Home!
   homeConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: HomeFilter): HomeConnection!
+  doctors(relativePath: String): Doctors!
+  doctorsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: DoctorsFilter): DoctorsConnection!
   services(relativePath: String): Services!
   servicesConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ServicesFilter): ServicesConnection!
+  screening(relativePath: String): Screening!
+  screeningConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ScreeningFilter): ScreeningConnection!
+  pcp(relativePath: String): Pcp!
+  pcpConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PcpFilter): PcpConnection!
+  aesthetics(relativePath: String): Aesthetics!
+  aestheticsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: AestheticsFilter): AestheticsConnection!
+  pledge(relativePath: String): Pledge!
+  pledgeConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PledgeFilter): PledgeConnection!
+  guidelines(relativePath: String): Guidelines!
+  guidelinesConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: GuidelinesFilter): GuidelinesConnection!
+  pages(relativePath: String): Pages!
+  pagesConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PagesFilter): PagesConnection!
 }
 
 input DocumentFilter {
+  global: GlobalFilter
   home: HomeFilter
+  doctors: DoctorsFilter
   services: ServicesFilter
+  screening: ScreeningFilter
+  pcp: PcpFilter
+  aesthetics: AestheticsFilter
+  pledge: PledgeFilter
+  guidelines: GuidelinesFilter
+  pages: PagesFilter
 }
 
 type DocumentConnectionEdges {
@@ -88,12 +112,78 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Home | Services | Folder
+union DocumentNode = Global | Home | Doctors | Services | Screening | Pcp | Aesthetics | Pledge | Guidelines | Pages | Folder
+
+type GlobalNavbarNavLinks {
+  label: String
+  path: String
+}
+
+type GlobalNavbar {
+  logoText: String
+  navLinks: [GlobalNavbarNavLinks]
+}
+
+type GlobalFooter {
+  quote: String
+  description: String
+  instagram: String
+  facebook: String
+}
+
+type Global implements Node & Document {
+  navbar: GlobalNavbar
+  footer: GlobalFooter
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input StringFilter {
+  startsWith: String
+  eq: String
+  exists: Boolean
+  in: [String]
+}
+
+input GlobalNavbarNavLinksFilter {
+  label: StringFilter
+  path: StringFilter
+}
+
+input GlobalNavbarFilter {
+  logoText: StringFilter
+  navLinks: GlobalNavbarNavLinksFilter
+}
+
+input GlobalFooterFilter {
+  quote: StringFilter
+  description: StringFilter
+  instagram: StringFilter
+  facebook: StringFilter
+}
+
+input GlobalFilter {
+  navbar: GlobalNavbarFilter
+  footer: GlobalFooterFilter
+}
+
+type GlobalConnectionEdges {
+  cursor: String!
+  node: Global
+}
+
+type GlobalConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [GlobalConnectionEdges]
+}
 
 type HomeHero {
   titlePart1: String
   titlePart2: String
   subtitle: String
+  video: String
 }
 
 type HomeFounder {
@@ -109,26 +199,26 @@ type HomePhilosophy {
   branchSymptomText: String
 }
 
+type HomeIndividualCare {
+  title: String
+  description: String
+}
+
 type Home implements Node & Document {
   hero: HomeHero
   founder: HomeFounder
   philosophy: HomePhilosophy
+  individualCare: [HomeIndividualCare]
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
-}
-
-input StringFilter {
-  startsWith: String
-  eq: String
-  exists: Boolean
-  in: [String]
 }
 
 input HomeHeroFilter {
   titlePart1: StringFilter
   titlePart2: StringFilter
   subtitle: StringFilter
+  video: StringFilter
 }
 
 input ImageFilter {
@@ -151,10 +241,16 @@ input HomePhilosophyFilter {
   branchSymptomText: StringFilter
 }
 
+input HomeIndividualCareFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
 input HomeFilter {
   hero: HomeHeroFilter
   founder: HomeFounderFilter
   philosophy: HomePhilosophyFilter
+  individualCare: HomeIndividualCareFilter
 }
 
 type HomeConnectionEdges {
@@ -166,6 +262,66 @@ type HomeConnection implements Connection {
   pageInfo: PageInfo!
   totalCount: Float!
   edges: [HomeConnectionEdges]
+}
+
+type DoctorsExcellence {
+  title: String
+  description: String
+}
+
+type DoctorsExpertise {
+  title: String
+  description: String
+}
+
+type Doctors implements Node & Document {
+  name: String
+  lastName: String
+  title: String
+  quote: String
+  tags: [String]
+  image: String
+  academicBio: String
+  excellence: [DoctorsExcellence]
+  expertise: [DoctorsExpertise]
+  philosophy: [String]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input DoctorsExcellenceFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input DoctorsExpertiseFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input DoctorsFilter {
+  name: StringFilter
+  lastName: StringFilter
+  title: StringFilter
+  quote: StringFilter
+  tags: StringFilter
+  image: ImageFilter
+  academicBio: StringFilter
+  excellence: DoctorsExcellenceFilter
+  expertise: DoctorsExpertiseFilter
+  philosophy: StringFilter
+}
+
+type DoctorsConnectionEdges {
+  cursor: String!
+  node: Doctors
+}
+
+type DoctorsConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [DoctorsConnectionEdges]
 }
 
 type ServicesItems {
@@ -206,33 +362,374 @@ type ServicesConnection implements Connection {
   edges: [ServicesConnectionEdges]
 }
 
+type ScreeningPathwayA {
+  title: String
+  description: String
+  features: [String]
+}
+
+type ScreeningPathwayB {
+  title: String
+  description: String
+  features: [String]
+}
+
+type Screening implements Node & Document {
+  tagline: String
+  title: String
+  subtitle: String
+  pathwayA: ScreeningPathwayA
+  pathwayB: ScreeningPathwayB
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input ScreeningPathwayAFilter {
+  title: StringFilter
+  description: StringFilter
+  features: StringFilter
+}
+
+input ScreeningPathwayBFilter {
+  title: StringFilter
+  description: StringFilter
+  features: StringFilter
+}
+
+input ScreeningFilter {
+  tagline: StringFilter
+  title: StringFilter
+  subtitle: StringFilter
+  pathwayA: ScreeningPathwayAFilter
+  pathwayB: ScreeningPathwayBFilter
+}
+
+type ScreeningConnectionEdges {
+  cursor: String!
+  node: Screening
+}
+
+type ScreeningConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [ScreeningConnectionEdges]
+}
+
+type PcpFeatures {
+  title: String
+  description: String
+  icon: String
+}
+
+type Pcp implements Node & Document {
+  tagline: String
+  title: String
+  subtitle: String
+  features: [PcpFeatures]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input PcpFeaturesFilter {
+  title: StringFilter
+  description: StringFilter
+  icon: StringFilter
+}
+
+input PcpFilter {
+  tagline: StringFilter
+  title: StringFilter
+  subtitle: StringFilter
+  features: PcpFeaturesFilter
+}
+
+type PcpConnectionEdges {
+  cursor: String!
+  node: Pcp
+}
+
+type PcpConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [PcpConnectionEdges]
+}
+
+type AestheticsServices {
+  title: String
+  description: String
+  image: String
+}
+
+type Aesthetics implements Node & Document {
+  tagline: String
+  title: String
+  subtitle: String
+  services: [AestheticsServices]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input AestheticsServicesFilter {
+  title: StringFilter
+  description: StringFilter
+  image: ImageFilter
+}
+
+input AestheticsFilter {
+  tagline: StringFilter
+  title: StringFilter
+  subtitle: StringFilter
+  services: AestheticsServicesFilter
+}
+
+type AestheticsConnectionEdges {
+  cursor: String!
+  node: Aesthetics
+}
+
+type AestheticsConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [AestheticsConnectionEdges]
+}
+
+type PledgePledges {
+  physical: String
+  spiritual: String
+  giving: String
+}
+
+type Pledge implements Node & Document {
+  tagline: String
+  title: String
+  subtitle: String
+  description: String
+  pledges: PledgePledges
+  registryUrl: String
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input PledgePledgesFilter {
+  physical: StringFilter
+  spiritual: StringFilter
+  giving: StringFilter
+}
+
+input PledgeFilter {
+  tagline: StringFilter
+  title: StringFilter
+  subtitle: StringFilter
+  description: StringFilter
+  pledges: PledgePledgesFilter
+  registryUrl: StringFilter
+}
+
+type PledgeConnectionEdges {
+  cursor: String!
+  node: Pledge
+}
+
+type PledgeConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [PledgeConnectionEdges]
+}
+
+type Guidelines implements Node & Document {
+  tagline: String
+  title: String
+  subtitle: String
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input GuidelinesFilter {
+  tagline: StringFilter
+  title: StringFilter
+  subtitle: StringFilter
+}
+
+type GuidelinesConnectionEdges {
+  cursor: String!
+  node: Guidelines
+}
+
+type GuidelinesConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [GuidelinesConnectionEdges]
+}
+
+type PagesBlocksHero {
+  tagline: String
+  title: String
+  subtitle: String
+}
+
+type PagesBlocksContentSection {
+  title: String
+  body: JSON
+  image: String
+}
+
+type PagesBlocksGridItems {
+  title: String
+  description: String
+  icon: String
+}
+
+type PagesBlocksGrid {
+  items: [PagesBlocksGridItems]
+}
+
+union PagesBlocks = PagesBlocksHero | PagesBlocksContentSection | PagesBlocksGrid
+
+type Pages implements Node & Document {
+  title: String!
+  blocks: [PagesBlocks]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input PagesBlocksHeroFilter {
+  tagline: StringFilter
+  title: StringFilter
+  subtitle: StringFilter
+}
+
+input RichTextFilter {
+  startsWith: String
+  eq: String
+  exists: Boolean
+}
+
+input PagesBlocksContentSectionFilter {
+  title: StringFilter
+  body: RichTextFilter
+  image: ImageFilter
+}
+
+input PagesBlocksGridItemsFilter {
+  title: StringFilter
+  description: StringFilter
+  icon: StringFilter
+}
+
+input PagesBlocksGridFilter {
+  items: PagesBlocksGridItemsFilter
+}
+
+input PagesBlocksFilter {
+  hero: PagesBlocksHeroFilter
+  contentSection: PagesBlocksContentSectionFilter
+  grid: PagesBlocksGridFilter
+}
+
+input PagesFilter {
+  title: StringFilter
+  blocks: PagesBlocksFilter
+}
+
+type PagesConnectionEdges {
+  cursor: String!
+  node: Pages
+}
+
+type PagesConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [PagesConnectionEdges]
+}
+
 type Mutation {
   addPendingDocument(collection: String!, relativePath: String!, template: String): DocumentNode!
   updateDocument(collection: String, relativePath: String!, params: DocumentUpdateMutation!): DocumentNode!
   deleteDocument(collection: String, relativePath: String!): DocumentNode!
   createDocument(collection: String, relativePath: String!, params: DocumentMutation!): DocumentNode!
   createFolder(collection: String, relativePath: String!): DocumentNode!
+  updateGlobal(relativePath: String!, params: GlobalMutation!): Global!
+  createGlobal(relativePath: String!, params: GlobalMutation!): Global!
   updateHome(relativePath: String!, params: HomeMutation!): Home!
   createHome(relativePath: String!, params: HomeMutation!): Home!
+  updateDoctors(relativePath: String!, params: DoctorsMutation!): Doctors!
+  createDoctors(relativePath: String!, params: DoctorsMutation!): Doctors!
   updateServices(relativePath: String!, params: ServicesMutation!): Services!
   createServices(relativePath: String!, params: ServicesMutation!): Services!
+  updateScreening(relativePath: String!, params: ScreeningMutation!): Screening!
+  createScreening(relativePath: String!, params: ScreeningMutation!): Screening!
+  updatePcp(relativePath: String!, params: PcpMutation!): Pcp!
+  createPcp(relativePath: String!, params: PcpMutation!): Pcp!
+  updateAesthetics(relativePath: String!, params: AestheticsMutation!): Aesthetics!
+  createAesthetics(relativePath: String!, params: AestheticsMutation!): Aesthetics!
+  updatePledge(relativePath: String!, params: PledgeMutation!): Pledge!
+  createPledge(relativePath: String!, params: PledgeMutation!): Pledge!
+  updateGuidelines(relativePath: String!, params: GuidelinesMutation!): Guidelines!
+  createGuidelines(relativePath: String!, params: GuidelinesMutation!): Guidelines!
+  updatePages(relativePath: String!, params: PagesMutation!): Pages!
+  createPages(relativePath: String!, params: PagesMutation!): Pages!
 }
 
 input DocumentUpdateMutation {
+  global: GlobalMutation
   home: HomeMutation
+  doctors: DoctorsMutation
   services: ServicesMutation
+  screening: ScreeningMutation
+  pcp: PcpMutation
+  aesthetics: AestheticsMutation
+  pledge: PledgeMutation
+  guidelines: GuidelinesMutation
+  pages: PagesMutation
   relativePath: String
 }
 
 input DocumentMutation {
+  global: GlobalMutation
   home: HomeMutation
+  doctors: DoctorsMutation
   services: ServicesMutation
+  screening: ScreeningMutation
+  pcp: PcpMutation
+  aesthetics: AestheticsMutation
+  pledge: PledgeMutation
+  guidelines: GuidelinesMutation
+  pages: PagesMutation
+}
+
+input GlobalNavbarNavLinksMutation {
+  label: String
+  path: String
+}
+
+input GlobalNavbarMutation {
+  logoText: String
+  navLinks: [GlobalNavbarNavLinksMutation]
+}
+
+input GlobalFooterMutation {
+  quote: String
+  description: String
+  instagram: String
+  facebook: String
+}
+
+input GlobalMutation {
+  navbar: GlobalNavbarMutation
+  footer: GlobalFooterMutation
 }
 
 input HomeHeroMutation {
   titlePart1: String
   titlePart2: String
   subtitle: String
+  video: String
 }
 
 input HomeFounderMutation {
@@ -248,10 +745,39 @@ input HomePhilosophyMutation {
   branchSymptomText: String
 }
 
+input HomeIndividualCareMutation {
+  title: String
+  description: String
+}
+
 input HomeMutation {
   hero: HomeHeroMutation
   founder: HomeFounderMutation
   philosophy: HomePhilosophyMutation
+  individualCare: [HomeIndividualCareMutation]
+}
+
+input DoctorsExcellenceMutation {
+  title: String
+  description: String
+}
+
+input DoctorsExpertiseMutation {
+  title: String
+  description: String
+}
+
+input DoctorsMutation {
+  name: String
+  lastName: String
+  title: String
+  quote: String
+  tags: [String]
+  image: String
+  academicBio: String
+  excellence: [DoctorsExcellenceMutation]
+  expertise: [DoctorsExpertiseMutation]
+  philosophy: [String]
 }
 
 input ServicesItemsMutation {
@@ -264,6 +790,106 @@ input ServicesItemsMutation {
 
 input ServicesMutation {
   items: [ServicesItemsMutation]
+}
+
+input ScreeningPathwayAMutation {
+  title: String
+  description: String
+  features: [String]
+}
+
+input ScreeningPathwayBMutation {
+  title: String
+  description: String
+  features: [String]
+}
+
+input ScreeningMutation {
+  tagline: String
+  title: String
+  subtitle: String
+  pathwayA: ScreeningPathwayAMutation
+  pathwayB: ScreeningPathwayBMutation
+}
+
+input PcpFeaturesMutation {
+  title: String
+  description: String
+  icon: String
+}
+
+input PcpMutation {
+  tagline: String
+  title: String
+  subtitle: String
+  features: [PcpFeaturesMutation]
+}
+
+input AestheticsServicesMutation {
+  title: String
+  description: String
+  image: String
+}
+
+input AestheticsMutation {
+  tagline: String
+  title: String
+  subtitle: String
+  services: [AestheticsServicesMutation]
+}
+
+input PledgePledgesMutation {
+  physical: String
+  spiritual: String
+  giving: String
+}
+
+input PledgeMutation {
+  tagline: String
+  title: String
+  subtitle: String
+  description: String
+  pledges: PledgePledgesMutation
+  registryUrl: String
+}
+
+input GuidelinesMutation {
+  tagline: String
+  title: String
+  subtitle: String
+}
+
+input PagesBlocksHeroMutation {
+  tagline: String
+  title: String
+  subtitle: String
+}
+
+input PagesBlocksContentSectionMutation {
+  title: String
+  body: JSON
+  image: String
+}
+
+input PagesBlocksGridItemsMutation {
+  title: String
+  description: String
+  icon: String
+}
+
+input PagesBlocksGridMutation {
+  items: [PagesBlocksGridItemsMutation]
+}
+
+input PagesBlocksMutation {
+  hero: PagesBlocksHeroMutation
+  contentSection: PagesBlocksContentSectionMutation
+  grid: PagesBlocksGridMutation
+}
+
+input PagesMutation {
+  title: String
+  blocks: [PagesBlocksMutation]
 }
 
 schema {

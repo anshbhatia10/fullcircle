@@ -82,10 +82,26 @@ export type Query = {
   collections: Array<Collection>;
   node: Node;
   document: DocumentNode;
+  global: Global;
+  globalConnection: GlobalConnection;
   home: Home;
   homeConnection: HomeConnection;
+  doctors: Doctors;
+  doctorsConnection: DoctorsConnection;
   services: Services;
   servicesConnection: ServicesConnection;
+  screening: Screening;
+  screeningConnection: ScreeningConnection;
+  pcp: Pcp;
+  pcpConnection: PcpConnection;
+  aesthetics: Aesthetics;
+  aestheticsConnection: AestheticsConnection;
+  pledge: Pledge;
+  pledgeConnection: PledgeConnection;
+  guidelines: Guidelines;
+  guidelinesConnection: GuidelinesConnection;
+  pages: Pages;
+  pagesConnection: PagesConnection;
 };
 
 
@@ -110,6 +126,21 @@ export type QueryDocumentArgs = {
 };
 
 
+export type QueryGlobalArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryGlobalConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<GlobalFilter>;
+};
+
+
 export type QueryHomeArgs = {
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
@@ -122,6 +153,21 @@ export type QueryHomeConnectionArgs = {
   last?: InputMaybe<Scalars['Float']['input']>;
   sort?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<HomeFilter>;
+};
+
+
+export type QueryDoctorsArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryDoctorsConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<DoctorsFilter>;
 };
 
 
@@ -139,9 +185,107 @@ export type QueryServicesConnectionArgs = {
   filter?: InputMaybe<ServicesFilter>;
 };
 
+
+export type QueryScreeningArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryScreeningConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<ScreeningFilter>;
+};
+
+
+export type QueryPcpArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryPcpConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<PcpFilter>;
+};
+
+
+export type QueryAestheticsArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryAestheticsConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<AestheticsFilter>;
+};
+
+
+export type QueryPledgeArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryPledgeConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<PledgeFilter>;
+};
+
+
+export type QueryGuidelinesArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryGuidelinesConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<GuidelinesFilter>;
+};
+
+
+export type QueryPagesArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryPagesConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<PagesFilter>;
+};
+
 export type DocumentFilter = {
+  global?: InputMaybe<GlobalFilter>;
   home?: InputMaybe<HomeFilter>;
+  doctors?: InputMaybe<DoctorsFilter>;
   services?: InputMaybe<ServicesFilter>;
+  screening?: InputMaybe<ScreeningFilter>;
+  pcp?: InputMaybe<PcpFilter>;
+  aesthetics?: InputMaybe<AestheticsFilter>;
+  pledge?: InputMaybe<PledgeFilter>;
+  guidelines?: InputMaybe<GuidelinesFilter>;
+  pages?: InputMaybe<PagesFilter>;
 };
 
 export type DocumentConnectionEdges = {
@@ -181,13 +325,85 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Home | Services | Folder;
+export type DocumentNode = Global | Home | Doctors | Services | Screening | Pcp | Aesthetics | Pledge | Guidelines | Pages | Folder;
+
+export type GlobalNavbarNavLinks = {
+  __typename?: 'GlobalNavbarNavLinks';
+  label?: Maybe<Scalars['String']['output']>;
+  path?: Maybe<Scalars['String']['output']>;
+};
+
+export type GlobalNavbar = {
+  __typename?: 'GlobalNavbar';
+  logoText?: Maybe<Scalars['String']['output']>;
+  navLinks?: Maybe<Array<Maybe<GlobalNavbarNavLinks>>>;
+};
+
+export type GlobalFooter = {
+  __typename?: 'GlobalFooter';
+  quote?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  instagram?: Maybe<Scalars['String']['output']>;
+  facebook?: Maybe<Scalars['String']['output']>;
+};
+
+export type Global = Node & Document & {
+  __typename?: 'Global';
+  navbar?: Maybe<GlobalNavbar>;
+  footer?: Maybe<GlobalFooter>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type StringFilter = {
+  startsWith?: InputMaybe<Scalars['String']['input']>;
+  eq?: InputMaybe<Scalars['String']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type GlobalNavbarNavLinksFilter = {
+  label?: InputMaybe<StringFilter>;
+  path?: InputMaybe<StringFilter>;
+};
+
+export type GlobalNavbarFilter = {
+  logoText?: InputMaybe<StringFilter>;
+  navLinks?: InputMaybe<GlobalNavbarNavLinksFilter>;
+};
+
+export type GlobalFooterFilter = {
+  quote?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  instagram?: InputMaybe<StringFilter>;
+  facebook?: InputMaybe<StringFilter>;
+};
+
+export type GlobalFilter = {
+  navbar?: InputMaybe<GlobalNavbarFilter>;
+  footer?: InputMaybe<GlobalFooterFilter>;
+};
+
+export type GlobalConnectionEdges = {
+  __typename?: 'GlobalConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Global>;
+};
+
+export type GlobalConnection = Connection & {
+  __typename?: 'GlobalConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<GlobalConnectionEdges>>>;
+};
 
 export type HomeHero = {
   __typename?: 'HomeHero';
   titlePart1?: Maybe<Scalars['String']['output']>;
   titlePart2?: Maybe<Scalars['String']['output']>;
   subtitle?: Maybe<Scalars['String']['output']>;
+  video?: Maybe<Scalars['String']['output']>;
 };
 
 export type HomeFounder = {
@@ -205,27 +421,28 @@ export type HomePhilosophy = {
   branchSymptomText?: Maybe<Scalars['String']['output']>;
 };
 
+export type HomeIndividualCare = {
+  __typename?: 'HomeIndividualCare';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+};
+
 export type Home = Node & Document & {
   __typename?: 'Home';
   hero?: Maybe<HomeHero>;
   founder?: Maybe<HomeFounder>;
   philosophy?: Maybe<HomePhilosophy>;
+  individualCare?: Maybe<Array<Maybe<HomeIndividualCare>>>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
-};
-
-export type StringFilter = {
-  startsWith?: InputMaybe<Scalars['String']['input']>;
-  eq?: InputMaybe<Scalars['String']['input']>;
-  exists?: InputMaybe<Scalars['Boolean']['input']>;
-  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type HomeHeroFilter = {
   titlePart1?: InputMaybe<StringFilter>;
   titlePart2?: InputMaybe<StringFilter>;
   subtitle?: InputMaybe<StringFilter>;
+  video?: InputMaybe<StringFilter>;
 };
 
 export type ImageFilter = {
@@ -248,10 +465,16 @@ export type HomePhilosophyFilter = {
   branchSymptomText?: InputMaybe<StringFilter>;
 };
 
+export type HomeIndividualCareFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
 export type HomeFilter = {
   hero?: InputMaybe<HomeHeroFilter>;
   founder?: InputMaybe<HomeFounderFilter>;
   philosophy?: InputMaybe<HomePhilosophyFilter>;
+  individualCare?: InputMaybe<HomeIndividualCareFilter>;
 };
 
 export type HomeConnectionEdges = {
@@ -265,6 +488,71 @@ export type HomeConnection = Connection & {
   pageInfo: PageInfo;
   totalCount: Scalars['Float']['output'];
   edges?: Maybe<Array<Maybe<HomeConnectionEdges>>>;
+};
+
+export type DoctorsExcellence = {
+  __typename?: 'DoctorsExcellence';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+};
+
+export type DoctorsExpertise = {
+  __typename?: 'DoctorsExpertise';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+};
+
+export type Doctors = Node & Document & {
+  __typename?: 'Doctors';
+  name?: Maybe<Scalars['String']['output']>;
+  lastName?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  quote?: Maybe<Scalars['String']['output']>;
+  tags?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  image?: Maybe<Scalars['String']['output']>;
+  academicBio?: Maybe<Scalars['String']['output']>;
+  excellence?: Maybe<Array<Maybe<DoctorsExcellence>>>;
+  expertise?: Maybe<Array<Maybe<DoctorsExpertise>>>;
+  philosophy?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type DoctorsExcellenceFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type DoctorsExpertiseFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type DoctorsFilter = {
+  name?: InputMaybe<StringFilter>;
+  lastName?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  quote?: InputMaybe<StringFilter>;
+  tags?: InputMaybe<StringFilter>;
+  image?: InputMaybe<ImageFilter>;
+  academicBio?: InputMaybe<StringFilter>;
+  excellence?: InputMaybe<DoctorsExcellenceFilter>;
+  expertise?: InputMaybe<DoctorsExpertiseFilter>;
+  philosophy?: InputMaybe<StringFilter>;
+};
+
+export type DoctorsConnectionEdges = {
+  __typename?: 'DoctorsConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Doctors>;
+};
+
+export type DoctorsConnection = Connection & {
+  __typename?: 'DoctorsConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<DoctorsConnectionEdges>>>;
 };
 
 export type ServicesItems = {
@@ -309,6 +597,319 @@ export type ServicesConnection = Connection & {
   edges?: Maybe<Array<Maybe<ServicesConnectionEdges>>>;
 };
 
+export type ScreeningPathwayA = {
+  __typename?: 'ScreeningPathwayA';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  features?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+};
+
+export type ScreeningPathwayB = {
+  __typename?: 'ScreeningPathwayB';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  features?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+};
+
+export type Screening = Node & Document & {
+  __typename?: 'Screening';
+  tagline?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  subtitle?: Maybe<Scalars['String']['output']>;
+  pathwayA?: Maybe<ScreeningPathwayA>;
+  pathwayB?: Maybe<ScreeningPathwayB>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type ScreeningPathwayAFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  features?: InputMaybe<StringFilter>;
+};
+
+export type ScreeningPathwayBFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  features?: InputMaybe<StringFilter>;
+};
+
+export type ScreeningFilter = {
+  tagline?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+  pathwayA?: InputMaybe<ScreeningPathwayAFilter>;
+  pathwayB?: InputMaybe<ScreeningPathwayBFilter>;
+};
+
+export type ScreeningConnectionEdges = {
+  __typename?: 'ScreeningConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Screening>;
+};
+
+export type ScreeningConnection = Connection & {
+  __typename?: 'ScreeningConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<ScreeningConnectionEdges>>>;
+};
+
+export type PcpFeatures = {
+  __typename?: 'PcpFeatures';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  icon?: Maybe<Scalars['String']['output']>;
+};
+
+export type Pcp = Node & Document & {
+  __typename?: 'Pcp';
+  tagline?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  subtitle?: Maybe<Scalars['String']['output']>;
+  features?: Maybe<Array<Maybe<PcpFeatures>>>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type PcpFeaturesFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  icon?: InputMaybe<StringFilter>;
+};
+
+export type PcpFilter = {
+  tagline?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+  features?: InputMaybe<PcpFeaturesFilter>;
+};
+
+export type PcpConnectionEdges = {
+  __typename?: 'PcpConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Pcp>;
+};
+
+export type PcpConnection = Connection & {
+  __typename?: 'PcpConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<PcpConnectionEdges>>>;
+};
+
+export type AestheticsServices = {
+  __typename?: 'AestheticsServices';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  image?: Maybe<Scalars['String']['output']>;
+};
+
+export type Aesthetics = Node & Document & {
+  __typename?: 'Aesthetics';
+  tagline?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  subtitle?: Maybe<Scalars['String']['output']>;
+  services?: Maybe<Array<Maybe<AestheticsServices>>>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type AestheticsServicesFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  image?: InputMaybe<ImageFilter>;
+};
+
+export type AestheticsFilter = {
+  tagline?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+  services?: InputMaybe<AestheticsServicesFilter>;
+};
+
+export type AestheticsConnectionEdges = {
+  __typename?: 'AestheticsConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Aesthetics>;
+};
+
+export type AestheticsConnection = Connection & {
+  __typename?: 'AestheticsConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<AestheticsConnectionEdges>>>;
+};
+
+export type PledgePledges = {
+  __typename?: 'PledgePledges';
+  physical?: Maybe<Scalars['String']['output']>;
+  spiritual?: Maybe<Scalars['String']['output']>;
+  giving?: Maybe<Scalars['String']['output']>;
+};
+
+export type Pledge = Node & Document & {
+  __typename?: 'Pledge';
+  tagline?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  subtitle?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  pledges?: Maybe<PledgePledges>;
+  registryUrl?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type PledgePledgesFilter = {
+  physical?: InputMaybe<StringFilter>;
+  spiritual?: InputMaybe<StringFilter>;
+  giving?: InputMaybe<StringFilter>;
+};
+
+export type PledgeFilter = {
+  tagline?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  pledges?: InputMaybe<PledgePledgesFilter>;
+  registryUrl?: InputMaybe<StringFilter>;
+};
+
+export type PledgeConnectionEdges = {
+  __typename?: 'PledgeConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Pledge>;
+};
+
+export type PledgeConnection = Connection & {
+  __typename?: 'PledgeConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<PledgeConnectionEdges>>>;
+};
+
+export type Guidelines = Node & Document & {
+  __typename?: 'Guidelines';
+  tagline?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  subtitle?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type GuidelinesFilter = {
+  tagline?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+};
+
+export type GuidelinesConnectionEdges = {
+  __typename?: 'GuidelinesConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Guidelines>;
+};
+
+export type GuidelinesConnection = Connection & {
+  __typename?: 'GuidelinesConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<GuidelinesConnectionEdges>>>;
+};
+
+export type PagesBlocksHero = {
+  __typename?: 'PagesBlocksHero';
+  tagline?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  subtitle?: Maybe<Scalars['String']['output']>;
+};
+
+export type PagesBlocksContentSection = {
+  __typename?: 'PagesBlocksContentSection';
+  title?: Maybe<Scalars['String']['output']>;
+  body?: Maybe<Scalars['JSON']['output']>;
+  image?: Maybe<Scalars['String']['output']>;
+};
+
+export type PagesBlocksGridItems = {
+  __typename?: 'PagesBlocksGridItems';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  icon?: Maybe<Scalars['String']['output']>;
+};
+
+export type PagesBlocksGrid = {
+  __typename?: 'PagesBlocksGrid';
+  items?: Maybe<Array<Maybe<PagesBlocksGridItems>>>;
+};
+
+export type PagesBlocks = PagesBlocksHero | PagesBlocksContentSection | PagesBlocksGrid;
+
+export type Pages = Node & Document & {
+  __typename?: 'Pages';
+  title: Scalars['String']['output'];
+  blocks?: Maybe<Array<Maybe<PagesBlocks>>>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type PagesBlocksHeroFilter = {
+  tagline?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+};
+
+export type RichTextFilter = {
+  startsWith?: InputMaybe<Scalars['String']['input']>;
+  eq?: InputMaybe<Scalars['String']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type PagesBlocksContentSectionFilter = {
+  title?: InputMaybe<StringFilter>;
+  body?: InputMaybe<RichTextFilter>;
+  image?: InputMaybe<ImageFilter>;
+};
+
+export type PagesBlocksGridItemsFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  icon?: InputMaybe<StringFilter>;
+};
+
+export type PagesBlocksGridFilter = {
+  items?: InputMaybe<PagesBlocksGridItemsFilter>;
+};
+
+export type PagesBlocksFilter = {
+  hero?: InputMaybe<PagesBlocksHeroFilter>;
+  contentSection?: InputMaybe<PagesBlocksContentSectionFilter>;
+  grid?: InputMaybe<PagesBlocksGridFilter>;
+};
+
+export type PagesFilter = {
+  title?: InputMaybe<StringFilter>;
+  blocks?: InputMaybe<PagesBlocksFilter>;
+};
+
+export type PagesConnectionEdges = {
+  __typename?: 'PagesConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Pages>;
+};
+
+export type PagesConnection = Connection & {
+  __typename?: 'PagesConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<PagesConnectionEdges>>>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   addPendingDocument: DocumentNode;
@@ -316,10 +917,26 @@ export type Mutation = {
   deleteDocument: DocumentNode;
   createDocument: DocumentNode;
   createFolder: DocumentNode;
+  updateGlobal: Global;
+  createGlobal: Global;
   updateHome: Home;
   createHome: Home;
+  updateDoctors: Doctors;
+  createDoctors: Doctors;
   updateServices: Services;
   createServices: Services;
+  updateScreening: Screening;
+  createScreening: Screening;
+  updatePcp: Pcp;
+  createPcp: Pcp;
+  updateAesthetics: Aesthetics;
+  createAesthetics: Aesthetics;
+  updatePledge: Pledge;
+  createPledge: Pledge;
+  updateGuidelines: Guidelines;
+  createGuidelines: Guidelines;
+  updatePages: Pages;
+  createPages: Pages;
 };
 
 
@@ -356,6 +973,18 @@ export type MutationCreateFolderArgs = {
 };
 
 
+export type MutationUpdateGlobalArgs = {
+  relativePath: Scalars['String']['input'];
+  params: GlobalMutation;
+};
+
+
+export type MutationCreateGlobalArgs = {
+  relativePath: Scalars['String']['input'];
+  params: GlobalMutation;
+};
+
+
 export type MutationUpdateHomeArgs = {
   relativePath: Scalars['String']['input'];
   params: HomeMutation;
@@ -365,6 +994,18 @@ export type MutationUpdateHomeArgs = {
 export type MutationCreateHomeArgs = {
   relativePath: Scalars['String']['input'];
   params: HomeMutation;
+};
+
+
+export type MutationUpdateDoctorsArgs = {
+  relativePath: Scalars['String']['input'];
+  params: DoctorsMutation;
+};
+
+
+export type MutationCreateDoctorsArgs = {
+  relativePath: Scalars['String']['input'];
+  params: DoctorsMutation;
 };
 
 
@@ -379,21 +1020,132 @@ export type MutationCreateServicesArgs = {
   params: ServicesMutation;
 };
 
+
+export type MutationUpdateScreeningArgs = {
+  relativePath: Scalars['String']['input'];
+  params: ScreeningMutation;
+};
+
+
+export type MutationCreateScreeningArgs = {
+  relativePath: Scalars['String']['input'];
+  params: ScreeningMutation;
+};
+
+
+export type MutationUpdatePcpArgs = {
+  relativePath: Scalars['String']['input'];
+  params: PcpMutation;
+};
+
+
+export type MutationCreatePcpArgs = {
+  relativePath: Scalars['String']['input'];
+  params: PcpMutation;
+};
+
+
+export type MutationUpdateAestheticsArgs = {
+  relativePath: Scalars['String']['input'];
+  params: AestheticsMutation;
+};
+
+
+export type MutationCreateAestheticsArgs = {
+  relativePath: Scalars['String']['input'];
+  params: AestheticsMutation;
+};
+
+
+export type MutationUpdatePledgeArgs = {
+  relativePath: Scalars['String']['input'];
+  params: PledgeMutation;
+};
+
+
+export type MutationCreatePledgeArgs = {
+  relativePath: Scalars['String']['input'];
+  params: PledgeMutation;
+};
+
+
+export type MutationUpdateGuidelinesArgs = {
+  relativePath: Scalars['String']['input'];
+  params: GuidelinesMutation;
+};
+
+
+export type MutationCreateGuidelinesArgs = {
+  relativePath: Scalars['String']['input'];
+  params: GuidelinesMutation;
+};
+
+
+export type MutationUpdatePagesArgs = {
+  relativePath: Scalars['String']['input'];
+  params: PagesMutation;
+};
+
+
+export type MutationCreatePagesArgs = {
+  relativePath: Scalars['String']['input'];
+  params: PagesMutation;
+};
+
 export type DocumentUpdateMutation = {
+  global?: InputMaybe<GlobalMutation>;
   home?: InputMaybe<HomeMutation>;
+  doctors?: InputMaybe<DoctorsMutation>;
   services?: InputMaybe<ServicesMutation>;
+  screening?: InputMaybe<ScreeningMutation>;
+  pcp?: InputMaybe<PcpMutation>;
+  aesthetics?: InputMaybe<AestheticsMutation>;
+  pledge?: InputMaybe<PledgeMutation>;
+  guidelines?: InputMaybe<GuidelinesMutation>;
+  pages?: InputMaybe<PagesMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type DocumentMutation = {
+  global?: InputMaybe<GlobalMutation>;
   home?: InputMaybe<HomeMutation>;
+  doctors?: InputMaybe<DoctorsMutation>;
   services?: InputMaybe<ServicesMutation>;
+  screening?: InputMaybe<ScreeningMutation>;
+  pcp?: InputMaybe<PcpMutation>;
+  aesthetics?: InputMaybe<AestheticsMutation>;
+  pledge?: InputMaybe<PledgeMutation>;
+  guidelines?: InputMaybe<GuidelinesMutation>;
+  pages?: InputMaybe<PagesMutation>;
+};
+
+export type GlobalNavbarNavLinksMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  path?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type GlobalNavbarMutation = {
+  logoText?: InputMaybe<Scalars['String']['input']>;
+  navLinks?: InputMaybe<Array<InputMaybe<GlobalNavbarNavLinksMutation>>>;
+};
+
+export type GlobalFooterMutation = {
+  quote?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  instagram?: InputMaybe<Scalars['String']['input']>;
+  facebook?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type GlobalMutation = {
+  navbar?: InputMaybe<GlobalNavbarMutation>;
+  footer?: InputMaybe<GlobalFooterMutation>;
 };
 
 export type HomeHeroMutation = {
   titlePart1?: InputMaybe<Scalars['String']['input']>;
   titlePart2?: InputMaybe<Scalars['String']['input']>;
   subtitle?: InputMaybe<Scalars['String']['input']>;
+  video?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type HomeFounderMutation = {
@@ -409,10 +1161,39 @@ export type HomePhilosophyMutation = {
   branchSymptomText?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type HomeIndividualCareMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type HomeMutation = {
   hero?: InputMaybe<HomeHeroMutation>;
   founder?: InputMaybe<HomeFounderMutation>;
   philosophy?: InputMaybe<HomePhilosophyMutation>;
+  individualCare?: InputMaybe<Array<InputMaybe<HomeIndividualCareMutation>>>;
+};
+
+export type DoctorsExcellenceMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type DoctorsExpertiseMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type DoctorsMutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  lastName?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  quote?: InputMaybe<Scalars['String']['input']>;
+  tags?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  academicBio?: InputMaybe<Scalars['String']['input']>;
+  excellence?: InputMaybe<Array<InputMaybe<DoctorsExcellenceMutation>>>;
+  expertise?: InputMaybe<Array<InputMaybe<DoctorsExpertiseMutation>>>;
+  philosophy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type ServicesItemsMutation = {
@@ -427,16 +1208,151 @@ export type ServicesMutation = {
   items?: InputMaybe<Array<InputMaybe<ServicesItemsMutation>>>;
 };
 
-export type HomePartsFragment = { __typename: 'Home', hero?: { __typename: 'HomeHero', titlePart1?: string | null, titlePart2?: string | null, subtitle?: string | null } | null, founder?: { __typename: 'HomeFounder', quote?: string | null, image?: string | null, bio?: string | null } | null, philosophy?: { __typename: 'HomePhilosophy', hinduismText?: string | null, ayurvedaText?: string | null, rootSoulText?: string | null, branchSymptomText?: string | null } | null };
+export type ScreeningPathwayAMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  features?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ScreeningPathwayBMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  features?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ScreeningMutation = {
+  tagline?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+  pathwayA?: InputMaybe<ScreeningPathwayAMutation>;
+  pathwayB?: InputMaybe<ScreeningPathwayBMutation>;
+};
+
+export type PcpFeaturesMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  icon?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PcpMutation = {
+  tagline?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+  features?: InputMaybe<Array<InputMaybe<PcpFeaturesMutation>>>;
+};
+
+export type AestheticsServicesMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AestheticsMutation = {
+  tagline?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+  services?: InputMaybe<Array<InputMaybe<AestheticsServicesMutation>>>;
+};
+
+export type PledgePledgesMutation = {
+  physical?: InputMaybe<Scalars['String']['input']>;
+  spiritual?: InputMaybe<Scalars['String']['input']>;
+  giving?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PledgeMutation = {
+  tagline?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  pledges?: InputMaybe<PledgePledgesMutation>;
+  registryUrl?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type GuidelinesMutation = {
+  tagline?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PagesBlocksHeroMutation = {
+  tagline?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PagesBlocksContentSectionMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  body?: InputMaybe<Scalars['JSON']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PagesBlocksGridItemsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  icon?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PagesBlocksGridMutation = {
+  items?: InputMaybe<Array<InputMaybe<PagesBlocksGridItemsMutation>>>;
+};
+
+export type PagesBlocksMutation = {
+  hero?: InputMaybe<PagesBlocksHeroMutation>;
+  contentSection?: InputMaybe<PagesBlocksContentSectionMutation>;
+  grid?: InputMaybe<PagesBlocksGridMutation>;
+};
+
+export type PagesMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  blocks?: InputMaybe<Array<InputMaybe<PagesBlocksMutation>>>;
+};
+
+export type GlobalPartsFragment = { __typename: 'Global', navbar?: { __typename: 'GlobalNavbar', logoText?: string | null, navLinks?: Array<{ __typename: 'GlobalNavbarNavLinks', label?: string | null, path?: string | null } | null> | null } | null, footer?: { __typename: 'GlobalFooter', quote?: string | null, description?: string | null, instagram?: string | null, facebook?: string | null } | null };
+
+export type HomePartsFragment = { __typename: 'Home', hero?: { __typename: 'HomeHero', titlePart1?: string | null, titlePart2?: string | null, subtitle?: string | null, video?: string | null } | null, founder?: { __typename: 'HomeFounder', quote?: string | null, image?: string | null, bio?: string | null } | null, philosophy?: { __typename: 'HomePhilosophy', hinduismText?: string | null, ayurvedaText?: string | null, rootSoulText?: string | null, branchSymptomText?: string | null } | null, individualCare?: Array<{ __typename: 'HomeIndividualCare', title?: string | null, description?: string | null } | null> | null };
+
+export type DoctorsPartsFragment = { __typename: 'Doctors', name?: string | null, lastName?: string | null, title?: string | null, quote?: string | null, tags?: Array<string | null> | null, image?: string | null, academicBio?: string | null, philosophy?: Array<string | null> | null, excellence?: Array<{ __typename: 'DoctorsExcellence', title?: string | null, description?: string | null } | null> | null, expertise?: Array<{ __typename: 'DoctorsExpertise', title?: string | null, description?: string | null } | null> | null };
 
 export type ServicesPartsFragment = { __typename: 'Services', items?: Array<{ __typename: 'ServicesItems', title?: string | null, category?: string | null, description?: string | null, features?: Array<string | null> | null, image?: string | null } | null> | null };
+
+export type ScreeningPartsFragment = { __typename: 'Screening', tagline?: string | null, title?: string | null, subtitle?: string | null, pathwayA?: { __typename: 'ScreeningPathwayA', title?: string | null, description?: string | null, features?: Array<string | null> | null } | null, pathwayB?: { __typename: 'ScreeningPathwayB', title?: string | null, description?: string | null, features?: Array<string | null> | null } | null };
+
+export type PcpPartsFragment = { __typename: 'Pcp', tagline?: string | null, title?: string | null, subtitle?: string | null, features?: Array<{ __typename: 'PcpFeatures', title?: string | null, description?: string | null, icon?: string | null } | null> | null };
+
+export type AestheticsPartsFragment = { __typename: 'Aesthetics', tagline?: string | null, title?: string | null, subtitle?: string | null, services?: Array<{ __typename: 'AestheticsServices', title?: string | null, description?: string | null, image?: string | null } | null> | null };
+
+export type PledgePartsFragment = { __typename: 'Pledge', tagline?: string | null, title?: string | null, subtitle?: string | null, description?: string | null, registryUrl?: string | null, pledges?: { __typename: 'PledgePledges', physical?: string | null, spiritual?: string | null, giving?: string | null } | null };
+
+export type GuidelinesPartsFragment = { __typename: 'Guidelines', tagline?: string | null, title?: string | null, subtitle?: string | null };
+
+export type PagesPartsFragment = { __typename: 'Pages', title: string, blocks?: Array<{ __typename: 'PagesBlocksHero', tagline?: string | null, title?: string | null, subtitle?: string | null } | { __typename: 'PagesBlocksContentSection', title?: string | null, body?: any | null, image?: string | null } | { __typename: 'PagesBlocksGrid', items?: Array<{ __typename: 'PagesBlocksGridItems', title?: string | null, description?: string | null, icon?: string | null } | null> | null } | null> | null };
+
+export type GlobalQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type GlobalQuery = { __typename?: 'Query', global: { __typename: 'Global', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, navbar?: { __typename: 'GlobalNavbar', logoText?: string | null, navLinks?: Array<{ __typename: 'GlobalNavbarNavLinks', label?: string | null, path?: string | null } | null> | null } | null, footer?: { __typename: 'GlobalFooter', quote?: string | null, description?: string | null, instagram?: string | null, facebook?: string | null } | null } };
+
+export type GlobalConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<GlobalFilter>;
+}>;
+
+
+export type GlobalConnectionQuery = { __typename?: 'Query', globalConnection: { __typename?: 'GlobalConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'GlobalConnectionEdges', cursor: string, node?: { __typename: 'Global', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, navbar?: { __typename: 'GlobalNavbar', logoText?: string | null, navLinks?: Array<{ __typename: 'GlobalNavbarNavLinks', label?: string | null, path?: string | null } | null> | null } | null, footer?: { __typename: 'GlobalFooter', quote?: string | null, description?: string | null, instagram?: string | null, facebook?: string | null } | null } | null } | null> | null } };
 
 export type HomeQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type HomeQuery = { __typename?: 'Query', home: { __typename: 'Home', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero?: { __typename: 'HomeHero', titlePart1?: string | null, titlePart2?: string | null, subtitle?: string | null } | null, founder?: { __typename: 'HomeFounder', quote?: string | null, image?: string | null, bio?: string | null } | null, philosophy?: { __typename: 'HomePhilosophy', hinduismText?: string | null, ayurvedaText?: string | null, rootSoulText?: string | null, branchSymptomText?: string | null } | null } };
+export type HomeQuery = { __typename?: 'Query', home: { __typename: 'Home', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero?: { __typename: 'HomeHero', titlePart1?: string | null, titlePart2?: string | null, subtitle?: string | null, video?: string | null } | null, founder?: { __typename: 'HomeFounder', quote?: string | null, image?: string | null, bio?: string | null } | null, philosophy?: { __typename: 'HomePhilosophy', hinduismText?: string | null, ayurvedaText?: string | null, rootSoulText?: string | null, branchSymptomText?: string | null } | null, individualCare?: Array<{ __typename: 'HomeIndividualCare', title?: string | null, description?: string | null } | null> | null } };
 
 export type HomeConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -448,7 +1364,26 @@ export type HomeConnectionQueryVariables = Exact<{
 }>;
 
 
-export type HomeConnectionQuery = { __typename?: 'Query', homeConnection: { __typename?: 'HomeConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'HomeConnectionEdges', cursor: string, node?: { __typename: 'Home', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero?: { __typename: 'HomeHero', titlePart1?: string | null, titlePart2?: string | null, subtitle?: string | null } | null, founder?: { __typename: 'HomeFounder', quote?: string | null, image?: string | null, bio?: string | null } | null, philosophy?: { __typename: 'HomePhilosophy', hinduismText?: string | null, ayurvedaText?: string | null, rootSoulText?: string | null, branchSymptomText?: string | null } | null } | null } | null> | null } };
+export type HomeConnectionQuery = { __typename?: 'Query', homeConnection: { __typename?: 'HomeConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'HomeConnectionEdges', cursor: string, node?: { __typename: 'Home', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero?: { __typename: 'HomeHero', titlePart1?: string | null, titlePart2?: string | null, subtitle?: string | null, video?: string | null } | null, founder?: { __typename: 'HomeFounder', quote?: string | null, image?: string | null, bio?: string | null } | null, philosophy?: { __typename: 'HomePhilosophy', hinduismText?: string | null, ayurvedaText?: string | null, rootSoulText?: string | null, branchSymptomText?: string | null } | null, individualCare?: Array<{ __typename: 'HomeIndividualCare', title?: string | null, description?: string | null } | null> | null } | null } | null> | null } };
+
+export type DoctorsQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type DoctorsQuery = { __typename?: 'Query', doctors: { __typename: 'Doctors', id: string, name?: string | null, lastName?: string | null, title?: string | null, quote?: string | null, tags?: Array<string | null> | null, image?: string | null, academicBio?: string | null, philosophy?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, excellence?: Array<{ __typename: 'DoctorsExcellence', title?: string | null, description?: string | null } | null> | null, expertise?: Array<{ __typename: 'DoctorsExpertise', title?: string | null, description?: string | null } | null> | null } };
+
+export type DoctorsConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<DoctorsFilter>;
+}>;
+
+
+export type DoctorsConnectionQuery = { __typename?: 'Query', doctorsConnection: { __typename?: 'DoctorsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'DoctorsConnectionEdges', cursor: string, node?: { __typename: 'Doctors', id: string, name?: string | null, lastName?: string | null, title?: string | null, quote?: string | null, tags?: Array<string | null> | null, image?: string | null, academicBio?: string | null, philosophy?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, excellence?: Array<{ __typename: 'DoctorsExcellence', title?: string | null, description?: string | null } | null> | null, expertise?: Array<{ __typename: 'DoctorsExpertise', title?: string | null, description?: string | null } | null> | null } | null } | null> | null } };
 
 export type ServicesQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -469,6 +1404,141 @@ export type ServicesConnectionQueryVariables = Exact<{
 
 export type ServicesConnectionQuery = { __typename?: 'Query', servicesConnection: { __typename?: 'ServicesConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ServicesConnectionEdges', cursor: string, node?: { __typename: 'Services', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, items?: Array<{ __typename: 'ServicesItems', title?: string | null, category?: string | null, description?: string | null, features?: Array<string | null> | null, image?: string | null } | null> | null } | null } | null> | null } };
 
+export type ScreeningQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type ScreeningQuery = { __typename?: 'Query', screening: { __typename: 'Screening', id: string, tagline?: string | null, title?: string | null, subtitle?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, pathwayA?: { __typename: 'ScreeningPathwayA', title?: string | null, description?: string | null, features?: Array<string | null> | null } | null, pathwayB?: { __typename: 'ScreeningPathwayB', title?: string | null, description?: string | null, features?: Array<string | null> | null } | null } };
+
+export type ScreeningConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<ScreeningFilter>;
+}>;
+
+
+export type ScreeningConnectionQuery = { __typename?: 'Query', screeningConnection: { __typename?: 'ScreeningConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ScreeningConnectionEdges', cursor: string, node?: { __typename: 'Screening', id: string, tagline?: string | null, title?: string | null, subtitle?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, pathwayA?: { __typename: 'ScreeningPathwayA', title?: string | null, description?: string | null, features?: Array<string | null> | null } | null, pathwayB?: { __typename: 'ScreeningPathwayB', title?: string | null, description?: string | null, features?: Array<string | null> | null } | null } | null } | null> | null } };
+
+export type PcpQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type PcpQuery = { __typename?: 'Query', pcp: { __typename: 'Pcp', id: string, tagline?: string | null, title?: string | null, subtitle?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, features?: Array<{ __typename: 'PcpFeatures', title?: string | null, description?: string | null, icon?: string | null } | null> | null } };
+
+export type PcpConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<PcpFilter>;
+}>;
+
+
+export type PcpConnectionQuery = { __typename?: 'Query', pcpConnection: { __typename?: 'PcpConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PcpConnectionEdges', cursor: string, node?: { __typename: 'Pcp', id: string, tagline?: string | null, title?: string | null, subtitle?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, features?: Array<{ __typename: 'PcpFeatures', title?: string | null, description?: string | null, icon?: string | null } | null> | null } | null } | null> | null } };
+
+export type AestheticsQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type AestheticsQuery = { __typename?: 'Query', aesthetics: { __typename: 'Aesthetics', id: string, tagline?: string | null, title?: string | null, subtitle?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, services?: Array<{ __typename: 'AestheticsServices', title?: string | null, description?: string | null, image?: string | null } | null> | null } };
+
+export type AestheticsConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<AestheticsFilter>;
+}>;
+
+
+export type AestheticsConnectionQuery = { __typename?: 'Query', aestheticsConnection: { __typename?: 'AestheticsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'AestheticsConnectionEdges', cursor: string, node?: { __typename: 'Aesthetics', id: string, tagline?: string | null, title?: string | null, subtitle?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, services?: Array<{ __typename: 'AestheticsServices', title?: string | null, description?: string | null, image?: string | null } | null> | null } | null } | null> | null } };
+
+export type PledgeQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type PledgeQuery = { __typename?: 'Query', pledge: { __typename: 'Pledge', id: string, tagline?: string | null, title?: string | null, subtitle?: string | null, description?: string | null, registryUrl?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, pledges?: { __typename: 'PledgePledges', physical?: string | null, spiritual?: string | null, giving?: string | null } | null } };
+
+export type PledgeConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<PledgeFilter>;
+}>;
+
+
+export type PledgeConnectionQuery = { __typename?: 'Query', pledgeConnection: { __typename?: 'PledgeConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PledgeConnectionEdges', cursor: string, node?: { __typename: 'Pledge', id: string, tagline?: string | null, title?: string | null, subtitle?: string | null, description?: string | null, registryUrl?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, pledges?: { __typename: 'PledgePledges', physical?: string | null, spiritual?: string | null, giving?: string | null } | null } | null } | null> | null } };
+
+export type GuidelinesQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type GuidelinesQuery = { __typename?: 'Query', guidelines: { __typename: 'Guidelines', id: string, tagline?: string | null, title?: string | null, subtitle?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+
+export type GuidelinesConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<GuidelinesFilter>;
+}>;
+
+
+export type GuidelinesConnectionQuery = { __typename?: 'Query', guidelinesConnection: { __typename?: 'GuidelinesConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'GuidelinesConnectionEdges', cursor: string, node?: { __typename: 'Guidelines', id: string, tagline?: string | null, title?: string | null, subtitle?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+
+export type PagesQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type PagesQuery = { __typename?: 'Query', pages: { __typename: 'Pages', id: string, title: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, blocks?: Array<{ __typename: 'PagesBlocksHero', tagline?: string | null, title?: string | null, subtitle?: string | null } | { __typename: 'PagesBlocksContentSection', title?: string | null, body?: any | null, image?: string | null } | { __typename: 'PagesBlocksGrid', items?: Array<{ __typename: 'PagesBlocksGridItems', title?: string | null, description?: string | null, icon?: string | null } | null> | null } | null> | null } };
+
+export type PagesConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<PagesFilter>;
+}>;
+
+
+export type PagesConnectionQuery = { __typename?: 'Query', pagesConnection: { __typename?: 'PagesConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PagesConnectionEdges', cursor: string, node?: { __typename: 'Pages', id: string, title: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, blocks?: Array<{ __typename: 'PagesBlocksHero', tagline?: string | null, title?: string | null, subtitle?: string | null } | { __typename: 'PagesBlocksContentSection', title?: string | null, body?: any | null, image?: string | null } | { __typename: 'PagesBlocksGrid', items?: Array<{ __typename: 'PagesBlocksGridItems', title?: string | null, description?: string | null, icon?: string | null } | null> | null } | null> | null } | null } | null> | null } };
+
+export const GlobalPartsFragmentDoc = gql`
+    fragment GlobalParts on Global {
+  __typename
+  navbar {
+    __typename
+    logoText
+    navLinks {
+      __typename
+      label
+      path
+    }
+  }
+  footer {
+    __typename
+    quote
+    description
+    instagram
+    facebook
+  }
+}
+    `;
 export const HomePartsFragmentDoc = gql`
     fragment HomeParts on Home {
   __typename
@@ -477,6 +1547,7 @@ export const HomePartsFragmentDoc = gql`
     titlePart1
     titlePart2
     subtitle
+    video
   }
   founder {
     __typename
@@ -491,6 +1562,34 @@ export const HomePartsFragmentDoc = gql`
     rootSoulText
     branchSymptomText
   }
+  individualCare {
+    __typename
+    title
+    description
+  }
+}
+    `;
+export const DoctorsPartsFragmentDoc = gql`
+    fragment DoctorsParts on Doctors {
+  __typename
+  name
+  lastName
+  title
+  quote
+  tags
+  image
+  academicBio
+  excellence {
+    __typename
+    title
+    description
+  }
+  expertise {
+    __typename
+    title
+    description
+  }
+  philosophy
 }
     `;
 export const ServicesPartsFragmentDoc = gql`
@@ -506,6 +1605,162 @@ export const ServicesPartsFragmentDoc = gql`
   }
 }
     `;
+export const ScreeningPartsFragmentDoc = gql`
+    fragment ScreeningParts on Screening {
+  __typename
+  tagline
+  title
+  subtitle
+  pathwayA {
+    __typename
+    title
+    description
+    features
+  }
+  pathwayB {
+    __typename
+    title
+    description
+    features
+  }
+}
+    `;
+export const PcpPartsFragmentDoc = gql`
+    fragment PcpParts on Pcp {
+  __typename
+  tagline
+  title
+  subtitle
+  features {
+    __typename
+    title
+    description
+    icon
+  }
+}
+    `;
+export const AestheticsPartsFragmentDoc = gql`
+    fragment AestheticsParts on Aesthetics {
+  __typename
+  tagline
+  title
+  subtitle
+  services {
+    __typename
+    title
+    description
+    image
+  }
+}
+    `;
+export const PledgePartsFragmentDoc = gql`
+    fragment PledgeParts on Pledge {
+  __typename
+  tagline
+  title
+  subtitle
+  description
+  pledges {
+    __typename
+    physical
+    spiritual
+    giving
+  }
+  registryUrl
+}
+    `;
+export const GuidelinesPartsFragmentDoc = gql`
+    fragment GuidelinesParts on Guidelines {
+  __typename
+  tagline
+  title
+  subtitle
+}
+    `;
+export const PagesPartsFragmentDoc = gql`
+    fragment PagesParts on Pages {
+  __typename
+  title
+  blocks {
+    __typename
+    ... on PagesBlocksHero {
+      tagline
+      title
+      subtitle
+    }
+    ... on PagesBlocksContentSection {
+      title
+      body
+      image
+    }
+    ... on PagesBlocksGrid {
+      items {
+        __typename
+        title
+        description
+        icon
+      }
+    }
+  }
+}
+    `;
+export const GlobalDocument = gql`
+    query global($relativePath: String!) {
+  global(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...GlobalParts
+  }
+}
+    ${GlobalPartsFragmentDoc}`;
+export const GlobalConnectionDocument = gql`
+    query globalConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: GlobalFilter) {
+  globalConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...GlobalParts
+      }
+    }
+  }
+}
+    ${GlobalPartsFragmentDoc}`;
 export const HomeDocument = gql`
     query home($relativePath: String!) {
   home(relativePath: $relativePath) {
@@ -563,6 +1818,63 @@ export const HomeConnectionDocument = gql`
   }
 }
     ${HomePartsFragmentDoc}`;
+export const DoctorsDocument = gql`
+    query doctors($relativePath: String!) {
+  doctors(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...DoctorsParts
+  }
+}
+    ${DoctorsPartsFragmentDoc}`;
+export const DoctorsConnectionDocument = gql`
+    query doctorsConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: DoctorsFilter) {
+  doctorsConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...DoctorsParts
+      }
+    }
+  }
+}
+    ${DoctorsPartsFragmentDoc}`;
 export const ServicesDocument = gql`
     query services($relativePath: String!) {
   services(relativePath: $relativePath) {
@@ -620,20 +1932,410 @@ export const ServicesConnectionDocument = gql`
   }
 }
     ${ServicesPartsFragmentDoc}`;
+export const ScreeningDocument = gql`
+    query screening($relativePath: String!) {
+  screening(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...ScreeningParts
+  }
+}
+    ${ScreeningPartsFragmentDoc}`;
+export const ScreeningConnectionDocument = gql`
+    query screeningConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: ScreeningFilter) {
+  screeningConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...ScreeningParts
+      }
+    }
+  }
+}
+    ${ScreeningPartsFragmentDoc}`;
+export const PcpDocument = gql`
+    query pcp($relativePath: String!) {
+  pcp(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...PcpParts
+  }
+}
+    ${PcpPartsFragmentDoc}`;
+export const PcpConnectionDocument = gql`
+    query pcpConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: PcpFilter) {
+  pcpConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...PcpParts
+      }
+    }
+  }
+}
+    ${PcpPartsFragmentDoc}`;
+export const AestheticsDocument = gql`
+    query aesthetics($relativePath: String!) {
+  aesthetics(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...AestheticsParts
+  }
+}
+    ${AestheticsPartsFragmentDoc}`;
+export const AestheticsConnectionDocument = gql`
+    query aestheticsConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: AestheticsFilter) {
+  aestheticsConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...AestheticsParts
+      }
+    }
+  }
+}
+    ${AestheticsPartsFragmentDoc}`;
+export const PledgeDocument = gql`
+    query pledge($relativePath: String!) {
+  pledge(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...PledgeParts
+  }
+}
+    ${PledgePartsFragmentDoc}`;
+export const PledgeConnectionDocument = gql`
+    query pledgeConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: PledgeFilter) {
+  pledgeConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...PledgeParts
+      }
+    }
+  }
+}
+    ${PledgePartsFragmentDoc}`;
+export const GuidelinesDocument = gql`
+    query guidelines($relativePath: String!) {
+  guidelines(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...GuidelinesParts
+  }
+}
+    ${GuidelinesPartsFragmentDoc}`;
+export const GuidelinesConnectionDocument = gql`
+    query guidelinesConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: GuidelinesFilter) {
+  guidelinesConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...GuidelinesParts
+      }
+    }
+  }
+}
+    ${GuidelinesPartsFragmentDoc}`;
+export const PagesDocument = gql`
+    query pages($relativePath: String!) {
+  pages(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...PagesParts
+  }
+}
+    ${PagesPartsFragmentDoc}`;
+export const PagesConnectionDocument = gql`
+    query pagesConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: PagesFilter) {
+  pagesConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...PagesParts
+      }
+    }
+  }
+}
+    ${PagesPartsFragmentDoc}`;
 export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<R>
   export function getSdk<C>(requester: Requester<C>) {
     return {
-      home(variables: HomeQueryVariables, options?: C): Promise<{data: HomeQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: HomeQueryVariables, query: string}> {
+      global(variables: GlobalQueryVariables, options?: C): Promise<{data: GlobalQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GlobalQueryVariables, query: string}> {
+        return requester<{data: GlobalQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GlobalQueryVariables, query: string}, GlobalQueryVariables>(GlobalDocument, variables, options);
+      },
+    globalConnection(variables?: GlobalConnectionQueryVariables, options?: C): Promise<{data: GlobalConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GlobalConnectionQueryVariables, query: string}> {
+        return requester<{data: GlobalConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GlobalConnectionQueryVariables, query: string}, GlobalConnectionQueryVariables>(GlobalConnectionDocument, variables, options);
+      },
+    home(variables: HomeQueryVariables, options?: C): Promise<{data: HomeQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: HomeQueryVariables, query: string}> {
         return requester<{data: HomeQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: HomeQueryVariables, query: string}, HomeQueryVariables>(HomeDocument, variables, options);
       },
     homeConnection(variables?: HomeConnectionQueryVariables, options?: C): Promise<{data: HomeConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: HomeConnectionQueryVariables, query: string}> {
         return requester<{data: HomeConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: HomeConnectionQueryVariables, query: string}, HomeConnectionQueryVariables>(HomeConnectionDocument, variables, options);
+      },
+    doctors(variables: DoctorsQueryVariables, options?: C): Promise<{data: DoctorsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: DoctorsQueryVariables, query: string}> {
+        return requester<{data: DoctorsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: DoctorsQueryVariables, query: string}, DoctorsQueryVariables>(DoctorsDocument, variables, options);
+      },
+    doctorsConnection(variables?: DoctorsConnectionQueryVariables, options?: C): Promise<{data: DoctorsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: DoctorsConnectionQueryVariables, query: string}> {
+        return requester<{data: DoctorsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: DoctorsConnectionQueryVariables, query: string}, DoctorsConnectionQueryVariables>(DoctorsConnectionDocument, variables, options);
       },
     services(variables: ServicesQueryVariables, options?: C): Promise<{data: ServicesQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ServicesQueryVariables, query: string}> {
         return requester<{data: ServicesQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ServicesQueryVariables, query: string}, ServicesQueryVariables>(ServicesDocument, variables, options);
       },
     servicesConnection(variables?: ServicesConnectionQueryVariables, options?: C): Promise<{data: ServicesConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ServicesConnectionQueryVariables, query: string}> {
         return requester<{data: ServicesConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ServicesConnectionQueryVariables, query: string}, ServicesConnectionQueryVariables>(ServicesConnectionDocument, variables, options);
+      },
+    screening(variables: ScreeningQueryVariables, options?: C): Promise<{data: ScreeningQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ScreeningQueryVariables, query: string}> {
+        return requester<{data: ScreeningQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ScreeningQueryVariables, query: string}, ScreeningQueryVariables>(ScreeningDocument, variables, options);
+      },
+    screeningConnection(variables?: ScreeningConnectionQueryVariables, options?: C): Promise<{data: ScreeningConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ScreeningConnectionQueryVariables, query: string}> {
+        return requester<{data: ScreeningConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ScreeningConnectionQueryVariables, query: string}, ScreeningConnectionQueryVariables>(ScreeningConnectionDocument, variables, options);
+      },
+    pcp(variables: PcpQueryVariables, options?: C): Promise<{data: PcpQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PcpQueryVariables, query: string}> {
+        return requester<{data: PcpQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PcpQueryVariables, query: string}, PcpQueryVariables>(PcpDocument, variables, options);
+      },
+    pcpConnection(variables?: PcpConnectionQueryVariables, options?: C): Promise<{data: PcpConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PcpConnectionQueryVariables, query: string}> {
+        return requester<{data: PcpConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PcpConnectionQueryVariables, query: string}, PcpConnectionQueryVariables>(PcpConnectionDocument, variables, options);
+      },
+    aesthetics(variables: AestheticsQueryVariables, options?: C): Promise<{data: AestheticsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AestheticsQueryVariables, query: string}> {
+        return requester<{data: AestheticsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AestheticsQueryVariables, query: string}, AestheticsQueryVariables>(AestheticsDocument, variables, options);
+      },
+    aestheticsConnection(variables?: AestheticsConnectionQueryVariables, options?: C): Promise<{data: AestheticsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AestheticsConnectionQueryVariables, query: string}> {
+        return requester<{data: AestheticsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AestheticsConnectionQueryVariables, query: string}, AestheticsConnectionQueryVariables>(AestheticsConnectionDocument, variables, options);
+      },
+    pledge(variables: PledgeQueryVariables, options?: C): Promise<{data: PledgeQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PledgeQueryVariables, query: string}> {
+        return requester<{data: PledgeQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PledgeQueryVariables, query: string}, PledgeQueryVariables>(PledgeDocument, variables, options);
+      },
+    pledgeConnection(variables?: PledgeConnectionQueryVariables, options?: C): Promise<{data: PledgeConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PledgeConnectionQueryVariables, query: string}> {
+        return requester<{data: PledgeConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PledgeConnectionQueryVariables, query: string}, PledgeConnectionQueryVariables>(PledgeConnectionDocument, variables, options);
+      },
+    guidelines(variables: GuidelinesQueryVariables, options?: C): Promise<{data: GuidelinesQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GuidelinesQueryVariables, query: string}> {
+        return requester<{data: GuidelinesQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GuidelinesQueryVariables, query: string}, GuidelinesQueryVariables>(GuidelinesDocument, variables, options);
+      },
+    guidelinesConnection(variables?: GuidelinesConnectionQueryVariables, options?: C): Promise<{data: GuidelinesConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GuidelinesConnectionQueryVariables, query: string}> {
+        return requester<{data: GuidelinesConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GuidelinesConnectionQueryVariables, query: string}, GuidelinesConnectionQueryVariables>(GuidelinesConnectionDocument, variables, options);
+      },
+    pages(variables: PagesQueryVariables, options?: C): Promise<{data: PagesQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PagesQueryVariables, query: string}> {
+        return requester<{data: PagesQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PagesQueryVariables, query: string}, PagesQueryVariables>(PagesDocument, variables, options);
+      },
+    pagesConnection(variables?: PagesConnectionQueryVariables, options?: C): Promise<{data: PagesConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PagesConnectionQueryVariables, query: string}> {
+        return requester<{data: PagesConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PagesConnectionQueryVariables, query: string}, PagesConnectionQueryVariables>(PagesConnectionDocument, variables, options);
       }
     };
   }
@@ -682,7 +2384,7 @@ export const ExperimentalGetTinaClient = () =>
   getSdk(
     generateRequester(
       createClient({
-        url: "http://localhost:4001/graphql",
+        url: "https://content.tinajs.io/2.2/content/49f9be90-ac1f-435f-9e52-6730dfaacb21/github/main",
         queries,
       })
     )

@@ -1,8 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Instagram, Facebook, Heart, Circle } from 'lucide-react';
+import { useTina } from 'tinacms/dist/react';
+import globalData from '../content/global/index.json';
 
 const Footer: React.FC = () => {
+  const { data } = useTina({
+    query: `{
+      global(relativePath: "index.json") {
+        footer {
+          quote
+          description
+          instagram
+          facebook
+        }
+      }
+    }`,
+    variables: { relativePath: "index.json" },
+    data: { global: globalData },
+  });
+
+  const { quote, description, instagram, facebook } = data.global.footer;
+
   return (
     <footer className="bg-[#B5838D] text-[#FAF3F0] pt-20 pb-10 border-t border-white/5">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -14,10 +33,10 @@ const Footer: React.FC = () => {
                 <span className="font-display text-2xl font-bold uppercase tracking-tight text-[#FAF3F0]">Full Circle</span>
             </div>
             <p className="font-serif italic text-lg text-[#FAF3F0]/80 mb-6 max-w-md">
-              "My body is a temple; when I leave it, I leave the doors open for someone else to find shelter."
+              "{quote}"
             </p>
             <p className="text-[#FAF3F0]/60 text-sm leading-relaxed max-w-md font-sans">
-               We bridge evidence-based protocol with ancient wisdom to provide a complete health map for your life.
+               {description}
             </p>
           </div>
 
@@ -36,10 +55,10 @@ const Footer: React.FC = () => {
           <div>
              <h3 className="uppercase tracking-widest text-xs font-bold text-[#FAF3F0] mb-6 opacity-80">Connect</h3>
              <div className="flex space-x-4 mb-8">
-               <a href="https://instagram.com/fullcircle369" target="_blank" rel="noreferrer" className="p-2 border border-[#FAF3F0]/30 rounded-full hover:bg-[#FAF3F0] hover:text-[#B5838D] transition-all">
+               <a href={instagram} target="_blank" rel="noreferrer" className="p-2 border border-[#FAF3F0]/30 rounded-full hover:bg-[#FAF3F0] hover:text-[#B5838D] transition-all">
                  <Instagram size={20} />
                </a>
-               <a href="#" className="p-2 border border-[#FAF3F0]/30 rounded-full hover:bg-[#FAF3F0] hover:text-[#B5838D] transition-all">
+               <a href={facebook} className="p-2 border border-[#FAF3F0]/30 rounded-full hover:bg-[#FAF3F0] hover:text-[#B5838D] transition-all">
                  <Facebook size={20} />
                </a>
              </div>

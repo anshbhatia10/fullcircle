@@ -1,3 +1,23 @@
+fragment GlobalParts on Global {
+  __typename
+  navbar {
+    __typename
+    logoText
+    navLinks {
+      __typename
+      label
+      path
+    }
+  }
+  footer {
+    __typename
+    quote
+    description
+    instagram
+    facebook
+  }
+}
+
 fragment HomeParts on Home {
   __typename
   hero {
@@ -5,6 +25,7 @@ fragment HomeParts on Home {
     titlePart1
     titlePart2
     subtitle
+    video
   }
   founder {
     __typename
@@ -19,6 +40,33 @@ fragment HomeParts on Home {
     rootSoulText
     branchSymptomText
   }
+  individualCare {
+    __typename
+    title
+    description
+  }
+}
+
+fragment DoctorsParts on Doctors {
+  __typename
+  name
+  lastName
+  title
+  quote
+  tags
+  image
+  academicBio
+  excellence {
+    __typename
+    title
+    description
+  }
+  expertise {
+    __typename
+    title
+    description
+  }
+  philosophy
 }
 
 fragment ServicesParts on Services {
@@ -30,5 +78,98 @@ fragment ServicesParts on Services {
     description
     features
     image
+  }
+}
+
+fragment ScreeningParts on Screening {
+  __typename
+  tagline
+  title
+  subtitle
+  pathwayA {
+    __typename
+    title
+    description
+    features
+  }
+  pathwayB {
+    __typename
+    title
+    description
+    features
+  }
+}
+
+fragment PcpParts on Pcp {
+  __typename
+  tagline
+  title
+  subtitle
+  features {
+    __typename
+    title
+    description
+    icon
+  }
+}
+
+fragment AestheticsParts on Aesthetics {
+  __typename
+  tagline
+  title
+  subtitle
+  services {
+    __typename
+    title
+    description
+    image
+  }
+}
+
+fragment PledgeParts on Pledge {
+  __typename
+  tagline
+  title
+  subtitle
+  description
+  pledges {
+    __typename
+    physical
+    spiritual
+    giving
+  }
+  registryUrl
+}
+
+fragment GuidelinesParts on Guidelines {
+  __typename
+  tagline
+  title
+  subtitle
+}
+
+fragment PagesParts on Pages {
+  __typename
+  title
+  blocks {
+    __typename
+    ... on PagesBlocksHero {
+      tagline
+      title
+      subtitle
+    }
+    ... on PagesBlocksContentSection {
+      title
+      body
+      image
+    }
+    ... on PagesBlocksGrid {
+      items {
+        __typename
+        title
+        description
+        icon
+      }
+    }
   }
 }

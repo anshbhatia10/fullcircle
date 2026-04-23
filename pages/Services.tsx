@@ -24,7 +24,7 @@ const Services: React.FC = (props) => {
         }
       }
     }`,
-    variables: {},
+    variables: { relativePath: "services.json" },
     data: { services: { items: servicesContent } },
   });
 

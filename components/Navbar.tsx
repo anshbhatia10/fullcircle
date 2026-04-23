@@ -1,22 +1,32 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Circle, Aperture, Heart } from 'lucide-react';
+import { useTina } from 'tinacms/dist/react';
+import globalData from '../content/global/index.json';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
+  const { data } = useTina({
+    query: `{
+      global(relativePath: "index.json") {
+        navbar {
+          logoText
+          navLinks {
+            label
+            path
+          }
+        }
+      }
+    }`,
+    variables: { relativePath: "index.json" },
+    data: { global: globalData },
+  });
+
   const toggleMenu = () => setIsOpen(!isOpen);
 
-  const navLinks = [
-    { label: 'Screening', path: '/screening-circle' },
-    { label: 'Guidelines', path: '/guidelines' },
-    { label: 'PCP', path: '/full-circle-pcp' },
-    { label: 'Aesthetics', path: '/aesthetic-circle' },
-    { label: 'Mission', path: '/inverted-tree' },
-    { label: 'Partners', path: '/partners' },
-    { label: 'Pledge', path: '/pledge' },
-  ];
+  const { logoText, navLinks } = data.global.navbar;
 
   return (
     <>
@@ -26,7 +36,7 @@ const Navbar: React.FC = () => {
             
             {/* Left: Navigation Links */}
             <div className="hidden xl:flex items-center space-x-4 lg:space-x-6">
-              {navLinks.map((link, index) => (
+              {navLinks.map((link: any, index: number) => (
                 <React.Fragment key={link.path}>
                   <Link 
                     to={link.path} 
@@ -54,7 +64,7 @@ const Navbar: React.FC = () => {
                  <Circle size={24} className="text-[#4A314D]/10 absolute" strokeWidth={1} />
                  <Aperture size={18} className="text-[#4A314D] animate-spin-slow group-hover:text-[#8E5D52] transition-colors" strokeWidth={1.5} />
                </div>
-               <span className="font-display text-xl md:text-2xl lg:text-3xl text-[#4A314D] tracking-tighter font-bold uppercase whitespace-nowrap">FULL CIRCLE</span>
+               <span className="font-display text-xl md:text-2xl lg:text-3xl text-[#4A314D] tracking-tighter font-bold uppercase whitespace-nowrap">{logoText}</span>
             </Link>
 
             {/* Right: Actions */}

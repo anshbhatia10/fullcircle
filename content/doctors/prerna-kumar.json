@@ -1,0 +1,24 @@
+{
+  "name": "Dr. Prerna",
+  "lastName": "Kumar",
+  "title": "Founder & Medical Director",
+  "quote": "Bridging the gap between advanced clinical science and the holistic essence of human wellness.",
+  "tags": ["Internist", "Nephrologist", "Transplant Specialist"],
+  "image": "PHOTO-2026-04-05-16-06-43.jpg",
+  "academicBio": "Dr. Prerna Kumar is a distinguished Internist and Nephrologist with an illustrious career spanning some of the most prestigious medical institutions in the United States and India. Her academic journey began at SDUMC, Rajiv Gandhi University, Karnataka (2008), before she moved to New York to pursue her specialization.\n\nWith a deep-seated commitment to clinical excellence, she completed her Internal Medicine graduation at Montefiore Medical Centre, Albert Einstein College of Medicine. Her pursuit of mastery in kidney health led her to the University of Iowa for her DM in Nephrology, followed by an intensive year of fellowship training in Transplant Nephrology.\n\nBefore returning to her roots in India, Dr. Kumar shared her expertise as an Assistant Professor of Medicine and Surgery at the University of Illinois, Chicago. Today, she brings this wealth of international experience to Full Circle, where she focuses on solving complex diagnostic problems and managing chronic illnesses with a preventive mindset.",
+  "excellence": [
+    { "title": "Clinical Training", "description": "Internal Medicine residency at Montefiore Medical Center, Albert Einstein College of Medicine, Bronx, NY." },
+    { "title": "Specialization", "description": "DM in Nephrology from the University of Iowa, followed by advanced Fellowship in Transplant Nephrology." },
+    { "title": "Academic Tenure", "description": "Served as Assistant Professor of Medicine and Surgery in Transplant Nephrology at the University of Illinois, Chicago." }
+  ],
+  "expertise": [
+    { "title": "Adult Medicine", "description": "Complex diagnostic problem solving and acute illness management." },
+    { "title": "Hypertension", "description": "Advanced management of high blood pressure and its systemic effects." },
+    { "title": "Kidney Disease", "description": "Comprehensive care for chronic kidney conditions and transplant patients." },
+    { "title": "Preventive Care", "description": "Holistic strategies to maintain long-term health and prevent chronic disease." }
+  ],
+  "philosophy": [
+    "Dr. Kumar believes that true healing is a holistic journey. Beyond the clinical protocols, she is a dedicated practitioner of yoga and meditation, advocating for spiritual well-being as a cornerstone of health.",
+    "In her practice, she integrates the rigorous evidence-based standards of the West with the ancient wisdom of holistic wellness, ensuring that every patient is treated as a complete soul, not just a set of symptoms."
+  ]
+}

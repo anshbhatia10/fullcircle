@@ -1,0 +1,45 @@
+{
+  "title": "Inverted Tree",
+  "blocks": [
+    {
+      "_template": "hero",
+      "tagline": "Our Commitment",
+      "title": "Legacy & Mission",
+      "subtitle": "\"We believe that true health is a state of harmony—a dynamic balance between mind, body, and spirit.\""
+    },
+    {
+      "_template": "contentSection",
+      "title": "Closing the Gap between Doctor & Patient",
+      "body": {
+        "type": "root",
+        "children": [
+          {
+            "type": "p",
+            "children": [{ "text": "Full Circle was founded on the principle that the patient is an equal partner in their healing journey. We merge the evidence-based rigor of conventional USA protocols with profound, time-tested wisdom." }]
+          }
+        ]
+      },
+      "image": "https://media.discordapp.net/attachments/1450481798252466287/1461341860948873329/image.png?ex=696a342a&is=6968e2aa&hm=6a38fba618e1bcaf69e13e8e66babd20380d14ba9390d1b29e5472f5364f7458&=&format=webp&quality=lossless&width=1500&height=1480"
+    },
+    {
+      "_template": "grid",
+      "items": [
+        {
+          "title": "No Size Fits All",
+          "description": "Recognizing each patient as a unique individual, not just a set of symptoms.",
+          "icon": "Heart"
+        },
+        {
+          "title": "Evidence Based",
+          "description": "USA standard protocols integrated with holistic diagnostics for a complete picture.",
+          "icon": "ShieldCheck"
+        },
+        {
+          "title": "Soul-Mind-Body",
+          "description": "A reversal of thinking that understands physical illness as a manifestation of energetic imprints.",
+          "icon": "Zap"
+        }
+      ]
+    }
+  ]
+}

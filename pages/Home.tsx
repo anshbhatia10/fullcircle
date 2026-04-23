@@ -15,6 +15,7 @@ const Home: React.FC = (props) => {
           titlePart1
           titlePart2
           subtitle
+          video
         }
         founder {
           quote
@@ -27,13 +28,17 @@ const Home: React.FC = (props) => {
           rootSoulText
           branchSymptomText
         }
+        individualCare {
+          title
+          description
+        }
       }
     }`,
-    variables: {},
+    variables: { relativePath: "home.json" },
     data: { home: homeContent },
   });
 
-  const { hero, founder, philosophy } = data.home;
+  const { hero, founder, philosophy, individualCare } = data.home;
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -234,7 +239,7 @@ const Home: React.FC = (props) => {
                      playsInline 
                      className="w-full h-full object-cover group-hover:scale-110 transition-all duration-1000 transform opacity-90"
                    >
-                     <source src={treeVideo} type="video/mp4" />
+                     <source src={hero.video || treeVideo} type="video/mp4" />
                    </video>
                    <div className="absolute inset-0 bg-gradient-to-t from-[#B5838D]/40 via-transparent to-transparent"></div>
                 </div>
@@ -462,6 +467,25 @@ const Home: React.FC = (props) => {
               <span>Book Appointment</span>
             </Link>
          </div>
+      </section>
+
+      {/* Individual Care Section */}
+      <section className="py-24 px-6 bg-white relative overflow-hidden border-b border-dark-brown/5">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10">
+            {individualCare && individualCare.map((item: any, i: number) => (
+               <div key={i} className="group p-10 rounded-[3rem] bg-cream/30 border border-dark-brown/5 hover:bg-cream/50 transition-all duration-500">
+                  <div className="w-12 h-12 bg-dark-brown text-cream rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+                    {i === 0 ? <Heart size={24} /> : i === 1 ? <Activity size={24} /> : <Sparkles size={24} />}
+                  </div>
+                  <h3 className="font-display text-3xl text-dark-brown mb-4">{item.title}</h3>
+                  <p className="text-dark-brown/60 leading-relaxed italic">
+                    {item.description}
+                  </p>
+               </div>
+            ))}
+          </div>
+        </div>
       </section>
 
       <style>{`

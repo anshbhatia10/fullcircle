@@ -1,18 +1,34 @@
 import React from 'react';
 import { Activity, Droplets, Heart, ClipboardList, Clock, AlertCircle } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceArea, ReferenceLine } from 'recharts';
+import { useTina, tinaField } from 'tinacms/dist/react';
+import guidelinesData from '../content/pages/health-guidelines.json';
 
 const HealthGuidelines: React.FC = () => {
+  const { data } = useTina({
+    query: `{
+      guidelines(relativePath: "health-guidelines.json") {
+        tagline
+        title
+        subtitle
+      }
+    }`,
+    variables: { relativePath: "health-guidelines.json" },
+    data: { guidelines: guidelinesData },
+  });
+
+  const { tagline, title, subtitle } = data.guidelines;
+
   return (
-    <div className="bg-cream min-h-screen pt-32 pb-20 px-6">
+    <div className="bg-cream min-h-screen pt-32 pb-20 px-6 font-sans">
       <div className="max-w-7xl mx-auto">
 
         {/* Header */}
         <div className="text-center mb-20">
-          <span className="text-accent-orange uppercase tracking-widest font-black text-xs">Clinical References</span>
-          <h1 className="font-display text-5xl md:text-7xl text-dark-brown mt-4 mb-6">Health Guidelines</h1>
-          <p className="max-w-3xl mx-auto text-xl text-dark-brown/70 font-serif italic">
-            Evidence-based references for blood pressure, kidney function, and diagnostic values.
+          <span data-tina-field={tinaField(data.guidelines, 'tagline')} className="text-accent-orange uppercase tracking-widest font-black text-xs">{tagline}</span>
+          <h1 data-tina-field={tinaField(data.guidelines, 'title')} className="font-display text-5xl md:text-7xl text-dark-brown mt-4 mb-6">{title}</h1>
+          <p data-tina-field={tinaField(data.guidelines, 'subtitle')} className="max-w-3xl mx-auto text-xl text-dark-brown/70 font-serif italic">
+            {subtitle}
           </p>
         </div>
 

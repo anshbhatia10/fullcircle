@@ -1,0 +1,15 @@
+{
+  "title": "Two Pathways. One Map.",
+  "tagline": "The Screening Circle",
+  "subtitle": "\"Choose one path, or bridge both for the ultimate health map.\"",
+  "pathwayA": {
+    "title": "The USA Protocol",
+    "description": "Standardized, data-driven screenings aligned with modern Western preventive guidelines.",
+    "features": ["Biometric & Metabolic analysis", "Kidney function & Lipid profiles"]
+  },
+  "pathwayB": {
+    "title": "The Ancient Protocol",
+    "description": "Traditional methods that identify imbalance before it manifests as physical symptoms.",
+    "features": ["Nadi Scan (Pulse) & Aura Analysis", "Dosha Balance (Vata, Pitta, Kapha)"]
+  }
+}

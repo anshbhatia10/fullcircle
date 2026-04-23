@@ -1,6 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Activity, HeartPulse, Sparkles, Stethoscope, ArrowRight, Layers } from 'lucide-react';
+import { useTina, tinaField } from 'tinacms/dist/react';
+import screeningData from '../content/pages/screening-circle.json';
 
 type QuizAnswer = 'A' | 'B' | null;
 
@@ -33,6 +35,30 @@ const questions: Array<{ prompt: string; a: string; b: string }> = [
 ];
 
 const ScreeningCircle: React.FC = () => {
+  const { data } = useTina({
+    query: `{
+      screening(relativePath: "screening-circle.json") {
+        tagline
+        title
+        subtitle
+        pathwayA {
+          title
+          description
+          features
+        }
+        pathwayB {
+          title
+          description
+          features
+        }
+      }
+    }`,
+    variables: { relativePath: "screening-circle.json" },
+    data: { screening: screeningData },
+  });
+
+  const { tagline, title, subtitle, pathwayA, pathwayB } = data.screening;
+
   const [answers, setAnswers] = useState<QuizAnswer[]>(() => questions.map(() => null));
 
   const { aCount, bCount, resultType, recommendation } = useMemo(() => {
@@ -77,12 +103,12 @@ const ScreeningCircle: React.FC = () => {
     <div className="bg-cream min-h-screen pt-32 pb-20 px-6 font-sans">
       <div className="max-w-7xl mx-auto">
         <header className="text-center mb-16">
-          <span className="uppercase tracking-widest font-black text-xs text-accent-orange mb-3 block">
-            The Screening Circle
+          <span data-tina-field={tinaField(data.screening, 'tagline')} className="uppercase tracking-widest font-black text-xs text-accent-orange mb-3 block">
+            {tagline}
           </span>
-          <h1 className="font-display text-5xl md:text-8xl text-dark-brown mt-4 mb-6 leading-tight">Two Pathways. One Map.</h1>
-          <p className="max-w-3xl mx-auto text-dark-brown/70 font-serif italic text-xl md:text-2xl leading-relaxed">
-            "Choose one path, or bridge both for the ultimate health map."
+          <h1 data-tina-field={tinaField(data.screening, 'title')} className="font-display text-5xl md:text-8xl text-dark-brown mt-4 mb-6 leading-tight">{title}</h1>
+          <p data-tina-field={tinaField(data.screening, 'subtitle')} className="max-w-3xl mx-auto text-dark-brown/70 font-serif italic text-xl md:text-2xl leading-relaxed">
+            {subtitle}
           </p>
         </header>
 
@@ -94,18 +120,19 @@ const ScreeningCircle: React.FC = () => {
               <div className="w-16 h-16 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform">
                 <Stethoscope size={32} />
               </div>
-              <div>
+              <div data-tina-field={tinaField(pathwayA)}>
                 <p className="text-[10px] uppercase tracking-widest font-black text-dark-brown/40 mb-1">Pathway A</p>
-                <h2 className="font-display text-4xl text-dark-brown">The USA Protocol</h2>
+                <h2 data-tina-field={tinaField(pathwayA, 'title')} className="font-display text-4xl text-dark-brown">{pathwayA.title}</h2>
                 <p className="text-xs text-accent-orange font-black uppercase tracking-widest mt-1">Evidence-Based</p>
               </div>
             </div>
-            <p className="text-dark-brown/70 text-lg leading-relaxed mb-10">
-              Standardized, data-driven screenings aligned with modern Western preventive guidelines.
+            <p data-tina-field={tinaField(pathwayA, 'description')} className="text-dark-brown/70 text-lg leading-relaxed mb-10">
+              {pathwayA.description}
             </p>
-            <div className="space-y-6 text-dark-brown/60 text-sm">
-               <div className="flex gap-4"><HeartPulse size={18} className="text-accent-orange shrink-0" /> <span>Biometric & Metabolic analysis</span></div>
-               <div className="flex gap-4"><Activity size={18} className="text-accent-orange shrink-0" /> <span>Kidney function & Lipid profiles</span></div>
+            <div data-tina-field={tinaField(pathwayA, 'features')} className="space-y-6 text-dark-brown/60 text-sm">
+               {pathwayA.features && pathwayA.features.map((f: string, i: number) => (
+                 <div key={i} className="flex gap-4"><HeartPulse size={18} className="text-accent-orange shrink-0" /> <span>{f}</span></div>
+               ))}
             </div>
           </div>
 
@@ -116,18 +143,19 @@ const ScreeningCircle: React.FC = () => {
               <div className="w-16 h-16 rounded-2xl bg-white/10 text-white flex items-center justify-center group-hover:scale-110 transition-transform">
                 <Sparkles size={32} />
               </div>
-              <div>
+              <div data-tina-field={tinaField(pathwayB)}>
                 <p className="text-[10px] uppercase tracking-widest font-black text-white/40 mb-1">Pathway B</p>
-                <h2 className="font-display text-4xl text-white">The Ancient Protocol</h2>
+                <h2 data-tina-field={tinaField(pathwayB, 'title')} className="font-display text-4xl text-white">{pathwayB.title}</h2>
                 <p className="text-xs text-accent-orange font-black uppercase tracking-widest mt-1">Energetic-Based</p>
               </div>
             </div>
-            <p className="text-cream/70 text-lg leading-relaxed mb-10 italic font-serif">
-              Traditional methods that identify imbalance before it manifests as physical symptoms.
+            <p data-tina-field={tinaField(pathwayB, 'description')} className="text-cream/70 text-lg leading-relaxed mb-10 italic font-serif">
+              {pathwayB.description}
             </p>
-            <div className="space-y-6 text-cream/60 text-sm relative z-10">
-               <div className="flex gap-4"><Sparkles size={18} className="text-accent-orange shrink-0" /> <span>Nadi Scan (Pulse) & Aura Analysis</span></div>
-               <div className="flex gap-4"><Sparkles size={18} className="text-accent-orange shrink-0" /> <span>Dosha Balance (Vata, Pitta, Kapha)</span></div>
+            <div data-tina-field={tinaField(pathwayB, 'features')} className="space-y-6 text-cream/60 text-sm relative z-10">
+               {pathwayB.features && pathwayB.features.map((f: string, i: number) => (
+                 <div key={i} className="flex gap-4"><Sparkles size={18} className="text-accent-orange shrink-0" /> <span>{f}</span></div>
+               ))}
             </div>
           </div>
         </section>
