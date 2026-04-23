@@ -20,5 +20,20 @@
   "philosophy": [
     "Dr. Kumar believes that true healing is a holistic journey. Beyond the clinical protocols, she is a dedicated practitioner of yoga and meditation, advocating for spiritual well-being as a cornerstone of health.",
     "In her practice, she integrates the rigorous evidence-based standards of the West with the ancient wisdom of holistic wellness, ensuring that every patient is treated as a complete soul, not just a set of symptoms."
-  ]
+  ],
+  "ui": {
+    "consultationButtonLabel": "Book Consultation",
+    "consultationButtonUrl": "/appointment",
+    "heroBadgeLabel": "Certified",
+    "heroBadgeText": "American Board Certified",
+    "journeyHeading": "A Journey of Global Excellence",
+    "expertiseHeading": "Areas of Expertise",
+    "philosophyBadge": "Medical Philosophy",
+    "philosophyHeading": "Beyond Clinical Boundaries",
+    "philosophyPillars": [
+      "Scientific Rigor",
+      "Holistic Insight",
+      "Compassionate Care"
+    ]
+  }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Heart, Activity, Star, Compass, Zap, ShieldCheck } from 'lucide-react';
-import { useTina } from "tinacms/dist/react";
+import { tinaField, useTina } from "tinacms/dist/react";
 import servicesContent from '../content/services.json';
 
 interface ServiceData {
@@ -15,6 +15,11 @@ const Services: React.FC = (props) => {
   const { data } = useTina({
     query: `{
       services(relativePath: "services.json") {
+        header {
+          tagline
+          title
+          subtitle
+        }
         items {
           title
           category
@@ -25,7 +30,7 @@ const Services: React.FC = (props) => {
       }
     }`,
     variables: { relativePath: "services.json" },
-    data: { services: { items: servicesContent } },
+    data: { services: servicesContent },
   });
 
   const getIcon = (category: string) => {
@@ -60,7 +65,8 @@ const Services: React.FC = (props) => {
     return 'bg-dark-brown';
   };
 
-  const displayServices: ServiceData[] = data.services.items;
+  const { header, items } = data.services;
+  const displayServices: ServiceData[] = items;
 
   return (
     <div className="bg-cream min-h-screen pt-32 pb-20 px-6">
@@ -68,10 +74,10 @@ const Services: React.FC = (props) => {
         
         {/* Header */}
         <div className="text-center mb-24">
-          <span className="text-accent-orange uppercase tracking-widest font-black text-xs">Our Pillars</span>
-          <h1 className="font-display text-6xl md:text-8xl text-dark-brown mt-4 mb-8">Our Services!</h1>
-          <p className="max-w-3xl mx-auto text-xl md:text-2xl text-dark-brown/70 font-serif italic">
-            "Healing the subtle bodies to restore physical form."
+          <span data-tina-field={tinaField(header, 'tagline')} className="text-accent-orange uppercase tracking-widest font-black text-xs">{header.tagline}</span>
+          <h1 data-tina-field={tinaField(header, 'title')} className="font-display text-6xl md:text-8xl text-dark-brown mt-4 mb-8">{header.title}</h1>
+          <p data-tina-field={tinaField(header, 'subtitle')} className="max-w-3xl mx-auto text-xl md:text-2xl text-dark-brown/70 font-serif italic">
+            "{header.subtitle}"
           </p>
         </div>
 
@@ -84,11 +90,11 @@ const Services: React.FC = (props) => {
                         {getIcon(service.category)}
                         <span>{service.category}</span>
                     </div>
-                    <h2 className="font-display text-5xl text-dark-brown">{service.title}</h2>
-                    <p className="text-lg text-dark-brown/80 leading-relaxed">
+                    <h2 data-tina-field={tinaField(service, 'title')} className="font-display text-5xl text-dark-brown">{service.title}</h2>
+                    <p data-tina-field={tinaField(service, 'description')} className="text-lg text-dark-brown/80 leading-relaxed">
                         {service.description}
                     </p>
-                    <div className="bg-white p-8 rounded-3xl border border-blue-50 shadow-sm space-y-4">
+                    <div data-tina-field={tinaField(service, 'features')} className="bg-white p-8 rounded-3xl border border-blue-50 shadow-sm space-y-4">
                         {service.features.map((feature, fIndex) => (
                             <div key={fIndex} className="flex items-start gap-4">
                                 <div className={`w-2 h-2 mt-2 rounded-full flex-shrink-0 ${getDotColor(service.category)}`}></div>

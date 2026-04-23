@@ -27,5 +27,9 @@
         }
       ]
     }
-  ]
+  ],
+  "cta": {
+    "title": "Full Circle is a Revolution!",
+    "description": "A clinic where patient participates equally in the treatment plan. Here, we close the gap between patients and doctors."
+  }
 }

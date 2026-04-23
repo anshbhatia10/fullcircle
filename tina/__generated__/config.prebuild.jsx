@@ -158,7 +158,38 @@ var config_default = defineConfig({
               { type: "string", name: "description", label: "Description" }
             ]
           },
-          { type: "string", list: true, name: "philosophy", label: "Philosophy Paragraphs", ui: { component: "textarea" } }
+          { type: "string", list: true, name: "philosophy", label: "Philosophy Paragraphs", ui: { component: "textarea" } },
+          {
+            type: "object",
+            name: "ui",
+            label: "Page UI Labels",
+            fields: [
+              { type: "string", name: "consultationButtonLabel", label: "Consultation Button Label" },
+              { type: "string", name: "consultationButtonUrl", label: "Consultation Button URL/Path" },
+              { type: "string", name: "heroBadgeLabel", label: "Hero Badge Label" },
+              { type: "string", name: "heroBadgeText", label: "Hero Badge Text" },
+              { type: "string", name: "journeyHeading", label: "Journey Heading" },
+              { type: "string", name: "expertiseHeading", label: "Expertise Heading" },
+              { type: "string", name: "philosophyBadge", label: "Philosophy Badge Label" },
+              { type: "string", name: "philosophyHeading", label: "Philosophy Heading" },
+              { type: "string", name: "bridgingHeading", label: "Bridging Heading" },
+              { type: "string", name: "legacyHeading", label: "Legacy Heading" },
+              { type: "string", name: "visionHeading", label: "Vision Heading" },
+              { type: "string", name: "visionQuote", label: "Vision Quote", ui: { component: "textarea" } },
+              { type: "string", name: "ctaLabel", label: "CTA Label" },
+              {
+                type: "object",
+                list: true,
+                name: "stats",
+                label: "Stats",
+                fields: [
+                  { type: "string", name: "value", label: "Value" },
+                  { type: "string", name: "label", label: "Label" }
+                ]
+              },
+              { type: "string", list: true, name: "philosophyPillars", label: "Philosophy Pillars" }
+            ]
+          }
         ]
       },
       {
@@ -177,6 +208,16 @@ var config_default = defineConfig({
           router: () => "/services"
         },
         fields: [
+          {
+            type: "object",
+            name: "header",
+            label: "Header",
+            fields: [
+              { type: "string", name: "tagline", label: "Tagline" },
+              { type: "string", name: "title", label: "Title" },
+              { type: "string", name: "subtitle", label: "Subtitle", ui: { component: "textarea" } }
+            ]
+          },
           {
             type: "object",
             list: true,
@@ -211,6 +252,10 @@ var config_default = defineConfig({
           { type: "string", name: "tagline", label: "Tagline" },
           { type: "string", name: "title", label: "Title" },
           { type: "string", name: "subtitle", label: "Subtitle", ui: { component: "textarea" } },
+          { type: "string", name: "pathwayALabel", label: "Pathway A Label" },
+          { type: "string", name: "pathwayATag", label: "Pathway A Tag" },
+          { type: "string", name: "pathwayBLabel", label: "Pathway B Label" },
+          { type: "string", name: "pathwayBTag", label: "Pathway B Tag" },
           {
             type: "object",
             name: "pathwayA",
@@ -229,6 +274,60 @@ var config_default = defineConfig({
               { type: "string", name: "title", label: "Title" },
               { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
               { type: "string", list: true, name: "features", label: "Features" }
+            ]
+          },
+          {
+            type: "object",
+            name: "quiz",
+            label: "Quiz",
+            fields: [
+              { type: "string", name: "badge", label: "Badge" },
+              { type: "string", name: "title", label: "Title" },
+              { type: "string", name: "resetLabel", label: "Reset Button Label" },
+              { type: "string", name: "incompleteText", label: "Incomplete State Text" },
+              { type: "string", name: "recommendationLabel", label: "Recommendation Label" },
+              { type: "string", name: "ctaLabel", label: "Result CTA Label" },
+              { type: "string", name: "ctaPath", label: "Result CTA Path" },
+              {
+                type: "object",
+                name: "defaultResult",
+                label: "Default Result",
+                fields: [
+                  { type: "string", name: "title", label: "Title" },
+                  { type: "string", name: "description", label: "Description", ui: { component: "textarea" } }
+                ]
+              },
+              {
+                type: "object",
+                name: "usaResult",
+                label: "USA Result",
+                fields: [
+                  { type: "string", name: "title", label: "Title" },
+                  { type: "string", name: "description", label: "Description", ui: { component: "textarea" } }
+                ]
+              },
+              {
+                type: "object",
+                name: "ancientResult",
+                label: "Ancient Result",
+                fields: [
+                  { type: "string", name: "title", label: "Title" },
+                  { type: "string", name: "description", label: "Description", ui: { component: "textarea" } }
+                ]
+              },
+              {
+                type: "object",
+                list: true,
+                name: "questions",
+                label: "Questions",
+                fields: [
+                  { type: "string", name: "prompt", label: "Prompt", ui: { component: "textarea" } },
+                  { type: "string", name: "a", label: "Option A Text", ui: { component: "textarea" } },
+                  { type: "string", name: "b", label: "Option B Text", ui: { component: "textarea" } },
+                  { type: "string", name: "aLabel", label: "Option A Label" },
+                  { type: "string", name: "bLabel", label: "Option B Label" }
+                ]
+              }
             ]
           }
         ]
@@ -284,6 +383,84 @@ var config_default = defineConfig({
           { type: "string", name: "tagline", label: "Tagline" },
           { type: "string", name: "title", label: "Title" },
           { type: "string", name: "subtitle", label: "Subtitle", ui: { component: "textarea" } },
+          { type: "string", name: "assessmentLabel", label: "Assessment Label" },
+          {
+            type: "object",
+            list: true,
+            name: "assessmentHighlights",
+            label: "Assessment Highlights",
+            fields: [
+              { type: "string", name: "title", label: "Title" },
+              { type: "string", name: "description", label: "Description", ui: { component: "textarea" } }
+            ]
+          },
+          {
+            type: "object",
+            name: "synergyCard",
+            label: "Synergy Card",
+            fields: [
+              { type: "string", name: "title", label: "Title" },
+              { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
+              { type: "string", name: "scienceLabel", label: "Science Label" },
+              { type: "string", name: "scienceTitle", label: "Science Title" },
+              { type: "string", name: "natureLabel", label: "Nature Label" },
+              { type: "string", name: "natureTitle", label: "Nature Title" }
+            ]
+          },
+          {
+            type: "object",
+            name: "scienceSection",
+            label: "Science Section",
+            fields: [
+              { type: "string", name: "tagline", label: "Tagline" },
+              { type: "string", name: "title", label: "Title" },
+              {
+                type: "object",
+                list: true,
+                name: "items",
+                label: "Items",
+                fields: [
+                  { type: "string", name: "title", label: "Title" },
+                  { type: "string", name: "description", label: "Description", ui: { component: "textarea" } }
+                ]
+              }
+            ]
+          },
+          {
+            type: "object",
+            name: "natureSection",
+            label: "Nature Section",
+            fields: [
+              { type: "string", name: "tagline", label: "Tagline" },
+              { type: "string", name: "title", label: "Title" },
+              {
+                type: "object",
+                list: true,
+                name: "items",
+                label: "Items",
+                fields: [
+                  { type: "string", name: "title", label: "Title" },
+                  { type: "string", name: "description", label: "Description", ui: { component: "textarea" } }
+                ]
+              }
+            ]
+          },
+          {
+            type: "object",
+            name: "packageDeal",
+            label: "Package Deal",
+            fields: [
+              { type: "string", name: "badge", label: "Badge" },
+              { type: "string", name: "title", label: "Title" },
+              { type: "string", name: "quote", label: "Quote", ui: { component: "textarea" } },
+              { type: "string", name: "bundleLabel", label: "Bundle Label" },
+              { type: "string", name: "bundleDescription", label: "Bundle Description", ui: { component: "textarea" } },
+              { type: "string", name: "primaryCtaLabel", label: "Primary CTA Label" },
+              { type: "string", name: "primaryCtaPath", label: "Primary CTA Path" },
+              { type: "string", name: "secondaryCtaLabel", label: "Secondary CTA Label" },
+              { type: "string", name: "secondaryCtaPath", label: "Secondary CTA Path" }
+            ]
+          },
           {
             type: "object",
             list: true,
@@ -325,6 +502,50 @@ var config_default = defineConfig({
               { type: "string", name: "physical", label: "Physical Pledge", ui: { component: "textarea" } },
               { type: "string", name: "spiritual", label: "Spiritual Pledge", ui: { component: "textarea" } },
               { type: "string", name: "giving", label: "Giving Pledge", ui: { component: "textarea" } }
+            ]
+          },
+          {
+            type: "object",
+            name: "signBox",
+            label: "Sign Box",
+            fields: [
+              { type: "string", name: "title", label: "Title" },
+              { type: "string", name: "subtitle", label: "Subtitle" },
+              { type: "string", name: "submitLabel", label: "Submit Label" },
+              { type: "string", name: "incompleteAlert", label: "Incomplete Alert", ui: { component: "textarea" } }
+            ]
+          },
+          {
+            type: "object",
+            name: "giftLabels",
+            label: "Gift Labels",
+            fields: [
+              { type: "string", name: "physicalTitle", label: "Physical Gift Title" },
+              { type: "string", name: "spiritualTitle", label: "Spiritual Gift Title" },
+              { type: "string", name: "givingTitle", label: "Giving Gift Title" }
+            ]
+          },
+          {
+            type: "object",
+            name: "successCard",
+            label: "Success Card",
+            fields: [
+              { type: "string", name: "title", label: "Title" },
+              { type: "string", name: "subtitle", label: "Subtitle" },
+              { type: "string", name: "badge", label: "Badge" },
+              { type: "string", name: "officialRegistryLabel", label: "Official Registry Label" },
+              { type: "string", name: "reviewLabel", label: "Review Label" }
+            ]
+          },
+          {
+            type: "object",
+            list: true,
+            name: "impactCards",
+            label: "Impact Cards",
+            fields: [
+              { type: "string", name: "title", label: "Title" },
+              { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
+              { type: "boolean", name: "dark", label: "Dark Card" }
             ]
           },
           { type: "string", name: "registryUrl", label: "Official Registry URL" }
@@ -480,6 +701,15 @@ var config_default = defineConfig({
                   }
                 ]
               }
+            ]
+          },
+          {
+            type: "object",
+            name: "cta",
+            label: "Bottom CTA",
+            fields: [
+              { type: "string", name: "title", label: "Title" },
+              { type: "string", name: "description", label: "Description", ui: { component: "textarea" } }
             ]
           }
         ]

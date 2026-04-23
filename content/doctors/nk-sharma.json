@@ -16,5 +16,24 @@
     "Dr. N.K. Sharma’s teachings transcend the technicalities of healing. He serves as a guide for those seeking self-discovery and profound spiritual evolution.",
     "By anchoring ancient traditions in modern scientific understanding, he offers a comprehensive roadmap that addresses the totality of human experience—from cellular health to cosmic consciousness.",
     "His legacy as a mentor and source of inspiration has touched millions, illuminating the path toward a fulfilling and enlightened existence."
-  ]
+  ],
+  "ui": {
+    "consultationButtonLabel": "Book Consultation",
+    "consultationButtonUrl": "https://wa.me/919910930108?text=I%20would%20like%20to%20book%20a%20consultation%20with%20Dr.%20NK%20Sharma",
+    "bridgingHeading": "Bridging Spirituality & Science",
+    "legacyHeading": "A Global Legacy",
+    "visionHeading": "The Vision",
+    "visionQuote": "Dr. Sharma is more than a teacher; he is a source of inspiration for those who seek to understand the universe through the lens of their own soul.",
+    "ctaLabel": "Book with the team",
+    "stats": [
+      {
+        "value": "Millions",
+        "label": "Lives Touched"
+      },
+      {
+        "value": "Global",
+        "label": "Presence"
+      }
+    ]
+  }
 }

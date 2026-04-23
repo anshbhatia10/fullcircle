@@ -11,6 +11,29 @@ const Pledge: React.FC = () => {
         title
         subtitle
         description
+        signBox {
+          title
+          subtitle
+          submitLabel
+          incompleteAlert
+        }
+        giftLabels {
+          physicalTitle
+          spiritualTitle
+          givingTitle
+        }
+        successCard {
+          title
+          subtitle
+          badge
+          officialRegistryLabel
+          reviewLabel
+        }
+        impactCards {
+          title
+          description
+          dark
+        }
         pledges {
           physical
           spiritual
@@ -23,7 +46,7 @@ const Pledge: React.FC = () => {
     data: { pledge: pledgeData },
   });
 
-  const { tagline, title, subtitle, description, pledges: pledgeItems, registryUrl } = data.pledge;
+  const { tagline, title, subtitle, description, signBox, giftLabels, successCard, impactCards, pledges: pledgeItems, registryUrl } = data.pledge;
 
   const [pledgeStatus, setPledgeStatus] = useState({ physical: false, spiritual: false, giving: false });
   const [signed, setSigned] = useState(false);
@@ -37,7 +60,7 @@ const Pledge: React.FC = () => {
       setSigned(true);
       window.open(registryUrl || "https://notto.abdm.gov.in", "_blank");
     } else {
-      alert("Please commit to all three aspects of the circle to sign.");
+      alert(signBox?.incompleteAlert || "Please commit to all three aspects of the circle to sign.");
     }
   };
 
@@ -48,14 +71,14 @@ const Pledge: React.FC = () => {
           <div className="w-24 h-24 bg-accent-orange/10 rounded-full flex items-center justify-center mx-auto mb-8">
             <Heart size={48} className="text-accent-orange" />
           </div>
-          <h2 className="font-display text-5xl text-dark-brown mb-4">Welcome to the Circle</h2>
-          <p className="font-serif text-2xl italic text-accent-orange mb-8">"I have signed the circle."</p>
-          <p className="text-dark-brown/70 mb-10 font-bold uppercase tracking-widest text-xs font-sans">Full Circle Conscious Donor</p>
+          <h2 data-tina-field={tinaField(successCard, 'title')} className="font-display text-5xl text-dark-brown mb-4">{successCard?.title}</h2>
+          <p data-tina-field={tinaField(successCard, 'subtitle')} className="font-serif text-2xl italic text-accent-orange mb-8">"{successCard?.subtitle}"</p>
+          <p data-tina-field={tinaField(successCard, 'badge')} className="text-dark-brown/70 mb-10 font-bold uppercase tracking-widest text-xs font-sans">{successCard?.badge}</p>
           <div className="flex flex-col gap-4">
             <a href={registryUrl || "https://notto.abdm.gov.in"} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 px-10 py-4 bg-dark-brown text-cream rounded-full text-xs font-bold uppercase tracking-widest hover:bg-accent-orange transition-colors">
-              Official Registry <ExternalLink size={14} />
+              <span data-tina-field={tinaField(successCard, 'officialRegistryLabel')}>{successCard?.officialRegistryLabel}</span> <ExternalLink size={14} />
             </a>
-            <button onClick={() => setSigned(false)} className="text-[10px] uppercase font-bold text-dark-brown/40 tracking-widest hover:text-accent-orange font-sans">Review the Pact</button>
+            <button onClick={() => setSigned(false)} className="text-[10px] uppercase font-bold text-dark-brown/40 tracking-widest hover:text-accent-orange font-sans">{successCard?.reviewLabel}</button>
           </div>
         </div>
       </div>
@@ -81,8 +104,8 @@ const Pledge: React.FC = () => {
 
         <div className="bg-white rounded-[4rem] shadow-xl overflow-hidden border border-dark-brown/5 mb-20">
           <div className="bg-[#1D1614] p-10 text-center text-cream">
-            <h2 className="font-display text-3xl">Sign the Circle</h2>
-            <p className="text-cream/50 text-[10px] mt-2 font-bold uppercase tracking-widest">The 100% Commitment</p>
+            <h2 data-tina-field={tinaField(signBox, 'title')} className="font-display text-3xl">{signBox?.title}</h2>
+            <p data-tina-field={tinaField(signBox, 'subtitle')} className="text-cream/50 text-[10px] mt-2 font-bold uppercase tracking-widest">{signBox?.subtitle}</p>
           </div>
 
           <div className="p-10 md:p-16 space-y-12">
@@ -91,7 +114,7 @@ const Pledge: React.FC = () => {
                 {pledgeStatus.physical && <Check size={24} className="text-white" />}
               </div>
               <div data-tina-field={tinaField(pledgeItems, 'physical')}>
-                <h3 className="font-display text-2xl text-dark-brown mb-3">1. The Physical Gift</h3>
+                <h3 data-tina-field={tinaField(giftLabels, 'physicalTitle')} className="font-display text-2xl text-dark-brown mb-3">{giftLabels?.physicalTitle}</h3>
                 <p className="text-dark-brown/60 text-sm italic font-serif">"{pledgeItems.physical}"</p>
               </div>
             </div>
@@ -101,7 +124,7 @@ const Pledge: React.FC = () => {
                 {pledgeStatus.spiritual && <Check size={24} className="text-white" />}
               </div>
               <div data-tina-field={tinaField(pledgeItems, 'spiritual')}>
-                <h3 className="font-display text-2xl text-dark-brown mb-3">2. The Spiritual Gift</h3>
+                <h3 data-tina-field={tinaField(giftLabels, 'spiritualTitle')} className="font-display text-2xl text-dark-brown mb-3">{giftLabels?.spiritualTitle}</h3>
                 <p className="text-dark-brown/60 text-sm italic font-serif">"{pledgeItems.spiritual}"</p>
               </div>
             </div>
@@ -111,35 +134,33 @@ const Pledge: React.FC = () => {
                 {pledgeStatus.giving && <Check size={24} className="text-white" />}
               </div>
               <div data-tina-field={tinaField(pledgeItems, 'giving')}>
-                <h3 className="font-display text-2xl text-dark-brown mb-3">3. The Art of Giving</h3>
+                <h3 data-tina-field={tinaField(giftLabels, 'givingTitle')} className="font-display text-2xl text-dark-brown mb-3">{giftLabels?.givingTitle}</h3>
                 <p className="text-dark-brown/60 text-sm italic font-serif">"{pledgeItems.giving}"</p>
               </div>
             </div>
 
             <div className="pt-10 border-t border-dark-brown/5 text-center">
               <button onClick={handleSign} className="px-16 py-6 bg-dark-brown text-cream rounded-full text-xs font-black uppercase tracking-[0.3em] hover:bg-accent-orange transition-all shadow-xl">
-                I have signed the circle
+                {signBox?.submitLabel}
               </button>
             </div>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="bg-white p-8 rounded-[3rem] border border-dark-brown/5 shadow-sm text-center">
-            <Zap size={24} className="text-accent-orange mx-auto mb-4" />
-            <h4 className="font-display text-xl mb-2 text-dark-brown">Neutralizing Karma</h4>
-            <p className="text-xs text-dark-brown/60 font-sans uppercase tracking-widest">Transforming transition into selfless merit.</p>
-          </div>
-          <div className="bg-[#1D1614] p-8 rounded-[3rem] text-cream shadow-xl text-center">
-            <ShieldCheck size={24} className="text-accent-orange mx-auto mb-4" />
-            <h4 className="font-display text-xl mb-2">EWS Support</h4>
-            <p className="text-xs text-cream/60 font-sans uppercase tracking-widest">United by biological hope. High Spiritual Quotient.</p>
-          </div>
-          <div className="bg-white p-8 rounded-[3rem] border border-dark-brown/5 shadow-sm text-center">
-            <Heart size={24} className="text-accent-orange mx-auto mb-4" />
-            <h4 className="font-display text-xl mb-2 text-dark-brown">Raising Frequency</h4>
-            <p className="text-xs text-dark-brown/60 font-sans uppercase tracking-widest">From scarcity to abundance and gift of life.</p>
-          </div>
+          {impactCards?.map((card: any, i: number) => (
+            <div
+              key={i}
+              data-tina-field={tinaField(card)}
+              className={card.dark ? "bg-[#1D1614] p-8 rounded-[3rem] text-cream shadow-xl text-center" : "bg-white p-8 rounded-[3rem] border border-dark-brown/5 shadow-sm text-center"}
+            >
+              {i === 0 && <Zap size={24} className="text-accent-orange mx-auto mb-4" />}
+              {i === 1 && <ShieldCheck size={24} className="text-accent-orange mx-auto mb-4" />}
+              {i >= 2 && <Heart size={24} className="text-accent-orange mx-auto mb-4" />}
+              <h4 data-tina-field={tinaField(card, 'title')} className={card.dark ? "font-display text-xl mb-2" : "font-display text-xl mb-2 text-dark-brown"}>{card.title}</h4>
+              <p data-tina-field={tinaField(card, 'description')} className={card.dark ? "text-xs text-cream/60 font-sans uppercase tracking-widest" : "text-xs text-dark-brown/60 font-sans uppercase tracking-widest"}>{card.description}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>

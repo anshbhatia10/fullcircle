@@ -2,6 +2,10 @@
   "title": "Two Pathways. One Map.",
   "tagline": "The Screening Circle",
   "subtitle": "\"Choose one path, or bridge both for the ultimate health map.\"",
+  "pathwayALabel": "Pathway A",
+  "pathwayATag": "Evidence-Based",
+  "pathwayBLabel": "Pathway B",
+  "pathwayBTag": "Energetic-Based",
   "pathwayA": {
     "title": "The USA Protocol",
     "description": "Standardized, data-driven screenings aligned with modern Western preventive guidelines.",
@@ -11,5 +15,63 @@
     "title": "The Ancient Protocol",
     "description": "Traditional methods that identify imbalance before it manifests as physical symptoms.",
     "features": ["Nadi Scan (Pulse) & Aura Analysis", "Dosha Balance (Vata, Pitta, Kapha)"]
+  },
+  "quiz": {
+    "badge": "Discovery Quiz",
+    "title": "Which Screening Circle Is Calling You?",
+    "resetLabel": "Reset Quiz",
+    "incompleteText": "Complete all 5 questions to reveal your health map pathway",
+    "recommendationLabel": "Your Recommendation",
+    "ctaLabel": "Start Screening",
+    "ctaPath": "/appointment",
+    "defaultResult": {
+      "title": "Bridge Both (The Full Circle Map)",
+      "description": "Your preferences show a balanced interest in both clinical rigor and ancient wisdom. We recommend our signature Bridge protocol."
+    },
+    "usaResult": {
+      "title": "The USA Protocol",
+      "description": "You value data, evidence, and clinical metrics. We recommend starting with our high-standard Western diagnostic screening."
+    },
+    "ancientResult": {
+      "title": "The Ancient Protocol",
+      "description": "You are deeply aligned with energetic and holistic roots. We recommend starting with a Nadi Scan and Aura analysis."
+    },
+    "questions": [
+      {
+        "prompt": "When you feel \"off,\" what is the first thing you want to know?",
+        "a": "My specific numbers (blood pressure, glucose, or kidney function).",
+        "b": "The root energy or emotional state causing the imbalance.",
+        "aLabel": "Clinical",
+        "bLabel": "Holistic"
+      },
+      {
+        "prompt": "Which phrase resonates most with your health philosophy?",
+        "a": "\"Show me the evidence and the data.\"",
+        "b": "\"Listen to the wisdom of the body and the elements.\"",
+        "aLabel": "Clinical",
+        "bLabel": "Holistic"
+      },
+      {
+        "prompt": "What is your primary goal for this visit?",
+        "a": "To manage a clinical condition or get a medical clearance.",
+        "b": "To understand my constitution (Dosha) and optimize my lifestyle.",
+        "aLabel": "Clinical",
+        "bLabel": "Holistic"
+      },
+      {
+        "prompt": "How do you view prevention?",
+        "a": "Early detection through lab tests and physical exams.",
+        "b": "Maintaining harmony in my aura and energy flow to stay vital.",
+        "aLabel": "Clinical",
+        "bLabel": "Holistic"
+      },
+      {
+        "prompt": "What kind of plan helps you most?",
+        "a": "A structured roadmap with measurable checkpoints.",
+        "b": "A holistic map that connects mind, body, and spirit.",
+        "aLabel": "Clinical",
+        "bLabel": "Holistic"
+      }
+    ]
   }
 }

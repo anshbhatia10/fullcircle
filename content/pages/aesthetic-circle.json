@@ -2,6 +2,64 @@
   "tagline": "The Aesthetic Circle",
   "title": "Beautiful Inside Out",
   "subtitle": "\"True beauty is not just skin deep. It is a reflection of your inner vitality.\"",
+  "assessmentLabel": "Assessment",
+  "assessmentHighlights": [
+    {
+      "title": "Surface health",
+      "description": "Texture, tone, and collagen density."
+    },
+    {
+      "title": "Internal connection",
+      "description": "How your Dosha (Vata, Pitta, Kapha) and hydration patterns affect your skin aging process."
+    }
+  ],
+  "synergyCard": {
+    "title": "The Full Circle Beauty Synergy",
+    "description": "Combine the best of clinical regeneration and holistic muscle toning for results that look natural and feel aligned.",
+    "scienceLabel": "The Science",
+    "scienceTitle": "Clinical Regeneration",
+    "natureLabel": "The Nature",
+    "natureTitle": "Holistic Structure"
+  },
+  "scienceSection": {
+    "tagline": "Clinical",
+    "title": "Regeneration (Science)",
+    "items": [
+      {
+        "title": "PRP (Platelet-Rich Plasma)",
+        "description": "Uses your body’s own growth factors to stimulate deep healing."
+      },
+      {
+        "title": "Microneedling",
+        "description": "Targeted collagen induction therapy to refine pores and scars."
+      }
+    ]
+  },
+  "natureSection": {
+    "tagline": "Holistic",
+    "title": "Structure (Nature)",
+    "items": [
+      {
+        "title": "Face Yoga coaching",
+        "description": "Natural muscle toning to lift and contour."
+      },
+      {
+        "title": "Naturopathic glow",
+        "description": "Supplements and Ayurvedic oils tailored to your skin type."
+      }
+    ]
+  },
+  "packageDeal": {
+    "badge": "Package Deal",
+    "title": "The Circle of Radiance",
+    "quote": "Why settle for half a solution? Fill the Circle. Bundle aesthetic regeneration with holistic wellness to align the inside and the outside.",
+    "bundleLabel": "Bundle & save",
+    "bundleDescription": "Book our Aesthetic Regeneration procedures (PRP + Microneedling) and receive a discount on our Holistic Wellness package (Face Yoga + Nadi Scan + Aura Scan).",
+    "primaryCtaLabel": "Book Aesthetic Circle",
+    "primaryCtaPath": "/appointment",
+    "secondaryCtaLabel": "Choose Your Screening Circle",
+    "secondaryCtaPath": "/screening-circle"
+  },
   "services": [
     {
       "title": "Aesthetic Skin Assessment",

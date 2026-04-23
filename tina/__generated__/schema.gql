@@ -277,6 +277,29 @@ type DoctorsExpertise {
   description: String
 }
 
+type DoctorsUiStats {
+  value: String
+  label: String
+}
+
+type DoctorsUi {
+  consultationButtonLabel: String
+  consultationButtonUrl: String
+  heroBadgeLabel: String
+  heroBadgeText: String
+  journeyHeading: String
+  expertiseHeading: String
+  philosophyBadge: String
+  philosophyHeading: String
+  bridgingHeading: String
+  legacyHeading: String
+  visionHeading: String
+  visionQuote: String
+  ctaLabel: String
+  stats: [DoctorsUiStats]
+  philosophyPillars: [String]
+}
+
 type Doctors implements Node & Document {
   name: String
   lastName: String
@@ -288,6 +311,7 @@ type Doctors implements Node & Document {
   excellence: [DoctorsExcellence]
   expertise: [DoctorsExpertise]
   philosophy: [String]
+  ui: DoctorsUi
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -303,6 +327,29 @@ input DoctorsExpertiseFilter {
   description: StringFilter
 }
 
+input DoctorsUiStatsFilter {
+  value: StringFilter
+  label: StringFilter
+}
+
+input DoctorsUiFilter {
+  consultationButtonLabel: StringFilter
+  consultationButtonUrl: StringFilter
+  heroBadgeLabel: StringFilter
+  heroBadgeText: StringFilter
+  journeyHeading: StringFilter
+  expertiseHeading: StringFilter
+  philosophyBadge: StringFilter
+  philosophyHeading: StringFilter
+  bridgingHeading: StringFilter
+  legacyHeading: StringFilter
+  visionHeading: StringFilter
+  visionQuote: StringFilter
+  ctaLabel: StringFilter
+  stats: DoctorsUiStatsFilter
+  philosophyPillars: StringFilter
+}
+
 input DoctorsFilter {
   name: StringFilter
   lastName: StringFilter
@@ -314,6 +361,7 @@ input DoctorsFilter {
   excellence: DoctorsExcellenceFilter
   expertise: DoctorsExpertiseFilter
   philosophy: StringFilter
+  ui: DoctorsUiFilter
 }
 
 type DoctorsConnectionEdges {
@@ -327,6 +375,12 @@ type DoctorsConnection implements Connection {
   edges: [DoctorsConnectionEdges]
 }
 
+type ServicesHeader {
+  tagline: String
+  title: String
+  subtitle: String
+}
+
 type ServicesItems {
   title: String
   category: String
@@ -336,10 +390,17 @@ type ServicesItems {
 }
 
 type Services implements Node & Document {
+  header: ServicesHeader
   items: [ServicesItems]
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
+}
+
+input ServicesHeaderFilter {
+  tagline: StringFilter
+  title: StringFilter
+  subtitle: StringFilter
 }
 
 input ServicesItemsFilter {
@@ -351,6 +412,7 @@ input ServicesItemsFilter {
 }
 
 input ServicesFilter {
+  header: ServicesHeaderFilter
   items: ServicesItemsFilter
 }
 
@@ -377,12 +439,54 @@ type ScreeningPathwayB {
   features: [String]
 }
 
+type ScreeningQuizDefaultResult {
+  title: String
+  description: String
+}
+
+type ScreeningQuizUsaResult {
+  title: String
+  description: String
+}
+
+type ScreeningQuizAncientResult {
+  title: String
+  description: String
+}
+
+type ScreeningQuizQuestions {
+  prompt: String
+  a: String
+  b: String
+  aLabel: String
+  bLabel: String
+}
+
+type ScreeningQuiz {
+  badge: String
+  title: String
+  resetLabel: String
+  incompleteText: String
+  recommendationLabel: String
+  ctaLabel: String
+  ctaPath: String
+  defaultResult: ScreeningQuizDefaultResult
+  usaResult: ScreeningQuizUsaResult
+  ancientResult: ScreeningQuizAncientResult
+  questions: [ScreeningQuizQuestions]
+}
+
 type Screening implements Node & Document {
   tagline: String
   title: String
   subtitle: String
+  pathwayALabel: String
+  pathwayATag: String
+  pathwayBLabel: String
+  pathwayBTag: String
   pathwayA: ScreeningPathwayA
   pathwayB: ScreeningPathwayB
+  quiz: ScreeningQuiz
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -400,12 +504,54 @@ input ScreeningPathwayBFilter {
   features: StringFilter
 }
 
+input ScreeningQuizDefaultResultFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input ScreeningQuizUsaResultFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input ScreeningQuizAncientResultFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input ScreeningQuizQuestionsFilter {
+  prompt: StringFilter
+  a: StringFilter
+  b: StringFilter
+  aLabel: StringFilter
+  bLabel: StringFilter
+}
+
+input ScreeningQuizFilter {
+  badge: StringFilter
+  title: StringFilter
+  resetLabel: StringFilter
+  incompleteText: StringFilter
+  recommendationLabel: StringFilter
+  ctaLabel: StringFilter
+  ctaPath: StringFilter
+  defaultResult: ScreeningQuizDefaultResultFilter
+  usaResult: ScreeningQuizUsaResultFilter
+  ancientResult: ScreeningQuizAncientResultFilter
+  questions: ScreeningQuizQuestionsFilter
+}
+
 input ScreeningFilter {
   tagline: StringFilter
   title: StringFilter
   subtitle: StringFilter
+  pathwayALabel: StringFilter
+  pathwayATag: StringFilter
+  pathwayBLabel: StringFilter
+  pathwayBTag: StringFilter
   pathwayA: ScreeningPathwayAFilter
   pathwayB: ScreeningPathwayBFilter
+  quiz: ScreeningQuizFilter
 }
 
 type ScreeningConnectionEdges {
@@ -459,6 +605,54 @@ type PcpConnection implements Connection {
   edges: [PcpConnectionEdges]
 }
 
+type AestheticsAssessmentHighlights {
+  title: String
+  description: String
+}
+
+type AestheticsSynergyCard {
+  title: String
+  description: String
+  scienceLabel: String
+  scienceTitle: String
+  natureLabel: String
+  natureTitle: String
+}
+
+type AestheticsScienceSectionItems {
+  title: String
+  description: String
+}
+
+type AestheticsScienceSection {
+  tagline: String
+  title: String
+  items: [AestheticsScienceSectionItems]
+}
+
+type AestheticsNatureSectionItems {
+  title: String
+  description: String
+}
+
+type AestheticsNatureSection {
+  tagline: String
+  title: String
+  items: [AestheticsNatureSectionItems]
+}
+
+type AestheticsPackageDeal {
+  badge: String
+  title: String
+  quote: String
+  bundleLabel: String
+  bundleDescription: String
+  primaryCtaLabel: String
+  primaryCtaPath: String
+  secondaryCtaLabel: String
+  secondaryCtaPath: String
+}
+
 type AestheticsServices {
   title: String
   description: String
@@ -469,10 +663,64 @@ type Aesthetics implements Node & Document {
   tagline: String
   title: String
   subtitle: String
+  assessmentLabel: String
+  assessmentHighlights: [AestheticsAssessmentHighlights]
+  synergyCard: AestheticsSynergyCard
+  scienceSection: AestheticsScienceSection
+  natureSection: AestheticsNatureSection
+  packageDeal: AestheticsPackageDeal
   services: [AestheticsServices]
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
+}
+
+input AestheticsAssessmentHighlightsFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input AestheticsSynergyCardFilter {
+  title: StringFilter
+  description: StringFilter
+  scienceLabel: StringFilter
+  scienceTitle: StringFilter
+  natureLabel: StringFilter
+  natureTitle: StringFilter
+}
+
+input AestheticsScienceSectionItemsFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input AestheticsScienceSectionFilter {
+  tagline: StringFilter
+  title: StringFilter
+  items: AestheticsScienceSectionItemsFilter
+}
+
+input AestheticsNatureSectionItemsFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input AestheticsNatureSectionFilter {
+  tagline: StringFilter
+  title: StringFilter
+  items: AestheticsNatureSectionItemsFilter
+}
+
+input AestheticsPackageDealFilter {
+  badge: StringFilter
+  title: StringFilter
+  quote: StringFilter
+  bundleLabel: StringFilter
+  bundleDescription: StringFilter
+  primaryCtaLabel: StringFilter
+  primaryCtaPath: StringFilter
+  secondaryCtaLabel: StringFilter
+  secondaryCtaPath: StringFilter
 }
 
 input AestheticsServicesFilter {
@@ -485,6 +733,12 @@ input AestheticsFilter {
   tagline: StringFilter
   title: StringFilter
   subtitle: StringFilter
+  assessmentLabel: StringFilter
+  assessmentHighlights: AestheticsAssessmentHighlightsFilter
+  synergyCard: AestheticsSynergyCardFilter
+  scienceSection: AestheticsScienceSectionFilter
+  natureSection: AestheticsNatureSectionFilter
+  packageDeal: AestheticsPackageDealFilter
   services: AestheticsServicesFilter
 }
 
@@ -505,12 +759,43 @@ type PledgePledges {
   giving: String
 }
 
+type PledgeSignBox {
+  title: String
+  subtitle: String
+  submitLabel: String
+  incompleteAlert: String
+}
+
+type PledgeGiftLabels {
+  physicalTitle: String
+  spiritualTitle: String
+  givingTitle: String
+}
+
+type PledgeSuccessCard {
+  title: String
+  subtitle: String
+  badge: String
+  officialRegistryLabel: String
+  reviewLabel: String
+}
+
+type PledgeImpactCards {
+  title: String
+  description: String
+  dark: Boolean
+}
+
 type Pledge implements Node & Document {
   tagline: String
   title: String
   subtitle: String
   description: String
   pledges: PledgePledges
+  signBox: PledgeSignBox
+  giftLabels: PledgeGiftLabels
+  successCard: PledgeSuccessCard
+  impactCards: [PledgeImpactCards]
   registryUrl: String
   id: ID!
   _sys: SystemInfo!
@@ -523,12 +808,48 @@ input PledgePledgesFilter {
   giving: StringFilter
 }
 
+input PledgeSignBoxFilter {
+  title: StringFilter
+  subtitle: StringFilter
+  submitLabel: StringFilter
+  incompleteAlert: StringFilter
+}
+
+input PledgeGiftLabelsFilter {
+  physicalTitle: StringFilter
+  spiritualTitle: StringFilter
+  givingTitle: StringFilter
+}
+
+input PledgeSuccessCardFilter {
+  title: StringFilter
+  subtitle: StringFilter
+  badge: StringFilter
+  officialRegistryLabel: StringFilter
+  reviewLabel: StringFilter
+}
+
+input BooleanFilter {
+  eq: Boolean
+  exists: Boolean
+}
+
+input PledgeImpactCardsFilter {
+  title: StringFilter
+  description: StringFilter
+  dark: BooleanFilter
+}
+
 input PledgeFilter {
   tagline: StringFilter
   title: StringFilter
   subtitle: StringFilter
   description: StringFilter
   pledges: PledgePledgesFilter
+  signBox: PledgeSignBoxFilter
+  giftLabels: PledgeGiftLabelsFilter
+  successCard: PledgeSuccessCardFilter
+  impactCards: PledgeImpactCardsFilter
   registryUrl: StringFilter
 }
 
@@ -637,11 +958,6 @@ input AppointmentFormFilter {
   wednesdayOnlyError: StringFilter
 }
 
-input BooleanFilter {
-  eq: Boolean
-  exists: Boolean
-}
-
 input AppointmentServicesFilter {
   name: StringFilter
   wednesdayOnly: BooleanFilter
@@ -690,9 +1006,15 @@ type PagesBlocksGrid {
 
 union PagesBlocks = PagesBlocksHero | PagesBlocksContentSection | PagesBlocksGrid
 
+type PagesCta {
+  title: String
+  description: String
+}
+
 type Pages implements Node & Document {
   title: String!
   blocks: [PagesBlocks]
+  cta: PagesCta
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -732,9 +1054,15 @@ input PagesBlocksFilter {
   grid: PagesBlocksGridFilter
 }
 
+input PagesCtaFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
 input PagesFilter {
   title: StringFilter
   blocks: PagesBlocksFilter
+  cta: PagesCtaFilter
 }
 
 type PagesConnectionEdges {
@@ -871,6 +1199,29 @@ input DoctorsExpertiseMutation {
   description: String
 }
 
+input DoctorsUiStatsMutation {
+  value: String
+  label: String
+}
+
+input DoctorsUiMutation {
+  consultationButtonLabel: String
+  consultationButtonUrl: String
+  heroBadgeLabel: String
+  heroBadgeText: String
+  journeyHeading: String
+  expertiseHeading: String
+  philosophyBadge: String
+  philosophyHeading: String
+  bridgingHeading: String
+  legacyHeading: String
+  visionHeading: String
+  visionQuote: String
+  ctaLabel: String
+  stats: [DoctorsUiStatsMutation]
+  philosophyPillars: [String]
+}
+
 input DoctorsMutation {
   name: String
   lastName: String
@@ -882,6 +1233,13 @@ input DoctorsMutation {
   excellence: [DoctorsExcellenceMutation]
   expertise: [DoctorsExpertiseMutation]
   philosophy: [String]
+  ui: DoctorsUiMutation
+}
+
+input ServicesHeaderMutation {
+  tagline: String
+  title: String
+  subtitle: String
 }
 
 input ServicesItemsMutation {
@@ -893,6 +1251,7 @@ input ServicesItemsMutation {
 }
 
 input ServicesMutation {
+  header: ServicesHeaderMutation
   items: [ServicesItemsMutation]
 }
 
@@ -908,12 +1267,54 @@ input ScreeningPathwayBMutation {
   features: [String]
 }
 
+input ScreeningQuizDefaultResultMutation {
+  title: String
+  description: String
+}
+
+input ScreeningQuizUsaResultMutation {
+  title: String
+  description: String
+}
+
+input ScreeningQuizAncientResultMutation {
+  title: String
+  description: String
+}
+
+input ScreeningQuizQuestionsMutation {
+  prompt: String
+  a: String
+  b: String
+  aLabel: String
+  bLabel: String
+}
+
+input ScreeningQuizMutation {
+  badge: String
+  title: String
+  resetLabel: String
+  incompleteText: String
+  recommendationLabel: String
+  ctaLabel: String
+  ctaPath: String
+  defaultResult: ScreeningQuizDefaultResultMutation
+  usaResult: ScreeningQuizUsaResultMutation
+  ancientResult: ScreeningQuizAncientResultMutation
+  questions: [ScreeningQuizQuestionsMutation]
+}
+
 input ScreeningMutation {
   tagline: String
   title: String
   subtitle: String
+  pathwayALabel: String
+  pathwayATag: String
+  pathwayBLabel: String
+  pathwayBTag: String
   pathwayA: ScreeningPathwayAMutation
   pathwayB: ScreeningPathwayBMutation
+  quiz: ScreeningQuizMutation
 }
 
 input PcpFeaturesMutation {
@@ -929,6 +1330,54 @@ input PcpMutation {
   features: [PcpFeaturesMutation]
 }
 
+input AestheticsAssessmentHighlightsMutation {
+  title: String
+  description: String
+}
+
+input AestheticsSynergyCardMutation {
+  title: String
+  description: String
+  scienceLabel: String
+  scienceTitle: String
+  natureLabel: String
+  natureTitle: String
+}
+
+input AestheticsScienceSectionItemsMutation {
+  title: String
+  description: String
+}
+
+input AestheticsScienceSectionMutation {
+  tagline: String
+  title: String
+  items: [AestheticsScienceSectionItemsMutation]
+}
+
+input AestheticsNatureSectionItemsMutation {
+  title: String
+  description: String
+}
+
+input AestheticsNatureSectionMutation {
+  tagline: String
+  title: String
+  items: [AestheticsNatureSectionItemsMutation]
+}
+
+input AestheticsPackageDealMutation {
+  badge: String
+  title: String
+  quote: String
+  bundleLabel: String
+  bundleDescription: String
+  primaryCtaLabel: String
+  primaryCtaPath: String
+  secondaryCtaLabel: String
+  secondaryCtaPath: String
+}
+
 input AestheticsServicesMutation {
   title: String
   description: String
@@ -939,6 +1388,12 @@ input AestheticsMutation {
   tagline: String
   title: String
   subtitle: String
+  assessmentLabel: String
+  assessmentHighlights: [AestheticsAssessmentHighlightsMutation]
+  synergyCard: AestheticsSynergyCardMutation
+  scienceSection: AestheticsScienceSectionMutation
+  natureSection: AestheticsNatureSectionMutation
+  packageDeal: AestheticsPackageDealMutation
   services: [AestheticsServicesMutation]
 }
 
@@ -948,12 +1403,43 @@ input PledgePledgesMutation {
   giving: String
 }
 
+input PledgeSignBoxMutation {
+  title: String
+  subtitle: String
+  submitLabel: String
+  incompleteAlert: String
+}
+
+input PledgeGiftLabelsMutation {
+  physicalTitle: String
+  spiritualTitle: String
+  givingTitle: String
+}
+
+input PledgeSuccessCardMutation {
+  title: String
+  subtitle: String
+  badge: String
+  officialRegistryLabel: String
+  reviewLabel: String
+}
+
+input PledgeImpactCardsMutation {
+  title: String
+  description: String
+  dark: Boolean
+}
+
 input PledgeMutation {
   tagline: String
   title: String
   subtitle: String
   description: String
   pledges: PledgePledgesMutation
+  signBox: PledgeSignBoxMutation
+  giftLabels: PledgeGiftLabelsMutation
+  successCard: PledgeSuccessCardMutation
+  impactCards: [PledgeImpactCardsMutation]
   registryUrl: String
 }
 
@@ -1030,9 +1516,15 @@ input PagesBlocksMutation {
   grid: PagesBlocksGridMutation
 }
 
+input PagesCtaMutation {
+  title: String
+  description: String
+}
+
 input PagesMutation {
   title: String
   blocks: [PagesBlocksMutation]
+  cta: PagesCtaMutation
 }
 
 schema {

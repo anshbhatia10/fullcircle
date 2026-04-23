@@ -67,10 +67,38 @@ fragment DoctorsParts on Doctors {
     description
   }
   philosophy
+  ui {
+    __typename
+    consultationButtonLabel
+    consultationButtonUrl
+    heroBadgeLabel
+    heroBadgeText
+    journeyHeading
+    expertiseHeading
+    philosophyBadge
+    philosophyHeading
+    bridgingHeading
+    legacyHeading
+    visionHeading
+    visionQuote
+    ctaLabel
+    stats {
+      __typename
+      value
+      label
+    }
+    philosophyPillars
+  }
 }
 
 fragment ServicesParts on Services {
   __typename
+  header {
+    __typename
+    tagline
+    title
+    subtitle
+  }
   items {
     __typename
     title
@@ -86,6 +114,10 @@ fragment ScreeningParts on Screening {
   tagline
   title
   subtitle
+  pathwayALabel
+  pathwayATag
+  pathwayBLabel
+  pathwayBTag
   pathwayA {
     __typename
     title
@@ -97,6 +129,39 @@ fragment ScreeningParts on Screening {
     title
     description
     features
+  }
+  quiz {
+    __typename
+    badge
+    title
+    resetLabel
+    incompleteText
+    recommendationLabel
+    ctaLabel
+    ctaPath
+    defaultResult {
+      __typename
+      title
+      description
+    }
+    usaResult {
+      __typename
+      title
+      description
+    }
+    ancientResult {
+      __typename
+      title
+      description
+    }
+    questions {
+      __typename
+      prompt
+      a
+      b
+      aLabel
+      bLabel
+    }
   }
 }
 
@@ -118,6 +183,53 @@ fragment AestheticsParts on Aesthetics {
   tagline
   title
   subtitle
+  assessmentLabel
+  assessmentHighlights {
+    __typename
+    title
+    description
+  }
+  synergyCard {
+    __typename
+    title
+    description
+    scienceLabel
+    scienceTitle
+    natureLabel
+    natureTitle
+  }
+  scienceSection {
+    __typename
+    tagline
+    title
+    items {
+      __typename
+      title
+      description
+    }
+  }
+  natureSection {
+    __typename
+    tagline
+    title
+    items {
+      __typename
+      title
+      description
+    }
+  }
+  packageDeal {
+    __typename
+    badge
+    title
+    quote
+    bundleLabel
+    bundleDescription
+    primaryCtaLabel
+    primaryCtaPath
+    secondaryCtaLabel
+    secondaryCtaPath
+  }
   services {
     __typename
     title
@@ -137,6 +249,33 @@ fragment PledgeParts on Pledge {
     physical
     spiritual
     giving
+  }
+  signBox {
+    __typename
+    title
+    subtitle
+    submitLabel
+    incompleteAlert
+  }
+  giftLabels {
+    __typename
+    physicalTitle
+    spiritualTitle
+    givingTitle
+  }
+  successCard {
+    __typename
+    title
+    subtitle
+    badge
+    officialRegistryLabel
+    reviewLabel
+  }
+  impactCards {
+    __typename
+    title
+    description
+    dark
   }
   registryUrl
 }
@@ -207,5 +346,10 @@ fragment PagesParts on Pages {
         icon
       }
     }
+  }
+  cta {
+    __typename
+    title
+    description
   }
 }

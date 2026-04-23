@@ -5,34 +5,7 @@ import { useTina, tinaField } from 'tinacms/dist/react';
 import screeningData from '../content/pages/screening-circle.json';
 
 type QuizAnswer = 'A' | 'B' | null;
-
-const questions: Array<{ prompt: string; a: string; b: string }> = [
-  {
-    prompt: 'When you feel "off," what is the first thing you want to know?',
-    a: 'My specific numbers (blood pressure, glucose, or kidney function).',
-    b: 'The root energy or emotional state causing the imbalance.',
-  },
-  {
-    prompt: 'Which phrase resonates most with your health philosophy?',
-    a: '"Show me the evidence and the data."',
-    b: '"Listen to the wisdom of the body and the elements."',
-  },
-  {
-    prompt: 'What is your primary goal for this visit?',
-    a: 'To manage a clinical condition or get a medical clearance.',
-    b: 'To understand my constitution (Dosha) and optimize my lifestyle.',
-  },
-  {
-    prompt: 'How do you view prevention?',
-    a: 'Early detection through lab tests and physical exams.',
-    b: 'Maintaining harmony in my aura and energy flow to stay vital.',
-  },
-  {
-    prompt: 'What kind of plan helps you most?',
-    a: 'A structured roadmap with measurable checkpoints.',
-    b: 'A holistic map that connects mind, body, and spirit.',
-  },
-];
+type QuizQuestion = { prompt: string; a: string; b: string; aLabel?: string; bLabel?: string };
 
 const ScreeningCircle: React.FC = () => {
   const { data } = useTina({
@@ -41,6 +14,10 @@ const ScreeningCircle: React.FC = () => {
         tagline
         title
         subtitle
+        pathwayALabel
+        pathwayATag
+        pathwayBLabel
+        pathwayBTag
         pathwayA {
           title
           description
@@ -51,15 +28,46 @@ const ScreeningCircle: React.FC = () => {
           description
           features
         }
+        quiz {
+          badge
+          title
+          resetLabel
+          incompleteText
+          recommendationLabel
+          ctaLabel
+          ctaPath
+          defaultResult {
+            title
+            description
+          }
+          usaResult {
+            title
+            description
+          }
+          ancientResult {
+            title
+            description
+          }
+          questions {
+            prompt
+            a
+            b
+            aLabel
+            bLabel
+          }
+        }
       }
     }`,
     variables: { relativePath: "screening-circle.json" },
     data: { screening: screeningData },
   });
 
-  const { tagline, title, subtitle, pathwayA, pathwayB } = data.screening;
-
+  const { tagline, title, subtitle, pathwayA, pathwayB, quiz, pathwayALabel, pathwayATag, pathwayBLabel, pathwayBTag } = data.screening;
+  const questions: QuizQuestion[] = quiz?.questions || [];
   const [answers, setAnswers] = useState<QuizAnswer[]>(() => questions.map(() => null));
+  React.useEffect(() => {
+    setAnswers(questions.map(() => null));
+  }, [questions.length]);
 
   const { aCount, bCount, resultType, recommendation } = useMemo(() => {
     const aCount = answers.filter((a) => a === 'A').length;
@@ -67,23 +75,23 @@ const ScreeningCircle: React.FC = () => {
 
     let resultType: 'USA' | 'ANCIENT' | 'MIXED' = 'MIXED';
     let recommendation = {
-      title: 'Bridge Both (The Full Circle Map)',
-      desc: 'Your preferences show a balanced interest in both clinical rigor and ancient wisdom. We recommend our signature Bridge protocol.',
+      title: quiz?.defaultResult?.title || 'Bridge Both (The Full Circle Map)',
+      desc: quiz?.defaultResult?.description || 'Your preferences show a balanced interest in both clinical rigor and ancient wisdom. We recommend our signature Bridge protocol.',
       icon: <Layers size={40} className="text-accent-orange" />
     };
 
     if (aCount >= 4) {
       resultType = 'USA';
       recommendation = {
-        title: 'The USA Protocol',
-        desc: 'You value data, evidence, and clinical metrics. We recommend starting with our high-standard Western diagnostic screening.',
+        title: quiz?.usaResult?.title || 'The USA Protocol',
+        desc: quiz?.usaResult?.description || 'You value data, evidence, and clinical metrics. We recommend starting with our high-standard Western diagnostic screening.',
         icon: <Stethoscope size={40} className="text-blue-500" />
       };
     } else if (bCount >= 4) {
       resultType = 'ANCIENT';
       recommendation = {
-        title: 'The Ancient Protocol',
-        desc: 'You are deeply aligned with energetic and holistic roots. We recommend starting with a Nadi Scan and Aura analysis.',
+        title: quiz?.ancientResult?.title || 'The Ancient Protocol',
+        desc: quiz?.ancientResult?.description || 'You are deeply aligned with energetic and holistic roots. We recommend starting with a Nadi Scan and Aura analysis.',
         icon: <Sparkles size={40} className="text-accent-orange" />
       };
     }
@@ -121,9 +129,9 @@ const ScreeningCircle: React.FC = () => {
                 <Stethoscope size={32} />
               </div>
               <div data-tina-field={tinaField(pathwayA)}>
-                <p className="text-[10px] uppercase tracking-widest font-black text-dark-brown/40 mb-1">Pathway A</p>
+                <p data-tina-field={tinaField(data.screening, 'pathwayALabel')} className="text-[10px] uppercase tracking-widest font-black text-dark-brown/40 mb-1">{pathwayALabel}</p>
                 <h2 data-tina-field={tinaField(pathwayA, 'title')} className="font-display text-4xl text-dark-brown">{pathwayA.title}</h2>
-                <p className="text-xs text-accent-orange font-black uppercase tracking-widest mt-1">Evidence-Based</p>
+                <p data-tina-field={tinaField(data.screening, 'pathwayATag')} className="text-xs text-accent-orange font-black uppercase tracking-widest mt-1">{pathwayATag}</p>
               </div>
             </div>
             <p data-tina-field={tinaField(pathwayA, 'description')} className="text-dark-brown/70 text-lg leading-relaxed mb-10">
@@ -144,9 +152,9 @@ const ScreeningCircle: React.FC = () => {
                 <Sparkles size={32} />
               </div>
               <div data-tina-field={tinaField(pathwayB)}>
-                <p className="text-[10px] uppercase tracking-widest font-black text-white/40 mb-1">Pathway B</p>
+                <p data-tina-field={tinaField(data.screening, 'pathwayBLabel')} className="text-[10px] uppercase tracking-widest font-black text-white/40 mb-1">{pathwayBLabel}</p>
                 <h2 data-tina-field={tinaField(pathwayB, 'title')} className="font-display text-4xl text-white">{pathwayB.title}</h2>
-                <p className="text-xs text-accent-orange font-black uppercase tracking-widest mt-1">Energetic-Based</p>
+                <p data-tina-field={tinaField(data.screening, 'pathwayBTag')} className="text-xs text-accent-orange font-black uppercase tracking-widest mt-1">{pathwayBTag}</p>
               </div>
             </div>
             <p data-tina-field={tinaField(pathwayB, 'description')} className="text-cream/70 text-lg leading-relaxed mb-10 italic font-serif">
@@ -164,13 +172,13 @@ const ScreeningCircle: React.FC = () => {
         <section className="bg-white rounded-[4rem] shadow-xl p-8 md:p-20 border border-dark-brown/5 relative overflow-hidden">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-10 mb-16 relative z-10">
             <div>
-              <span className="uppercase tracking-widest font-black text-xs text-accent-orange mb-4 block">Discovery Quiz</span>
-              <h2 className="font-display text-5xl md:text-6xl text-dark-brown leading-tight">Which Screening Circle <br /> Is Calling You?</h2>
+              <span data-tina-field={tinaField(quiz, 'badge')} className="uppercase tracking-widest font-black text-xs text-accent-orange mb-4 block">{quiz?.badge}</span>
+              <h2 data-tina-field={tinaField(quiz, 'title')} className="font-display text-5xl md:text-6xl text-dark-brown leading-tight">{quiz?.title}</h2>
             </div>
-            <button onClick={reset} className="px-8 py-3 rounded-full border border-dark-brown/10 text-[10px] font-black uppercase tracking-widest text-dark-brown/40 hover:text-accent-orange transition-all">Reset Quiz</button>
+            <button onClick={reset} className="px-8 py-3 rounded-full border border-dark-brown/10 text-[10px] font-black uppercase tracking-widest text-dark-brown/40 hover:text-accent-orange transition-all">{quiz?.resetLabel}</button>
           </div>
 
-          <div className="space-y-12 relative z-10 mb-20">
+          <div data-tina-field={tinaField(quiz, 'questions')} className="space-y-12 relative z-10 mb-20">
             {questions.map((q, index) => (
               <div key={index} className="border-b border-dark-brown/5 pb-12 last:border-0">
                 <p className="font-display text-3xl text-dark-brown mb-8"><span className="text-accent-orange mr-4 font-sans text-xl font-black">0{index + 1}</span> {q.prompt}</p>
@@ -182,7 +190,7 @@ const ScreeningCircle: React.FC = () => {
                       className={`text-left p-8 rounded-3xl border-2 transition-all duration-300 ${answers[index] === type ? 'border-accent-orange bg-accent-orange/5' : 'border-dark-brown/5 hover:bg-cream/20'}`}
                     >
                       <div className="flex justify-between items-center mb-4">
-                        <span className="text-[10px] font-black uppercase tracking-widest text-dark-brown/20">{type === 'A' ? 'Clinical' : 'Holistic'}</span>
+                        <span className="text-[10px] font-black uppercase tracking-widest text-dark-brown/20">{type === 'A' ? (q.aLabel || 'Clinical') : (q.bLabel || 'Holistic')}</span>
                         {answers[index] === type && <div className="w-3 h-3 rounded-full bg-accent-orange shadow-[0_0_10px_rgba(255,126,95,0.5)]" />}
                       </div>
                       <p className="text-lg text-dark-brown/70 leading-relaxed">{type === 'A' ? q.a : q.b}</p>
@@ -202,19 +210,19 @@ const ScreeningCircle: React.FC = () => {
                   {recommendation.icon}
                 </div>
                 <div className="flex-grow">
-                  <p className="text-[10px] uppercase tracking-widest font-black text-accent-orange mb-2">Your Recommendation</p>
+                  <p data-tina-field={tinaField(quiz, 'recommendationLabel')} className="text-[10px] uppercase tracking-widest font-black text-accent-orange mb-2">{quiz?.recommendationLabel}</p>
                   <h3 className="font-display text-4xl md:text-5xl mb-4 text-white uppercase tracking-tighter">{recommendation.title}</h3>
                   <p className="text-cream/70 text-lg font-serif italic max-w-2xl">{recommendation.desc}</p>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <Link to="/appointment" className="px-10 py-6 rounded-full bg-cream text-bronze-dark text-[10px] font-black uppercase tracking-[0.2em] hover:bg-accent-orange hover:text-white transition-all text-center shadow-xl transform hover:-translate-y-1">Start Screening</Link>
+                  <Link to={quiz?.ctaPath || "/appointment"} className="px-10 py-6 rounded-full bg-cream text-bronze-dark text-[10px] font-black uppercase tracking-[0.2em] hover:bg-accent-orange hover:text-white transition-all text-center shadow-xl transform hover:-translate-y-1">{quiz?.ctaLabel}</Link>
                 </div>
               </div>
             </div>
           )}
           {!allAnswered && (
             <div className="text-center py-10 border-2 border-dashed border-dark-brown/10 rounded-[3rem]">
-              <p className="text-dark-brown/40 uppercase tracking-[0.2em] font-black text-xs">Complete all 5 questions to reveal your health map pathway</p>
+              <p data-tina-field={tinaField(quiz, 'incompleteText')} className="text-dark-brown/40 uppercase tracking-[0.2em] font-black text-xs">{quiz?.incompleteText}</p>
             </div>
           )}
         </section>

@@ -2,7 +2,7 @@ import React from 'react';
 import { ShieldCheck, Heart, Sparkles, Activity, Clock, Calendar, MapPin, ExternalLink, Quote, Award, Globe, BookOpen } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import drImage from '../1456482892.jpg';
-import { useTina } from 'tinacms/dist/react';
+import { tinaField, useTina } from 'tinacms/dist/react';
 import drData from '../content/doctors/nk-sharma.json';
 
 const DrNKSharma: React.FC = () => {
@@ -21,13 +21,26 @@ const DrNKSharma: React.FC = () => {
           description
         }
         philosophy
+        ui {
+          consultationButtonLabel
+          consultationButtonUrl
+          bridgingHeading
+          legacyHeading
+          visionHeading
+          visionQuote
+          ctaLabel
+          stats {
+            value
+            label
+          }
+        }
       }
     }`,
     variables: { relativePath: "nk-sharma.json" },
     data: { doctors: drData },
   });
 
-  const { name, lastName, title, quote, tags, image, academicBio, excellence, philosophy } = data.doctors;
+  const { name, lastName, title, quote, tags, image, academicBio, excellence, philosophy, ui } = data.doctors;
 
   return (
     <div className="bg-[#FAF3F0] min-h-screen pt-32 pb-20 px-6 overflow-x-hidden">
@@ -38,12 +51,12 @@ const DrNKSharma: React.FC = () => {
           <div className="relative">
             <div className="absolute -top-10 -left-10 w-40 h-40 bg-[#E5989B]/10 rounded-full blur-3xl"></div>
             <div className="relative z-10">
-              <span className="text-[#8E5D52] uppercase tracking-widest font-black text-xs mb-4 block italic">{title}</span>
-              <h1 className="font-display text-6xl md:text-8xl text-[#4A314D] mb-8 leading-none">
+              <span data-tina-field={tinaField(data.doctors, 'title')} className="text-[#8E5D52] uppercase tracking-widest font-black text-xs mb-4 block italic">{title}</span>
+              <h1 data-tina-field={tinaField(data.doctors, 'name')} className="font-display text-6xl md:text-8xl text-[#4A314D] mb-8 leading-none">
                 {name} <br />
-                <span className="italic text-[#B5838D]">{lastName}</span>
+                <span data-tina-field={tinaField(data.doctors, 'lastName')} className="italic text-[#B5838D]">{lastName}</span>
               </h1>
-              <p className="text-xl text-[#4A314D]/80 font-serif italic leading-relaxed mb-8">
+              <p data-tina-field={tinaField(data.doctors, 'quote')} className="text-xl text-[#4A314D]/80 font-serif italic leading-relaxed mb-8">
                 "{quote}"
               </p>
               <div className="flex flex-wrap gap-4 mb-10">
@@ -54,13 +67,13 @@ const DrNKSharma: React.FC = () => {
                 ))}
               </div>
               <a 
-                href="https://wa.me/919910930108?text=I%20would%20like%20to%20book%20a%20consultation%20with%20Dr.%20NK%20Sharma" 
+                href={ui?.consultationButtonUrl} 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-4 bg-[#4A314D] text-white px-10 py-5 rounded-full font-bold uppercase tracking-[0.2em] text-xs hover:bg-[#8E5D52] transition-all shadow-xl transform hover:-translate-y-1"
               >
                 <ShieldCheck size={18} />
-                <span>Book Consultation</span>
+                <span data-tina-field={tinaField(ui, 'consultationButtonLabel')}>{ui?.consultationButtonLabel}</span>
               </a>
             </div>
           </div>
@@ -98,7 +111,7 @@ const DrNKSharma: React.FC = () => {
           </div>
           
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="font-display text-4xl md:text-6xl text-[#4A314D] mb-12">Bridging Spirituality <br />& Science</h2>
+            <h2 data-tina-field={tinaField(ui, 'bridgingHeading')} className="font-display text-4xl md:text-6xl text-[#4A314D] mb-12">{ui?.bridgingHeading}</h2>
             <div className="space-y-8 font-serif text-lg md:text-2xl text-[#4A314D]/70 leading-relaxed italic">
               {philosophy && philosophy.map((p: string, i: number) => (
                 <p key={i}>{p}</p>
@@ -110,19 +123,17 @@ const DrNKSharma: React.FC = () => {
         {/* RECOGNITION */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
-            <h2 className="font-display text-5xl text-[#4A314D]">A Global Legacy</h2>
+            <h2 data-tina-field={tinaField(ui, 'legacyHeading')} className="font-display text-5xl text-[#4A314D]">{ui?.legacyHeading}</h2>
             <p className="text-lg text-[#4A314D]/70 leading-relaxed">
               {academicBio}
             </p>
-            <div className="flex gap-8">
-              <div className="flex flex-col">
-                <span className="text-4xl font-display text-[#B5838D]">Millions</span>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-[#4A314D]/50">Lives Touched</span>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-4xl font-display text-[#B5838D]">Global</span>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-[#4A314D]/50">Presence</span>
-              </div>
+            <div data-tina-field={tinaField(ui, 'stats')} className="flex gap-8">
+              {ui?.stats?.map((stat: any, i: number) => (
+                <div key={i} className="flex flex-col">
+                  <span data-tina-field={tinaField(stat, 'value')} className="text-4xl font-display text-[#B5838D]">{stat.value}</span>
+                  <span data-tina-field={tinaField(stat, 'label')} className="text-[10px] font-bold uppercase tracking-widest text-[#4A314D]/50">{stat.label}</span>
+                </div>
+              ))}
             </div>
           </div>
           <div className="bg-white p-12 rounded-[3rem] border border-[#4A314D]/5 shadow-sm">
@@ -130,16 +141,16 @@ const DrNKSharma: React.FC = () => {
                <div className="w-12 h-12 rounded-full bg-[#E5989B]/10 flex items-center justify-center text-[#E5989B]">
                  <Sparkles size={24} />
                </div>
-               <h3 className="font-display text-2xl text-[#4A314D]">The Vision</h3>
+               <h3 data-tina-field={tinaField(ui, 'visionHeading')} className="font-display text-2xl text-[#4A314D]">{ui?.visionHeading}</h3>
              </div>
-             <p className="text-[#4A314D]/70 leading-relaxed mb-6 italic">
-               "Dr. Sharma is more than a teacher; he is a source of inspiration for those who seek to understand the universe through the lens of their own soul."
+             <p data-tina-field={tinaField(ui, 'visionQuote')} className="text-[#4A314D]/70 leading-relaxed mb-6 italic">
+               "{ui?.visionQuote}"
              </p>
              <Link 
                to="/appointment" 
                className="inline-flex items-center gap-2 font-black uppercase tracking-widest text-[10px] border-b-2 border-[#4A314D] pb-1 hover:text-[#B5838D] hover:border-[#B5838D] transition-all"
              >
-               Book with the team <ExternalLink size={12} />
+               <span data-tina-field={tinaField(ui, 'ctaLabel')}>{ui?.ctaLabel}</span> <ExternalLink size={12} />
              </Link>
           </div>
         </div>

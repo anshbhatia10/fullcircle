@@ -520,6 +520,31 @@ export type DoctorsExpertise = {
   description?: Maybe<Scalars['String']['output']>;
 };
 
+export type DoctorsUiStats = {
+  __typename?: 'DoctorsUiStats';
+  value?: Maybe<Scalars['String']['output']>;
+  label?: Maybe<Scalars['String']['output']>;
+};
+
+export type DoctorsUi = {
+  __typename?: 'DoctorsUi';
+  consultationButtonLabel?: Maybe<Scalars['String']['output']>;
+  consultationButtonUrl?: Maybe<Scalars['String']['output']>;
+  heroBadgeLabel?: Maybe<Scalars['String']['output']>;
+  heroBadgeText?: Maybe<Scalars['String']['output']>;
+  journeyHeading?: Maybe<Scalars['String']['output']>;
+  expertiseHeading?: Maybe<Scalars['String']['output']>;
+  philosophyBadge?: Maybe<Scalars['String']['output']>;
+  philosophyHeading?: Maybe<Scalars['String']['output']>;
+  bridgingHeading?: Maybe<Scalars['String']['output']>;
+  legacyHeading?: Maybe<Scalars['String']['output']>;
+  visionHeading?: Maybe<Scalars['String']['output']>;
+  visionQuote?: Maybe<Scalars['String']['output']>;
+  ctaLabel?: Maybe<Scalars['String']['output']>;
+  stats?: Maybe<Array<Maybe<DoctorsUiStats>>>;
+  philosophyPillars?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+};
+
 export type Doctors = Node & Document & {
   __typename?: 'Doctors';
   name?: Maybe<Scalars['String']['output']>;
@@ -532,6 +557,7 @@ export type Doctors = Node & Document & {
   excellence?: Maybe<Array<Maybe<DoctorsExcellence>>>;
   expertise?: Maybe<Array<Maybe<DoctorsExpertise>>>;
   philosophy?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  ui?: Maybe<DoctorsUi>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
@@ -547,6 +573,29 @@ export type DoctorsExpertiseFilter = {
   description?: InputMaybe<StringFilter>;
 };
 
+export type DoctorsUiStatsFilter = {
+  value?: InputMaybe<StringFilter>;
+  label?: InputMaybe<StringFilter>;
+};
+
+export type DoctorsUiFilter = {
+  consultationButtonLabel?: InputMaybe<StringFilter>;
+  consultationButtonUrl?: InputMaybe<StringFilter>;
+  heroBadgeLabel?: InputMaybe<StringFilter>;
+  heroBadgeText?: InputMaybe<StringFilter>;
+  journeyHeading?: InputMaybe<StringFilter>;
+  expertiseHeading?: InputMaybe<StringFilter>;
+  philosophyBadge?: InputMaybe<StringFilter>;
+  philosophyHeading?: InputMaybe<StringFilter>;
+  bridgingHeading?: InputMaybe<StringFilter>;
+  legacyHeading?: InputMaybe<StringFilter>;
+  visionHeading?: InputMaybe<StringFilter>;
+  visionQuote?: InputMaybe<StringFilter>;
+  ctaLabel?: InputMaybe<StringFilter>;
+  stats?: InputMaybe<DoctorsUiStatsFilter>;
+  philosophyPillars?: InputMaybe<StringFilter>;
+};
+
 export type DoctorsFilter = {
   name?: InputMaybe<StringFilter>;
   lastName?: InputMaybe<StringFilter>;
@@ -558,6 +607,7 @@ export type DoctorsFilter = {
   excellence?: InputMaybe<DoctorsExcellenceFilter>;
   expertise?: InputMaybe<DoctorsExpertiseFilter>;
   philosophy?: InputMaybe<StringFilter>;
+  ui?: InputMaybe<DoctorsUiFilter>;
 };
 
 export type DoctorsConnectionEdges = {
@@ -573,6 +623,13 @@ export type DoctorsConnection = Connection & {
   edges?: Maybe<Array<Maybe<DoctorsConnectionEdges>>>;
 };
 
+export type ServicesHeader = {
+  __typename?: 'ServicesHeader';
+  tagline?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  subtitle?: Maybe<Scalars['String']['output']>;
+};
+
 export type ServicesItems = {
   __typename?: 'ServicesItems';
   title?: Maybe<Scalars['String']['output']>;
@@ -584,10 +641,17 @@ export type ServicesItems = {
 
 export type Services = Node & Document & {
   __typename?: 'Services';
+  header?: Maybe<ServicesHeader>;
   items?: Maybe<Array<Maybe<ServicesItems>>>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
+};
+
+export type ServicesHeaderFilter = {
+  tagline?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
 };
 
 export type ServicesItemsFilter = {
@@ -599,6 +663,7 @@ export type ServicesItemsFilter = {
 };
 
 export type ServicesFilter = {
+  header?: InputMaybe<ServicesHeaderFilter>;
   items?: InputMaybe<ServicesItemsFilter>;
 };
 
@@ -629,13 +694,60 @@ export type ScreeningPathwayB = {
   features?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
 };
 
+export type ScreeningQuizDefaultResult = {
+  __typename?: 'ScreeningQuizDefaultResult';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+};
+
+export type ScreeningQuizUsaResult = {
+  __typename?: 'ScreeningQuizUsaResult';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+};
+
+export type ScreeningQuizAncientResult = {
+  __typename?: 'ScreeningQuizAncientResult';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+};
+
+export type ScreeningQuizQuestions = {
+  __typename?: 'ScreeningQuizQuestions';
+  prompt?: Maybe<Scalars['String']['output']>;
+  a?: Maybe<Scalars['String']['output']>;
+  b?: Maybe<Scalars['String']['output']>;
+  aLabel?: Maybe<Scalars['String']['output']>;
+  bLabel?: Maybe<Scalars['String']['output']>;
+};
+
+export type ScreeningQuiz = {
+  __typename?: 'ScreeningQuiz';
+  badge?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  resetLabel?: Maybe<Scalars['String']['output']>;
+  incompleteText?: Maybe<Scalars['String']['output']>;
+  recommendationLabel?: Maybe<Scalars['String']['output']>;
+  ctaLabel?: Maybe<Scalars['String']['output']>;
+  ctaPath?: Maybe<Scalars['String']['output']>;
+  defaultResult?: Maybe<ScreeningQuizDefaultResult>;
+  usaResult?: Maybe<ScreeningQuizUsaResult>;
+  ancientResult?: Maybe<ScreeningQuizAncientResult>;
+  questions?: Maybe<Array<Maybe<ScreeningQuizQuestions>>>;
+};
+
 export type Screening = Node & Document & {
   __typename?: 'Screening';
   tagline?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
   subtitle?: Maybe<Scalars['String']['output']>;
+  pathwayALabel?: Maybe<Scalars['String']['output']>;
+  pathwayATag?: Maybe<Scalars['String']['output']>;
+  pathwayBLabel?: Maybe<Scalars['String']['output']>;
+  pathwayBTag?: Maybe<Scalars['String']['output']>;
   pathwayA?: Maybe<ScreeningPathwayA>;
   pathwayB?: Maybe<ScreeningPathwayB>;
+  quiz?: Maybe<ScreeningQuiz>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
@@ -653,12 +765,54 @@ export type ScreeningPathwayBFilter = {
   features?: InputMaybe<StringFilter>;
 };
 
+export type ScreeningQuizDefaultResultFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type ScreeningQuizUsaResultFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type ScreeningQuizAncientResultFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type ScreeningQuizQuestionsFilter = {
+  prompt?: InputMaybe<StringFilter>;
+  a?: InputMaybe<StringFilter>;
+  b?: InputMaybe<StringFilter>;
+  aLabel?: InputMaybe<StringFilter>;
+  bLabel?: InputMaybe<StringFilter>;
+};
+
+export type ScreeningQuizFilter = {
+  badge?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  resetLabel?: InputMaybe<StringFilter>;
+  incompleteText?: InputMaybe<StringFilter>;
+  recommendationLabel?: InputMaybe<StringFilter>;
+  ctaLabel?: InputMaybe<StringFilter>;
+  ctaPath?: InputMaybe<StringFilter>;
+  defaultResult?: InputMaybe<ScreeningQuizDefaultResultFilter>;
+  usaResult?: InputMaybe<ScreeningQuizUsaResultFilter>;
+  ancientResult?: InputMaybe<ScreeningQuizAncientResultFilter>;
+  questions?: InputMaybe<ScreeningQuizQuestionsFilter>;
+};
+
 export type ScreeningFilter = {
   tagline?: InputMaybe<StringFilter>;
   title?: InputMaybe<StringFilter>;
   subtitle?: InputMaybe<StringFilter>;
+  pathwayALabel?: InputMaybe<StringFilter>;
+  pathwayATag?: InputMaybe<StringFilter>;
+  pathwayBLabel?: InputMaybe<StringFilter>;
+  pathwayBTag?: InputMaybe<StringFilter>;
   pathwayA?: InputMaybe<ScreeningPathwayAFilter>;
   pathwayB?: InputMaybe<ScreeningPathwayBFilter>;
+  quiz?: InputMaybe<ScreeningQuizFilter>;
 };
 
 export type ScreeningConnectionEdges = {
@@ -718,6 +872,61 @@ export type PcpConnection = Connection & {
   edges?: Maybe<Array<Maybe<PcpConnectionEdges>>>;
 };
 
+export type AestheticsAssessmentHighlights = {
+  __typename?: 'AestheticsAssessmentHighlights';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+};
+
+export type AestheticsSynergyCard = {
+  __typename?: 'AestheticsSynergyCard';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  scienceLabel?: Maybe<Scalars['String']['output']>;
+  scienceTitle?: Maybe<Scalars['String']['output']>;
+  natureLabel?: Maybe<Scalars['String']['output']>;
+  natureTitle?: Maybe<Scalars['String']['output']>;
+};
+
+export type AestheticsScienceSectionItems = {
+  __typename?: 'AestheticsScienceSectionItems';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+};
+
+export type AestheticsScienceSection = {
+  __typename?: 'AestheticsScienceSection';
+  tagline?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  items?: Maybe<Array<Maybe<AestheticsScienceSectionItems>>>;
+};
+
+export type AestheticsNatureSectionItems = {
+  __typename?: 'AestheticsNatureSectionItems';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+};
+
+export type AestheticsNatureSection = {
+  __typename?: 'AestheticsNatureSection';
+  tagline?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  items?: Maybe<Array<Maybe<AestheticsNatureSectionItems>>>;
+};
+
+export type AestheticsPackageDeal = {
+  __typename?: 'AestheticsPackageDeal';
+  badge?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  quote?: Maybe<Scalars['String']['output']>;
+  bundleLabel?: Maybe<Scalars['String']['output']>;
+  bundleDescription?: Maybe<Scalars['String']['output']>;
+  primaryCtaLabel?: Maybe<Scalars['String']['output']>;
+  primaryCtaPath?: Maybe<Scalars['String']['output']>;
+  secondaryCtaLabel?: Maybe<Scalars['String']['output']>;
+  secondaryCtaPath?: Maybe<Scalars['String']['output']>;
+};
+
 export type AestheticsServices = {
   __typename?: 'AestheticsServices';
   title?: Maybe<Scalars['String']['output']>;
@@ -730,10 +939,64 @@ export type Aesthetics = Node & Document & {
   tagline?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
   subtitle?: Maybe<Scalars['String']['output']>;
+  assessmentLabel?: Maybe<Scalars['String']['output']>;
+  assessmentHighlights?: Maybe<Array<Maybe<AestheticsAssessmentHighlights>>>;
+  synergyCard?: Maybe<AestheticsSynergyCard>;
+  scienceSection?: Maybe<AestheticsScienceSection>;
+  natureSection?: Maybe<AestheticsNatureSection>;
+  packageDeal?: Maybe<AestheticsPackageDeal>;
   services?: Maybe<Array<Maybe<AestheticsServices>>>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
+};
+
+export type AestheticsAssessmentHighlightsFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type AestheticsSynergyCardFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  scienceLabel?: InputMaybe<StringFilter>;
+  scienceTitle?: InputMaybe<StringFilter>;
+  natureLabel?: InputMaybe<StringFilter>;
+  natureTitle?: InputMaybe<StringFilter>;
+};
+
+export type AestheticsScienceSectionItemsFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type AestheticsScienceSectionFilter = {
+  tagline?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  items?: InputMaybe<AestheticsScienceSectionItemsFilter>;
+};
+
+export type AestheticsNatureSectionItemsFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type AestheticsNatureSectionFilter = {
+  tagline?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  items?: InputMaybe<AestheticsNatureSectionItemsFilter>;
+};
+
+export type AestheticsPackageDealFilter = {
+  badge?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  quote?: InputMaybe<StringFilter>;
+  bundleLabel?: InputMaybe<StringFilter>;
+  bundleDescription?: InputMaybe<StringFilter>;
+  primaryCtaLabel?: InputMaybe<StringFilter>;
+  primaryCtaPath?: InputMaybe<StringFilter>;
+  secondaryCtaLabel?: InputMaybe<StringFilter>;
+  secondaryCtaPath?: InputMaybe<StringFilter>;
 };
 
 export type AestheticsServicesFilter = {
@@ -746,6 +1009,12 @@ export type AestheticsFilter = {
   tagline?: InputMaybe<StringFilter>;
   title?: InputMaybe<StringFilter>;
   subtitle?: InputMaybe<StringFilter>;
+  assessmentLabel?: InputMaybe<StringFilter>;
+  assessmentHighlights?: InputMaybe<AestheticsAssessmentHighlightsFilter>;
+  synergyCard?: InputMaybe<AestheticsSynergyCardFilter>;
+  scienceSection?: InputMaybe<AestheticsScienceSectionFilter>;
+  natureSection?: InputMaybe<AestheticsNatureSectionFilter>;
+  packageDeal?: InputMaybe<AestheticsPackageDealFilter>;
   services?: InputMaybe<AestheticsServicesFilter>;
 };
 
@@ -769,6 +1038,37 @@ export type PledgePledges = {
   giving?: Maybe<Scalars['String']['output']>;
 };
 
+export type PledgeSignBox = {
+  __typename?: 'PledgeSignBox';
+  title?: Maybe<Scalars['String']['output']>;
+  subtitle?: Maybe<Scalars['String']['output']>;
+  submitLabel?: Maybe<Scalars['String']['output']>;
+  incompleteAlert?: Maybe<Scalars['String']['output']>;
+};
+
+export type PledgeGiftLabels = {
+  __typename?: 'PledgeGiftLabels';
+  physicalTitle?: Maybe<Scalars['String']['output']>;
+  spiritualTitle?: Maybe<Scalars['String']['output']>;
+  givingTitle?: Maybe<Scalars['String']['output']>;
+};
+
+export type PledgeSuccessCard = {
+  __typename?: 'PledgeSuccessCard';
+  title?: Maybe<Scalars['String']['output']>;
+  subtitle?: Maybe<Scalars['String']['output']>;
+  badge?: Maybe<Scalars['String']['output']>;
+  officialRegistryLabel?: Maybe<Scalars['String']['output']>;
+  reviewLabel?: Maybe<Scalars['String']['output']>;
+};
+
+export type PledgeImpactCards = {
+  __typename?: 'PledgeImpactCards';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  dark?: Maybe<Scalars['Boolean']['output']>;
+};
+
 export type Pledge = Node & Document & {
   __typename?: 'Pledge';
   tagline?: Maybe<Scalars['String']['output']>;
@@ -776,6 +1076,10 @@ export type Pledge = Node & Document & {
   subtitle?: Maybe<Scalars['String']['output']>;
   description?: Maybe<Scalars['String']['output']>;
   pledges?: Maybe<PledgePledges>;
+  signBox?: Maybe<PledgeSignBox>;
+  giftLabels?: Maybe<PledgeGiftLabels>;
+  successCard?: Maybe<PledgeSuccessCard>;
+  impactCards?: Maybe<Array<Maybe<PledgeImpactCards>>>;
   registryUrl?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
@@ -788,12 +1092,48 @@ export type PledgePledgesFilter = {
   giving?: InputMaybe<StringFilter>;
 };
 
+export type PledgeSignBoxFilter = {
+  title?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+  submitLabel?: InputMaybe<StringFilter>;
+  incompleteAlert?: InputMaybe<StringFilter>;
+};
+
+export type PledgeGiftLabelsFilter = {
+  physicalTitle?: InputMaybe<StringFilter>;
+  spiritualTitle?: InputMaybe<StringFilter>;
+  givingTitle?: InputMaybe<StringFilter>;
+};
+
+export type PledgeSuccessCardFilter = {
+  title?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+  badge?: InputMaybe<StringFilter>;
+  officialRegistryLabel?: InputMaybe<StringFilter>;
+  reviewLabel?: InputMaybe<StringFilter>;
+};
+
+export type BooleanFilter = {
+  eq?: InputMaybe<Scalars['Boolean']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type PledgeImpactCardsFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  dark?: InputMaybe<BooleanFilter>;
+};
+
 export type PledgeFilter = {
   tagline?: InputMaybe<StringFilter>;
   title?: InputMaybe<StringFilter>;
   subtitle?: InputMaybe<StringFilter>;
   description?: InputMaybe<StringFilter>;
   pledges?: InputMaybe<PledgePledgesFilter>;
+  signBox?: InputMaybe<PledgeSignBoxFilter>;
+  giftLabels?: InputMaybe<PledgeGiftLabelsFilter>;
+  successCard?: InputMaybe<PledgeSuccessCardFilter>;
+  impactCards?: InputMaybe<PledgeImpactCardsFilter>;
   registryUrl?: InputMaybe<StringFilter>;
 };
 
@@ -912,11 +1252,6 @@ export type AppointmentFormFilter = {
   wednesdayOnlyError?: InputMaybe<StringFilter>;
 };
 
-export type BooleanFilter = {
-  eq?: InputMaybe<Scalars['Boolean']['input']>;
-  exists?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
 export type AppointmentServicesFilter = {
   name?: InputMaybe<StringFilter>;
   wednesdayOnly?: InputMaybe<BooleanFilter>;
@@ -971,10 +1306,17 @@ export type PagesBlocksGrid = {
 
 export type PagesBlocks = PagesBlocksHero | PagesBlocksContentSection | PagesBlocksGrid;
 
+export type PagesCta = {
+  __typename?: 'PagesCta';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+};
+
 export type Pages = Node & Document & {
   __typename?: 'Pages';
   title: Scalars['String']['output'];
   blocks?: Maybe<Array<Maybe<PagesBlocks>>>;
+  cta?: Maybe<PagesCta>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
@@ -1014,9 +1356,15 @@ export type PagesBlocksFilter = {
   grid?: InputMaybe<PagesBlocksGridFilter>;
 };
 
+export type PagesCtaFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
 export type PagesFilter = {
   title?: InputMaybe<StringFilter>;
   blocks?: InputMaybe<PagesBlocksFilter>;
+  cta?: InputMaybe<PagesCtaFilter>;
 };
 
 export type PagesConnectionEdges = {
@@ -1321,6 +1669,29 @@ export type DoctorsExpertiseMutation = {
   description?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type DoctorsUiStatsMutation = {
+  value?: InputMaybe<Scalars['String']['input']>;
+  label?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type DoctorsUiMutation = {
+  consultationButtonLabel?: InputMaybe<Scalars['String']['input']>;
+  consultationButtonUrl?: InputMaybe<Scalars['String']['input']>;
+  heroBadgeLabel?: InputMaybe<Scalars['String']['input']>;
+  heroBadgeText?: InputMaybe<Scalars['String']['input']>;
+  journeyHeading?: InputMaybe<Scalars['String']['input']>;
+  expertiseHeading?: InputMaybe<Scalars['String']['input']>;
+  philosophyBadge?: InputMaybe<Scalars['String']['input']>;
+  philosophyHeading?: InputMaybe<Scalars['String']['input']>;
+  bridgingHeading?: InputMaybe<Scalars['String']['input']>;
+  legacyHeading?: InputMaybe<Scalars['String']['input']>;
+  visionHeading?: InputMaybe<Scalars['String']['input']>;
+  visionQuote?: InputMaybe<Scalars['String']['input']>;
+  ctaLabel?: InputMaybe<Scalars['String']['input']>;
+  stats?: InputMaybe<Array<InputMaybe<DoctorsUiStatsMutation>>>;
+  philosophyPillars?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
 export type DoctorsMutation = {
   name?: InputMaybe<Scalars['String']['input']>;
   lastName?: InputMaybe<Scalars['String']['input']>;
@@ -1332,6 +1703,13 @@ export type DoctorsMutation = {
   excellence?: InputMaybe<Array<InputMaybe<DoctorsExcellenceMutation>>>;
   expertise?: InputMaybe<Array<InputMaybe<DoctorsExpertiseMutation>>>;
   philosophy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  ui?: InputMaybe<DoctorsUiMutation>;
+};
+
+export type ServicesHeaderMutation = {
+  tagline?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ServicesItemsMutation = {
@@ -1343,6 +1721,7 @@ export type ServicesItemsMutation = {
 };
 
 export type ServicesMutation = {
+  header?: InputMaybe<ServicesHeaderMutation>;
   items?: InputMaybe<Array<InputMaybe<ServicesItemsMutation>>>;
 };
 
@@ -1358,12 +1737,54 @@ export type ScreeningPathwayBMutation = {
   features?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
+export type ScreeningQuizDefaultResultMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ScreeningQuizUsaResultMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ScreeningQuizAncientResultMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ScreeningQuizQuestionsMutation = {
+  prompt?: InputMaybe<Scalars['String']['input']>;
+  a?: InputMaybe<Scalars['String']['input']>;
+  b?: InputMaybe<Scalars['String']['input']>;
+  aLabel?: InputMaybe<Scalars['String']['input']>;
+  bLabel?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ScreeningQuizMutation = {
+  badge?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  resetLabel?: InputMaybe<Scalars['String']['input']>;
+  incompleteText?: InputMaybe<Scalars['String']['input']>;
+  recommendationLabel?: InputMaybe<Scalars['String']['input']>;
+  ctaLabel?: InputMaybe<Scalars['String']['input']>;
+  ctaPath?: InputMaybe<Scalars['String']['input']>;
+  defaultResult?: InputMaybe<ScreeningQuizDefaultResultMutation>;
+  usaResult?: InputMaybe<ScreeningQuizUsaResultMutation>;
+  ancientResult?: InputMaybe<ScreeningQuizAncientResultMutation>;
+  questions?: InputMaybe<Array<InputMaybe<ScreeningQuizQuestionsMutation>>>;
+};
+
 export type ScreeningMutation = {
   tagline?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
   subtitle?: InputMaybe<Scalars['String']['input']>;
+  pathwayALabel?: InputMaybe<Scalars['String']['input']>;
+  pathwayATag?: InputMaybe<Scalars['String']['input']>;
+  pathwayBLabel?: InputMaybe<Scalars['String']['input']>;
+  pathwayBTag?: InputMaybe<Scalars['String']['input']>;
   pathwayA?: InputMaybe<ScreeningPathwayAMutation>;
   pathwayB?: InputMaybe<ScreeningPathwayBMutation>;
+  quiz?: InputMaybe<ScreeningQuizMutation>;
 };
 
 export type PcpFeaturesMutation = {
@@ -1379,6 +1800,54 @@ export type PcpMutation = {
   features?: InputMaybe<Array<InputMaybe<PcpFeaturesMutation>>>;
 };
 
+export type AestheticsAssessmentHighlightsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AestheticsSynergyCardMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  scienceLabel?: InputMaybe<Scalars['String']['input']>;
+  scienceTitle?: InputMaybe<Scalars['String']['input']>;
+  natureLabel?: InputMaybe<Scalars['String']['input']>;
+  natureTitle?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AestheticsScienceSectionItemsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AestheticsScienceSectionMutation = {
+  tagline?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  items?: InputMaybe<Array<InputMaybe<AestheticsScienceSectionItemsMutation>>>;
+};
+
+export type AestheticsNatureSectionItemsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AestheticsNatureSectionMutation = {
+  tagline?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  items?: InputMaybe<Array<InputMaybe<AestheticsNatureSectionItemsMutation>>>;
+};
+
+export type AestheticsPackageDealMutation = {
+  badge?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  quote?: InputMaybe<Scalars['String']['input']>;
+  bundleLabel?: InputMaybe<Scalars['String']['input']>;
+  bundleDescription?: InputMaybe<Scalars['String']['input']>;
+  primaryCtaLabel?: InputMaybe<Scalars['String']['input']>;
+  primaryCtaPath?: InputMaybe<Scalars['String']['input']>;
+  secondaryCtaLabel?: InputMaybe<Scalars['String']['input']>;
+  secondaryCtaPath?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type AestheticsServicesMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
@@ -1389,6 +1858,12 @@ export type AestheticsMutation = {
   tagline?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
   subtitle?: InputMaybe<Scalars['String']['input']>;
+  assessmentLabel?: InputMaybe<Scalars['String']['input']>;
+  assessmentHighlights?: InputMaybe<Array<InputMaybe<AestheticsAssessmentHighlightsMutation>>>;
+  synergyCard?: InputMaybe<AestheticsSynergyCardMutation>;
+  scienceSection?: InputMaybe<AestheticsScienceSectionMutation>;
+  natureSection?: InputMaybe<AestheticsNatureSectionMutation>;
+  packageDeal?: InputMaybe<AestheticsPackageDealMutation>;
   services?: InputMaybe<Array<InputMaybe<AestheticsServicesMutation>>>;
 };
 
@@ -1398,12 +1873,43 @@ export type PledgePledgesMutation = {
   giving?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type PledgeSignBoxMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+  submitLabel?: InputMaybe<Scalars['String']['input']>;
+  incompleteAlert?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PledgeGiftLabelsMutation = {
+  physicalTitle?: InputMaybe<Scalars['String']['input']>;
+  spiritualTitle?: InputMaybe<Scalars['String']['input']>;
+  givingTitle?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PledgeSuccessCardMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+  badge?: InputMaybe<Scalars['String']['input']>;
+  officialRegistryLabel?: InputMaybe<Scalars['String']['input']>;
+  reviewLabel?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PledgeImpactCardsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  dark?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 export type PledgeMutation = {
   tagline?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
   subtitle?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   pledges?: InputMaybe<PledgePledgesMutation>;
+  signBox?: InputMaybe<PledgeSignBoxMutation>;
+  giftLabels?: InputMaybe<PledgeGiftLabelsMutation>;
+  successCard?: InputMaybe<PledgeSuccessCardMutation>;
+  impactCards?: InputMaybe<Array<InputMaybe<PledgeImpactCardsMutation>>>;
   registryUrl?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -1480,32 +1986,38 @@ export type PagesBlocksMutation = {
   grid?: InputMaybe<PagesBlocksGridMutation>;
 };
 
+export type PagesCtaMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type PagesMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   blocks?: InputMaybe<Array<InputMaybe<PagesBlocksMutation>>>;
+  cta?: InputMaybe<PagesCtaMutation>;
 };
 
 export type GlobalPartsFragment = { __typename: 'Global', navbar?: { __typename: 'GlobalNavbar', logoText?: string | null, navLinks?: Array<{ __typename: 'GlobalNavbarNavLinks', label?: string | null, path?: string | null } | null> | null } | null, footer?: { __typename: 'GlobalFooter', quote?: string | null, description?: string | null, instagram?: string | null, facebook?: string | null } | null };
 
 export type HomePartsFragment = { __typename: 'Home', hero?: { __typename: 'HomeHero', titlePart1?: string | null, titlePart2?: string | null, subtitle?: string | null, video?: string | null } | null, founder?: { __typename: 'HomeFounder', quote?: string | null, image?: string | null, bio?: string | null } | null, philosophy?: { __typename: 'HomePhilosophy', hinduismText?: string | null, ayurvedaText?: string | null, rootSoulText?: string | null, branchSymptomText?: string | null } | null, individualCare?: Array<{ __typename: 'HomeIndividualCare', title?: string | null, description?: string | null } | null> | null };
 
-export type DoctorsPartsFragment = { __typename: 'Doctors', name?: string | null, lastName?: string | null, title?: string | null, quote?: string | null, tags?: Array<string | null> | null, image?: string | null, academicBio?: string | null, philosophy?: Array<string | null> | null, excellence?: Array<{ __typename: 'DoctorsExcellence', title?: string | null, description?: string | null } | null> | null, expertise?: Array<{ __typename: 'DoctorsExpertise', title?: string | null, description?: string | null } | null> | null };
+export type DoctorsPartsFragment = { __typename: 'Doctors', name?: string | null, lastName?: string | null, title?: string | null, quote?: string | null, tags?: Array<string | null> | null, image?: string | null, academicBio?: string | null, philosophy?: Array<string | null> | null, excellence?: Array<{ __typename: 'DoctorsExcellence', title?: string | null, description?: string | null } | null> | null, expertise?: Array<{ __typename: 'DoctorsExpertise', title?: string | null, description?: string | null } | null> | null, ui?: { __typename: 'DoctorsUi', consultationButtonLabel?: string | null, consultationButtonUrl?: string | null, heroBadgeLabel?: string | null, heroBadgeText?: string | null, journeyHeading?: string | null, expertiseHeading?: string | null, philosophyBadge?: string | null, philosophyHeading?: string | null, bridgingHeading?: string | null, legacyHeading?: string | null, visionHeading?: string | null, visionQuote?: string | null, ctaLabel?: string | null, philosophyPillars?: Array<string | null> | null, stats?: Array<{ __typename: 'DoctorsUiStats', value?: string | null, label?: string | null } | null> | null } | null };
 
-export type ServicesPartsFragment = { __typename: 'Services', items?: Array<{ __typename: 'ServicesItems', title?: string | null, category?: string | null, description?: string | null, features?: Array<string | null> | null, image?: string | null } | null> | null };
+export type ServicesPartsFragment = { __typename: 'Services', header?: { __typename: 'ServicesHeader', tagline?: string | null, title?: string | null, subtitle?: string | null } | null, items?: Array<{ __typename: 'ServicesItems', title?: string | null, category?: string | null, description?: string | null, features?: Array<string | null> | null, image?: string | null } | null> | null };
 
-export type ScreeningPartsFragment = { __typename: 'Screening', tagline?: string | null, title?: string | null, subtitle?: string | null, pathwayA?: { __typename: 'ScreeningPathwayA', title?: string | null, description?: string | null, features?: Array<string | null> | null } | null, pathwayB?: { __typename: 'ScreeningPathwayB', title?: string | null, description?: string | null, features?: Array<string | null> | null } | null };
+export type ScreeningPartsFragment = { __typename: 'Screening', tagline?: string | null, title?: string | null, subtitle?: string | null, pathwayALabel?: string | null, pathwayATag?: string | null, pathwayBLabel?: string | null, pathwayBTag?: string | null, pathwayA?: { __typename: 'ScreeningPathwayA', title?: string | null, description?: string | null, features?: Array<string | null> | null } | null, pathwayB?: { __typename: 'ScreeningPathwayB', title?: string | null, description?: string | null, features?: Array<string | null> | null } | null, quiz?: { __typename: 'ScreeningQuiz', badge?: string | null, title?: string | null, resetLabel?: string | null, incompleteText?: string | null, recommendationLabel?: string | null, ctaLabel?: string | null, ctaPath?: string | null, defaultResult?: { __typename: 'ScreeningQuizDefaultResult', title?: string | null, description?: string | null } | null, usaResult?: { __typename: 'ScreeningQuizUsaResult', title?: string | null, description?: string | null } | null, ancientResult?: { __typename: 'ScreeningQuizAncientResult', title?: string | null, description?: string | null } | null, questions?: Array<{ __typename: 'ScreeningQuizQuestions', prompt?: string | null, a?: string | null, b?: string | null, aLabel?: string | null, bLabel?: string | null } | null> | null } | null };
 
 export type PcpPartsFragment = { __typename: 'Pcp', tagline?: string | null, title?: string | null, subtitle?: string | null, features?: Array<{ __typename: 'PcpFeatures', title?: string | null, description?: string | null, icon?: string | null } | null> | null };
 
-export type AestheticsPartsFragment = { __typename: 'Aesthetics', tagline?: string | null, title?: string | null, subtitle?: string | null, services?: Array<{ __typename: 'AestheticsServices', title?: string | null, description?: string | null, image?: string | null } | null> | null };
+export type AestheticsPartsFragment = { __typename: 'Aesthetics', tagline?: string | null, title?: string | null, subtitle?: string | null, assessmentLabel?: string | null, assessmentHighlights?: Array<{ __typename: 'AestheticsAssessmentHighlights', title?: string | null, description?: string | null } | null> | null, synergyCard?: { __typename: 'AestheticsSynergyCard', title?: string | null, description?: string | null, scienceLabel?: string | null, scienceTitle?: string | null, natureLabel?: string | null, natureTitle?: string | null } | null, scienceSection?: { __typename: 'AestheticsScienceSection', tagline?: string | null, title?: string | null, items?: Array<{ __typename: 'AestheticsScienceSectionItems', title?: string | null, description?: string | null } | null> | null } | null, natureSection?: { __typename: 'AestheticsNatureSection', tagline?: string | null, title?: string | null, items?: Array<{ __typename: 'AestheticsNatureSectionItems', title?: string | null, description?: string | null } | null> | null } | null, packageDeal?: { __typename: 'AestheticsPackageDeal', badge?: string | null, title?: string | null, quote?: string | null, bundleLabel?: string | null, bundleDescription?: string | null, primaryCtaLabel?: string | null, primaryCtaPath?: string | null, secondaryCtaLabel?: string | null, secondaryCtaPath?: string | null } | null, services?: Array<{ __typename: 'AestheticsServices', title?: string | null, description?: string | null, image?: string | null } | null> | null };
 
-export type PledgePartsFragment = { __typename: 'Pledge', tagline?: string | null, title?: string | null, subtitle?: string | null, description?: string | null, registryUrl?: string | null, pledges?: { __typename: 'PledgePledges', physical?: string | null, spiritual?: string | null, giving?: string | null } | null };
+export type PledgePartsFragment = { __typename: 'Pledge', tagline?: string | null, title?: string | null, subtitle?: string | null, description?: string | null, registryUrl?: string | null, pledges?: { __typename: 'PledgePledges', physical?: string | null, spiritual?: string | null, giving?: string | null } | null, signBox?: { __typename: 'PledgeSignBox', title?: string | null, subtitle?: string | null, submitLabel?: string | null, incompleteAlert?: string | null } | null, giftLabels?: { __typename: 'PledgeGiftLabels', physicalTitle?: string | null, spiritualTitle?: string | null, givingTitle?: string | null } | null, successCard?: { __typename: 'PledgeSuccessCard', title?: string | null, subtitle?: string | null, badge?: string | null, officialRegistryLabel?: string | null, reviewLabel?: string | null } | null, impactCards?: Array<{ __typename: 'PledgeImpactCards', title?: string | null, description?: string | null, dark?: boolean | null } | null> | null };
 
 export type GuidelinesPartsFragment = { __typename: 'Guidelines', tagline?: string | null, title?: string | null, subtitle?: string | null };
 
 export type AppointmentPartsFragment = { __typename: 'Appointment', timeSlots?: Array<string | null> | null, hero?: { __typename: 'AppointmentHero', title?: string | null, quote?: string | null, clinicalText?: string | null, spiritualText?: string | null, aestheticText?: string | null } | null, contact?: { __typename: 'AppointmentContact', headingHours?: string | null, hours?: string | null, specialHoursTitle?: string | null, specialHours?: string | null, locationHeading?: string | null, location?: string | null, whatsappNumber?: string | null } | null, form?: { __typename: 'AppointmentForm', serviceLabel?: string | null, timeLabel?: string | null, submitLabel?: string | null, weekdayOnlyError?: string | null, wednesdayOnlyError?: string | null } | null, services?: Array<{ __typename: 'AppointmentServices', name?: string | null, wednesdayOnly?: boolean | null } | null> | null };
 
-export type PagesPartsFragment = { __typename: 'Pages', title: string, blocks?: Array<{ __typename: 'PagesBlocksHero', tagline?: string | null, title?: string | null, subtitle?: string | null } | { __typename: 'PagesBlocksContentSection', title?: string | null, body?: any | null, image?: string | null } | { __typename: 'PagesBlocksGrid', items?: Array<{ __typename: 'PagesBlocksGridItems', title?: string | null, description?: string | null, icon?: string | null } | null> | null } | null> | null };
+export type PagesPartsFragment = { __typename: 'Pages', title: string, blocks?: Array<{ __typename: 'PagesBlocksHero', tagline?: string | null, title?: string | null, subtitle?: string | null } | { __typename: 'PagesBlocksContentSection', title?: string | null, body?: any | null, image?: string | null } | { __typename: 'PagesBlocksGrid', items?: Array<{ __typename: 'PagesBlocksGridItems', title?: string | null, description?: string | null, icon?: string | null } | null> | null } | null> | null, cta?: { __typename: 'PagesCta', title?: string | null, description?: string | null } | null };
 
 export type GlobalQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1550,7 +2062,7 @@ export type DoctorsQueryVariables = Exact<{
 }>;
 
 
-export type DoctorsQuery = { __typename?: 'Query', doctors: { __typename: 'Doctors', id: string, name?: string | null, lastName?: string | null, title?: string | null, quote?: string | null, tags?: Array<string | null> | null, image?: string | null, academicBio?: string | null, philosophy?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, excellence?: Array<{ __typename: 'DoctorsExcellence', title?: string | null, description?: string | null } | null> | null, expertise?: Array<{ __typename: 'DoctorsExpertise', title?: string | null, description?: string | null } | null> | null } };
+export type DoctorsQuery = { __typename?: 'Query', doctors: { __typename: 'Doctors', id: string, name?: string | null, lastName?: string | null, title?: string | null, quote?: string | null, tags?: Array<string | null> | null, image?: string | null, academicBio?: string | null, philosophy?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, excellence?: Array<{ __typename: 'DoctorsExcellence', title?: string | null, description?: string | null } | null> | null, expertise?: Array<{ __typename: 'DoctorsExpertise', title?: string | null, description?: string | null } | null> | null, ui?: { __typename: 'DoctorsUi', consultationButtonLabel?: string | null, consultationButtonUrl?: string | null, heroBadgeLabel?: string | null, heroBadgeText?: string | null, journeyHeading?: string | null, expertiseHeading?: string | null, philosophyBadge?: string | null, philosophyHeading?: string | null, bridgingHeading?: string | null, legacyHeading?: string | null, visionHeading?: string | null, visionQuote?: string | null, ctaLabel?: string | null, philosophyPillars?: Array<string | null> | null, stats?: Array<{ __typename: 'DoctorsUiStats', value?: string | null, label?: string | null } | null> | null } | null } };
 
 export type DoctorsConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1562,14 +2074,14 @@ export type DoctorsConnectionQueryVariables = Exact<{
 }>;
 
 
-export type DoctorsConnectionQuery = { __typename?: 'Query', doctorsConnection: { __typename?: 'DoctorsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'DoctorsConnectionEdges', cursor: string, node?: { __typename: 'Doctors', id: string, name?: string | null, lastName?: string | null, title?: string | null, quote?: string | null, tags?: Array<string | null> | null, image?: string | null, academicBio?: string | null, philosophy?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, excellence?: Array<{ __typename: 'DoctorsExcellence', title?: string | null, description?: string | null } | null> | null, expertise?: Array<{ __typename: 'DoctorsExpertise', title?: string | null, description?: string | null } | null> | null } | null } | null> | null } };
+export type DoctorsConnectionQuery = { __typename?: 'Query', doctorsConnection: { __typename?: 'DoctorsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'DoctorsConnectionEdges', cursor: string, node?: { __typename: 'Doctors', id: string, name?: string | null, lastName?: string | null, title?: string | null, quote?: string | null, tags?: Array<string | null> | null, image?: string | null, academicBio?: string | null, philosophy?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, excellence?: Array<{ __typename: 'DoctorsExcellence', title?: string | null, description?: string | null } | null> | null, expertise?: Array<{ __typename: 'DoctorsExpertise', title?: string | null, description?: string | null } | null> | null, ui?: { __typename: 'DoctorsUi', consultationButtonLabel?: string | null, consultationButtonUrl?: string | null, heroBadgeLabel?: string | null, heroBadgeText?: string | null, journeyHeading?: string | null, expertiseHeading?: string | null, philosophyBadge?: string | null, philosophyHeading?: string | null, bridgingHeading?: string | null, legacyHeading?: string | null, visionHeading?: string | null, visionQuote?: string | null, ctaLabel?: string | null, philosophyPillars?: Array<string | null> | null, stats?: Array<{ __typename: 'DoctorsUiStats', value?: string | null, label?: string | null } | null> | null } | null } | null } | null> | null } };
 
 export type ServicesQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type ServicesQuery = { __typename?: 'Query', services: { __typename: 'Services', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, items?: Array<{ __typename: 'ServicesItems', title?: string | null, category?: string | null, description?: string | null, features?: Array<string | null> | null, image?: string | null } | null> | null } };
+export type ServicesQuery = { __typename?: 'Query', services: { __typename: 'Services', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, header?: { __typename: 'ServicesHeader', tagline?: string | null, title?: string | null, subtitle?: string | null } | null, items?: Array<{ __typename: 'ServicesItems', title?: string | null, category?: string | null, description?: string | null, features?: Array<string | null> | null, image?: string | null } | null> | null } };
 
 export type ServicesConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1581,14 +2093,14 @@ export type ServicesConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ServicesConnectionQuery = { __typename?: 'Query', servicesConnection: { __typename?: 'ServicesConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ServicesConnectionEdges', cursor: string, node?: { __typename: 'Services', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, items?: Array<{ __typename: 'ServicesItems', title?: string | null, category?: string | null, description?: string | null, features?: Array<string | null> | null, image?: string | null } | null> | null } | null } | null> | null } };
+export type ServicesConnectionQuery = { __typename?: 'Query', servicesConnection: { __typename?: 'ServicesConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ServicesConnectionEdges', cursor: string, node?: { __typename: 'Services', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, header?: { __typename: 'ServicesHeader', tagline?: string | null, title?: string | null, subtitle?: string | null } | null, items?: Array<{ __typename: 'ServicesItems', title?: string | null, category?: string | null, description?: string | null, features?: Array<string | null> | null, image?: string | null } | null> | null } | null } | null> | null } };
 
 export type ScreeningQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type ScreeningQuery = { __typename?: 'Query', screening: { __typename: 'Screening', id: string, tagline?: string | null, title?: string | null, subtitle?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, pathwayA?: { __typename: 'ScreeningPathwayA', title?: string | null, description?: string | null, features?: Array<string | null> | null } | null, pathwayB?: { __typename: 'ScreeningPathwayB', title?: string | null, description?: string | null, features?: Array<string | null> | null } | null } };
+export type ScreeningQuery = { __typename?: 'Query', screening: { __typename: 'Screening', id: string, tagline?: string | null, title?: string | null, subtitle?: string | null, pathwayALabel?: string | null, pathwayATag?: string | null, pathwayBLabel?: string | null, pathwayBTag?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, pathwayA?: { __typename: 'ScreeningPathwayA', title?: string | null, description?: string | null, features?: Array<string | null> | null } | null, pathwayB?: { __typename: 'ScreeningPathwayB', title?: string | null, description?: string | null, features?: Array<string | null> | null } | null, quiz?: { __typename: 'ScreeningQuiz', badge?: string | null, title?: string | null, resetLabel?: string | null, incompleteText?: string | null, recommendationLabel?: string | null, ctaLabel?: string | null, ctaPath?: string | null, defaultResult?: { __typename: 'ScreeningQuizDefaultResult', title?: string | null, description?: string | null } | null, usaResult?: { __typename: 'ScreeningQuizUsaResult', title?: string | null, description?: string | null } | null, ancientResult?: { __typename: 'ScreeningQuizAncientResult', title?: string | null, description?: string | null } | null, questions?: Array<{ __typename: 'ScreeningQuizQuestions', prompt?: string | null, a?: string | null, b?: string | null, aLabel?: string | null, bLabel?: string | null } | null> | null } | null } };
 
 export type ScreeningConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1600,7 +2112,7 @@ export type ScreeningConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ScreeningConnectionQuery = { __typename?: 'Query', screeningConnection: { __typename?: 'ScreeningConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ScreeningConnectionEdges', cursor: string, node?: { __typename: 'Screening', id: string, tagline?: string | null, title?: string | null, subtitle?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, pathwayA?: { __typename: 'ScreeningPathwayA', title?: string | null, description?: string | null, features?: Array<string | null> | null } | null, pathwayB?: { __typename: 'ScreeningPathwayB', title?: string | null, description?: string | null, features?: Array<string | null> | null } | null } | null } | null> | null } };
+export type ScreeningConnectionQuery = { __typename?: 'Query', screeningConnection: { __typename?: 'ScreeningConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ScreeningConnectionEdges', cursor: string, node?: { __typename: 'Screening', id: string, tagline?: string | null, title?: string | null, subtitle?: string | null, pathwayALabel?: string | null, pathwayATag?: string | null, pathwayBLabel?: string | null, pathwayBTag?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, pathwayA?: { __typename: 'ScreeningPathwayA', title?: string | null, description?: string | null, features?: Array<string | null> | null } | null, pathwayB?: { __typename: 'ScreeningPathwayB', title?: string | null, description?: string | null, features?: Array<string | null> | null } | null, quiz?: { __typename: 'ScreeningQuiz', badge?: string | null, title?: string | null, resetLabel?: string | null, incompleteText?: string | null, recommendationLabel?: string | null, ctaLabel?: string | null, ctaPath?: string | null, defaultResult?: { __typename: 'ScreeningQuizDefaultResult', title?: string | null, description?: string | null } | null, usaResult?: { __typename: 'ScreeningQuizUsaResult', title?: string | null, description?: string | null } | null, ancientResult?: { __typename: 'ScreeningQuizAncientResult', title?: string | null, description?: string | null } | null, questions?: Array<{ __typename: 'ScreeningQuizQuestions', prompt?: string | null, a?: string | null, b?: string | null, aLabel?: string | null, bLabel?: string | null } | null> | null } | null } | null } | null> | null } };
 
 export type PcpQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1626,7 +2138,7 @@ export type AestheticsQueryVariables = Exact<{
 }>;
 
 
-export type AestheticsQuery = { __typename?: 'Query', aesthetics: { __typename: 'Aesthetics', id: string, tagline?: string | null, title?: string | null, subtitle?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, services?: Array<{ __typename: 'AestheticsServices', title?: string | null, description?: string | null, image?: string | null } | null> | null } };
+export type AestheticsQuery = { __typename?: 'Query', aesthetics: { __typename: 'Aesthetics', id: string, tagline?: string | null, title?: string | null, subtitle?: string | null, assessmentLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, assessmentHighlights?: Array<{ __typename: 'AestheticsAssessmentHighlights', title?: string | null, description?: string | null } | null> | null, synergyCard?: { __typename: 'AestheticsSynergyCard', title?: string | null, description?: string | null, scienceLabel?: string | null, scienceTitle?: string | null, natureLabel?: string | null, natureTitle?: string | null } | null, scienceSection?: { __typename: 'AestheticsScienceSection', tagline?: string | null, title?: string | null, items?: Array<{ __typename: 'AestheticsScienceSectionItems', title?: string | null, description?: string | null } | null> | null } | null, natureSection?: { __typename: 'AestheticsNatureSection', tagline?: string | null, title?: string | null, items?: Array<{ __typename: 'AestheticsNatureSectionItems', title?: string | null, description?: string | null } | null> | null } | null, packageDeal?: { __typename: 'AestheticsPackageDeal', badge?: string | null, title?: string | null, quote?: string | null, bundleLabel?: string | null, bundleDescription?: string | null, primaryCtaLabel?: string | null, primaryCtaPath?: string | null, secondaryCtaLabel?: string | null, secondaryCtaPath?: string | null } | null, services?: Array<{ __typename: 'AestheticsServices', title?: string | null, description?: string | null, image?: string | null } | null> | null } };
 
 export type AestheticsConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1638,14 +2150,14 @@ export type AestheticsConnectionQueryVariables = Exact<{
 }>;
 
 
-export type AestheticsConnectionQuery = { __typename?: 'Query', aestheticsConnection: { __typename?: 'AestheticsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'AestheticsConnectionEdges', cursor: string, node?: { __typename: 'Aesthetics', id: string, tagline?: string | null, title?: string | null, subtitle?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, services?: Array<{ __typename: 'AestheticsServices', title?: string | null, description?: string | null, image?: string | null } | null> | null } | null } | null> | null } };
+export type AestheticsConnectionQuery = { __typename?: 'Query', aestheticsConnection: { __typename?: 'AestheticsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'AestheticsConnectionEdges', cursor: string, node?: { __typename: 'Aesthetics', id: string, tagline?: string | null, title?: string | null, subtitle?: string | null, assessmentLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, assessmentHighlights?: Array<{ __typename: 'AestheticsAssessmentHighlights', title?: string | null, description?: string | null } | null> | null, synergyCard?: { __typename: 'AestheticsSynergyCard', title?: string | null, description?: string | null, scienceLabel?: string | null, scienceTitle?: string | null, natureLabel?: string | null, natureTitle?: string | null } | null, scienceSection?: { __typename: 'AestheticsScienceSection', tagline?: string | null, title?: string | null, items?: Array<{ __typename: 'AestheticsScienceSectionItems', title?: string | null, description?: string | null } | null> | null } | null, natureSection?: { __typename: 'AestheticsNatureSection', tagline?: string | null, title?: string | null, items?: Array<{ __typename: 'AestheticsNatureSectionItems', title?: string | null, description?: string | null } | null> | null } | null, packageDeal?: { __typename: 'AestheticsPackageDeal', badge?: string | null, title?: string | null, quote?: string | null, bundleLabel?: string | null, bundleDescription?: string | null, primaryCtaLabel?: string | null, primaryCtaPath?: string | null, secondaryCtaLabel?: string | null, secondaryCtaPath?: string | null } | null, services?: Array<{ __typename: 'AestheticsServices', title?: string | null, description?: string | null, image?: string | null } | null> | null } | null } | null> | null } };
 
 export type PledgeQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type PledgeQuery = { __typename?: 'Query', pledge: { __typename: 'Pledge', id: string, tagline?: string | null, title?: string | null, subtitle?: string | null, description?: string | null, registryUrl?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, pledges?: { __typename: 'PledgePledges', physical?: string | null, spiritual?: string | null, giving?: string | null } | null } };
+export type PledgeQuery = { __typename?: 'Query', pledge: { __typename: 'Pledge', id: string, tagline?: string | null, title?: string | null, subtitle?: string | null, description?: string | null, registryUrl?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, pledges?: { __typename: 'PledgePledges', physical?: string | null, spiritual?: string | null, giving?: string | null } | null, signBox?: { __typename: 'PledgeSignBox', title?: string | null, subtitle?: string | null, submitLabel?: string | null, incompleteAlert?: string | null } | null, giftLabels?: { __typename: 'PledgeGiftLabels', physicalTitle?: string | null, spiritualTitle?: string | null, givingTitle?: string | null } | null, successCard?: { __typename: 'PledgeSuccessCard', title?: string | null, subtitle?: string | null, badge?: string | null, officialRegistryLabel?: string | null, reviewLabel?: string | null } | null, impactCards?: Array<{ __typename: 'PledgeImpactCards', title?: string | null, description?: string | null, dark?: boolean | null } | null> | null } };
 
 export type PledgeConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1657,7 +2169,7 @@ export type PledgeConnectionQueryVariables = Exact<{
 }>;
 
 
-export type PledgeConnectionQuery = { __typename?: 'Query', pledgeConnection: { __typename?: 'PledgeConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PledgeConnectionEdges', cursor: string, node?: { __typename: 'Pledge', id: string, tagline?: string | null, title?: string | null, subtitle?: string | null, description?: string | null, registryUrl?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, pledges?: { __typename: 'PledgePledges', physical?: string | null, spiritual?: string | null, giving?: string | null } | null } | null } | null> | null } };
+export type PledgeConnectionQuery = { __typename?: 'Query', pledgeConnection: { __typename?: 'PledgeConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PledgeConnectionEdges', cursor: string, node?: { __typename: 'Pledge', id: string, tagline?: string | null, title?: string | null, subtitle?: string | null, description?: string | null, registryUrl?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, pledges?: { __typename: 'PledgePledges', physical?: string | null, spiritual?: string | null, giving?: string | null } | null, signBox?: { __typename: 'PledgeSignBox', title?: string | null, subtitle?: string | null, submitLabel?: string | null, incompleteAlert?: string | null } | null, giftLabels?: { __typename: 'PledgeGiftLabels', physicalTitle?: string | null, spiritualTitle?: string | null, givingTitle?: string | null } | null, successCard?: { __typename: 'PledgeSuccessCard', title?: string | null, subtitle?: string | null, badge?: string | null, officialRegistryLabel?: string | null, reviewLabel?: string | null } | null, impactCards?: Array<{ __typename: 'PledgeImpactCards', title?: string | null, description?: string | null, dark?: boolean | null } | null> | null } | null } | null> | null } };
 
 export type GuidelinesQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1702,7 +2214,7 @@ export type PagesQueryVariables = Exact<{
 }>;
 
 
-export type PagesQuery = { __typename?: 'Query', pages: { __typename: 'Pages', id: string, title: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, blocks?: Array<{ __typename: 'PagesBlocksHero', tagline?: string | null, title?: string | null, subtitle?: string | null } | { __typename: 'PagesBlocksContentSection', title?: string | null, body?: any | null, image?: string | null } | { __typename: 'PagesBlocksGrid', items?: Array<{ __typename: 'PagesBlocksGridItems', title?: string | null, description?: string | null, icon?: string | null } | null> | null } | null> | null } };
+export type PagesQuery = { __typename?: 'Query', pages: { __typename: 'Pages', id: string, title: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, blocks?: Array<{ __typename: 'PagesBlocksHero', tagline?: string | null, title?: string | null, subtitle?: string | null } | { __typename: 'PagesBlocksContentSection', title?: string | null, body?: any | null, image?: string | null } | { __typename: 'PagesBlocksGrid', items?: Array<{ __typename: 'PagesBlocksGridItems', title?: string | null, description?: string | null, icon?: string | null } | null> | null } | null> | null, cta?: { __typename: 'PagesCta', title?: string | null, description?: string | null } | null } };
 
 export type PagesConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1714,7 +2226,7 @@ export type PagesConnectionQueryVariables = Exact<{
 }>;
 
 
-export type PagesConnectionQuery = { __typename?: 'Query', pagesConnection: { __typename?: 'PagesConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PagesConnectionEdges', cursor: string, node?: { __typename: 'Pages', id: string, title: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, blocks?: Array<{ __typename: 'PagesBlocksHero', tagline?: string | null, title?: string | null, subtitle?: string | null } | { __typename: 'PagesBlocksContentSection', title?: string | null, body?: any | null, image?: string | null } | { __typename: 'PagesBlocksGrid', items?: Array<{ __typename: 'PagesBlocksGridItems', title?: string | null, description?: string | null, icon?: string | null } | null> | null } | null> | null } | null } | null> | null } };
+export type PagesConnectionQuery = { __typename?: 'Query', pagesConnection: { __typename?: 'PagesConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PagesConnectionEdges', cursor: string, node?: { __typename: 'Pages', id: string, title: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, blocks?: Array<{ __typename: 'PagesBlocksHero', tagline?: string | null, title?: string | null, subtitle?: string | null } | { __typename: 'PagesBlocksContentSection', title?: string | null, body?: any | null, image?: string | null } | { __typename: 'PagesBlocksGrid', items?: Array<{ __typename: 'PagesBlocksGridItems', title?: string | null, description?: string | null, icon?: string | null } | null> | null } | null> | null, cta?: { __typename: 'PagesCta', title?: string | null, description?: string | null } | null } | null } | null> | null } };
 
 export const GlobalPartsFragmentDoc = gql`
     fragment GlobalParts on Global {
@@ -1788,11 +2300,39 @@ export const DoctorsPartsFragmentDoc = gql`
     description
   }
   philosophy
+  ui {
+    __typename
+    consultationButtonLabel
+    consultationButtonUrl
+    heroBadgeLabel
+    heroBadgeText
+    journeyHeading
+    expertiseHeading
+    philosophyBadge
+    philosophyHeading
+    bridgingHeading
+    legacyHeading
+    visionHeading
+    visionQuote
+    ctaLabel
+    stats {
+      __typename
+      value
+      label
+    }
+    philosophyPillars
+  }
 }
     `;
 export const ServicesPartsFragmentDoc = gql`
     fragment ServicesParts on Services {
   __typename
+  header {
+    __typename
+    tagline
+    title
+    subtitle
+  }
   items {
     __typename
     title
@@ -1809,6 +2349,10 @@ export const ScreeningPartsFragmentDoc = gql`
   tagline
   title
   subtitle
+  pathwayALabel
+  pathwayATag
+  pathwayBLabel
+  pathwayBTag
   pathwayA {
     __typename
     title
@@ -1820,6 +2364,39 @@ export const ScreeningPartsFragmentDoc = gql`
     title
     description
     features
+  }
+  quiz {
+    __typename
+    badge
+    title
+    resetLabel
+    incompleteText
+    recommendationLabel
+    ctaLabel
+    ctaPath
+    defaultResult {
+      __typename
+      title
+      description
+    }
+    usaResult {
+      __typename
+      title
+      description
+    }
+    ancientResult {
+      __typename
+      title
+      description
+    }
+    questions {
+      __typename
+      prompt
+      a
+      b
+      aLabel
+      bLabel
+    }
   }
 }
     `;
@@ -1843,6 +2420,53 @@ export const AestheticsPartsFragmentDoc = gql`
   tagline
   title
   subtitle
+  assessmentLabel
+  assessmentHighlights {
+    __typename
+    title
+    description
+  }
+  synergyCard {
+    __typename
+    title
+    description
+    scienceLabel
+    scienceTitle
+    natureLabel
+    natureTitle
+  }
+  scienceSection {
+    __typename
+    tagline
+    title
+    items {
+      __typename
+      title
+      description
+    }
+  }
+  natureSection {
+    __typename
+    tagline
+    title
+    items {
+      __typename
+      title
+      description
+    }
+  }
+  packageDeal {
+    __typename
+    badge
+    title
+    quote
+    bundleLabel
+    bundleDescription
+    primaryCtaLabel
+    primaryCtaPath
+    secondaryCtaLabel
+    secondaryCtaPath
+  }
   services {
     __typename
     title
@@ -1863,6 +2487,33 @@ export const PledgePartsFragmentDoc = gql`
     physical
     spiritual
     giving
+  }
+  signBox {
+    __typename
+    title
+    subtitle
+    submitLabel
+    incompleteAlert
+  }
+  giftLabels {
+    __typename
+    physicalTitle
+    spiritualTitle
+    givingTitle
+  }
+  successCard {
+    __typename
+    title
+    subtitle
+    badge
+    officialRegistryLabel
+    reviewLabel
+  }
+  impactCards {
+    __typename
+    title
+    description
+    dark
   }
   registryUrl
 }
@@ -1936,6 +2587,11 @@ export const PagesPartsFragmentDoc = gql`
         icon
       }
     }
+  }
+  cta {
+    __typename
+    title
+    description
   }
 }
     `;

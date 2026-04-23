@@ -11,6 +11,46 @@ const AestheticCircle: React.FC = () => {
         tagline
         title
         subtitle
+        assessmentLabel
+        assessmentHighlights {
+          title
+          description
+        }
+        synergyCard {
+          title
+          description
+          scienceLabel
+          scienceTitle
+          natureLabel
+          natureTitle
+        }
+        scienceSection {
+          tagline
+          title
+          items {
+            title
+            description
+          }
+        }
+        natureSection {
+          tagline
+          title
+          items {
+            title
+            description
+          }
+        }
+        packageDeal {
+          badge
+          title
+          quote
+          bundleLabel
+          bundleDescription
+          primaryCtaLabel
+          primaryCtaPath
+          secondaryCtaLabel
+          secondaryCtaPath
+        }
         services {
           title
           description
@@ -22,7 +62,18 @@ const AestheticCircle: React.FC = () => {
     data: { aesthetics: aestheticData },
   });
 
-  const { tagline, title, subtitle, services } = data.aesthetics;
+  const {
+    tagline,
+    title,
+    subtitle,
+    services,
+    assessmentLabel,
+    assessmentHighlights,
+    synergyCard,
+    scienceSection,
+    natureSection,
+    packageDeal,
+  } = data.aesthetics;
   const mainService = services[0] || { title: "Aesthetic Skin Assessment", description: "Our comprehensive skin analysis looks beyond the surface." };
 
   return (
@@ -43,48 +94,42 @@ const AestheticCircle: React.FC = () => {
                 <ScanFace size={32} />
               </div>
               <div data-tina-field={tinaField(services[0])}>
-                <p className="text-[10px] uppercase tracking-widest font-black text-dark-brown/40 mb-1">Assessment</p>
+                <p data-tina-field={tinaField(data.aesthetics, 'assessmentLabel')} className="text-[10px] uppercase tracking-widest font-black text-dark-brown/40 mb-1">{assessmentLabel}</p>
                 <h2 data-tina-field={tinaField(services[0], 'title')} className="font-display text-4xl text-dark-brown">{mainService.title}</h2>
               </div>
             </div>
             <p data-tina-field={tinaField(services[0], 'description')} className="text-dark-brown/70 text-lg leading-relaxed mb-10">
               {mainService.description}
             </p>
-            <div className="space-y-6 text-dark-brown/80">
-              <div className="flex gap-4 items-start">
-                <Sparkles className="text-accent-orange shrink-0 mt-1" size={20} />
-                <p>
-                  <span className="font-black uppercase tracking-widest text-xs block mb-1">Surface health</span>
-                  <span className="text-sm">Texture, tone, and collagen density.</span>
-                </p>
-              </div>
-              <div className="flex gap-4 items-start">
-                <Droplets className="text-accent-orange shrink-0 mt-1" size={20} />
-                <p>
-                  <span className="font-black uppercase tracking-widest text-xs block mb-1">Internal connection</span>
-                  <span className="text-sm">How your Dosha (Vata, Pitta, Kapha) and hydration patterns affect your skin aging process.</span>
-                </p>
-              </div>
+            <div data-tina-field={tinaField(data.aesthetics, 'assessmentHighlights')} className="space-y-6 text-dark-brown/80">
+              {assessmentHighlights?.map((highlight: any, i: number) => (
+                <div key={i} className="flex gap-4 items-start">
+                  {i % 2 === 0 ? <Sparkles className="text-accent-orange shrink-0 mt-1" size={20} /> : <Droplets className="text-accent-orange shrink-0 mt-1" size={20} />}
+                  <p>
+                    <span data-tina-field={tinaField(highlight, 'title')} className="font-black uppercase tracking-widest text-xs block mb-1">{highlight.title}</span>
+                    <span data-tina-field={tinaField(highlight, 'description')} className="text-sm">{highlight.description}</span>
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
 
           <div className="lg:col-span-5 bg-bronze-dark text-cream rounded-[3rem] p-10 md:p-14 shadow-2xl relative overflow-hidden flex flex-col justify-between min-h-[400px]">
             <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/5 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none" />
             <div>
-              <h3 className="font-display text-4xl mb-6 relative z-10 leading-tight">The Full Circle Beauty Synergy</h3>
-              <p className="text-cream/70 leading-relaxed relative z-10 mb-10 italic font-serif text-lg">
-                Combine the best of clinical regeneration and holistic muscle toning for results that look natural and feel
-                aligned.
+              <h3 data-tina-field={tinaField(synergyCard, 'title')} className="font-display text-4xl mb-6 relative z-10 leading-tight">{synergyCard?.title}</h3>
+              <p data-tina-field={tinaField(synergyCard, 'description')} className="text-cream/70 leading-relaxed relative z-10 mb-10 italic font-serif text-lg">
+                {synergyCard?.description}
               </p>
             </div>
             <div className="flex flex-col gap-4 relative z-10">
               <div className="rounded-2xl border border-white/10 bg-white/5 p-6 hover:bg-white/10 transition-colors">
-                <p className="text-[10px] uppercase tracking-widest font-black text-accent-orange mb-2">The Science</p>
-                <p className="font-bold text-cream">Clinical Regeneration</p>
+                <p data-tina-field={tinaField(synergyCard, 'scienceLabel')} className="text-[10px] uppercase tracking-widest font-black text-accent-orange mb-2">{synergyCard?.scienceLabel}</p>
+                <p data-tina-field={tinaField(synergyCard, 'scienceTitle')} className="font-bold text-cream">{synergyCard?.scienceTitle}</p>
               </div>
               <div className="rounded-2xl border border-white/10 bg-white/5 p-6 hover:bg-white/10 transition-colors">
-                <p className="text-[10px] uppercase tracking-widest font-black text-accent-orange mb-2">The Nature</p>
-                <p className="font-bold text-cream">Holistic Structure</p>
+                <p data-tina-field={tinaField(synergyCard, 'natureLabel')} className="text-[10px] uppercase tracking-widest font-black text-accent-orange mb-2">{synergyCard?.natureLabel}</p>
+                <p data-tina-field={tinaField(synergyCard, 'natureTitle')} className="font-bold text-cream">{synergyCard?.natureTitle}</p>
               </div>
             </div>
           </div>
@@ -97,25 +142,20 @@ const AestheticCircle: React.FC = () => {
                 <HeartPulse size={28} />
               </div>
               <div>
-                <p className="text-[10px] uppercase tracking-widest font-black text-dark-brown/40 mb-1">Clinical</p>
-                <h3 className="font-display text-3xl text-dark-brown">Regeneration (Science)</h3>
+                <p data-tina-field={tinaField(scienceSection, 'tagline')} className="text-[10px] uppercase tracking-widest font-black text-dark-brown/40 mb-1">{scienceSection?.tagline}</p>
+                <h3 data-tina-field={tinaField(scienceSection, 'title')} className="font-display text-3xl text-dark-brown">{scienceSection?.title}</h3>
               </div>
             </div>
-            <div className="space-y-6 text-dark-brown/70">
-              <div className="flex gap-4 items-start">
-                <Wand2 className="text-accent-orange shrink-0 mt-1" size={20} />
-                <p className="text-sm leading-relaxed">
-                  <span className="font-bold text-dark-brown">PRP (Platelet-Rich Plasma):</span> Uses your body’s own
-                  growth factors to stimulate deep healing.
-                </p>
-              </div>
-              <div className="flex gap-4 items-start">
-                <Sparkles className="text-accent-orange shrink-0 mt-1" size={20} />
-                <p className="text-sm leading-relaxed">
-                  <span className="font-bold text-dark-brown">Microneedling:</span> Targeted collagen induction therapy to
-                  refine pores and scars.
-                </p>
-              </div>
+            <div data-tina-field={tinaField(scienceSection, 'items')} className="space-y-6 text-dark-brown/70">
+              {scienceSection?.items?.map((item: any, i: number) => (
+                <div key={i} className="flex gap-4 items-start">
+                  {i % 2 === 0 ? <Wand2 className="text-accent-orange shrink-0 mt-1" size={20} /> : <Sparkles className="text-accent-orange shrink-0 mt-1" size={20} />}
+                  <p className="text-sm leading-relaxed">
+                    <span data-tina-field={tinaField(item, 'title')} className="font-bold text-dark-brown">{item.title}:</span>{" "}
+                    <span data-tina-field={tinaField(item, 'description')}>{item.description}</span>
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
 
@@ -125,25 +165,20 @@ const AestheticCircle: React.FC = () => {
                 <Leaf size={28} />
               </div>
               <div>
-                <p className="text-[10px] uppercase tracking-widest font-black text-dark-brown/40 mb-1">Holistic</p>
-                <h3 className="font-display text-3xl text-dark-brown">Structure (Nature)</h3>
+                <p data-tina-field={tinaField(natureSection, 'tagline')} className="text-[10px] uppercase tracking-widest font-black text-dark-brown/40 mb-1">{natureSection?.tagline}</p>
+                <h3 data-tina-field={tinaField(natureSection, 'title')} className="font-display text-3xl text-dark-brown">{natureSection?.title}</h3>
               </div>
             </div>
-            <div className="space-y-6 text-dark-brown/70">
-              <div className="flex gap-4 items-start">
-                <Sparkles className="text-accent-orange shrink-0 mt-1" size={20} />
-                <p className="text-sm leading-relaxed">
-                  <span className="font-bold text-dark-brown">Face Yoga coaching:</span> Natural muscle toning to lift and
-                  contour.
-                </p>
-              </div>
-              <div className="flex gap-4 items-start">
-                <Droplets className="text-accent-orange shrink-0 mt-1" size={20} />
-                <p className="text-sm leading-relaxed">
-                  <span className="font-bold text-dark-brown">Naturopathic glow:</span> Supplements and Ayurvedic oils
-                  tailored to your skin type.
-                </p>
-              </div>
+            <div data-tina-field={tinaField(natureSection, 'items')} className="space-y-6 text-dark-brown/70">
+              {natureSection?.items?.map((item: any, i: number) => (
+                <div key={i} className="flex gap-4 items-start">
+                  {i % 2 === 0 ? <Sparkles className="text-accent-orange shrink-0 mt-1" size={20} /> : <Droplets className="text-accent-orange shrink-0 mt-1" size={20} />}
+                  <p className="text-sm leading-relaxed">
+                    <span data-tina-field={tinaField(item, 'title')} className="font-bold text-dark-brown">{item.title}:</span>{" "}
+                    <span data-tina-field={tinaField(item, 'description')}>{item.description}</span>
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -153,32 +188,30 @@ const AestheticCircle: React.FC = () => {
           
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-7">
-              <span className="uppercase tracking-widest font-black text-xs text-accent-orange mb-4 block">Package Deal</span>
-              <h2 className="font-display text-5xl md:text-7xl mb-8 leading-tight">The Circle of Radiance</h2>
-              <p className="text-cream/70 text-xl leading-relaxed mb-10 italic font-serif">
-                "Why settle for half a solution? Fill the Circle. Bundle aesthetic regeneration with holistic wellness to
-                align the inside and the outside."
+              <span data-tina-field={tinaField(packageDeal, 'badge')} className="uppercase tracking-widest font-black text-xs text-accent-orange mb-4 block">{packageDeal?.badge}</span>
+              <h2 data-tina-field={tinaField(packageDeal, 'title')} className="font-display text-5xl md:text-7xl mb-8 leading-tight">{packageDeal?.title}</h2>
+              <p data-tina-field={tinaField(packageDeal, 'quote')} className="text-cream/70 text-xl leading-relaxed mb-10 italic font-serif">
+                "{packageDeal?.quote}"
               </p>
               <div className="rounded-[2rem] border border-white/10 bg-white/5 p-8 text-cream/80">
-                <p className="font-black uppercase tracking-widest text-[10px] text-accent-orange mb-3">Bundle & save</p>
-                <p className="text-sm leading-relaxed">
-                  Book our Aesthetic Regeneration procedures (PRP + Microneedling) and receive a discount on our Holistic
-                  Wellness package (Face Yoga + Nadi Scan + Aura Scan).
+                <p data-tina-field={tinaField(packageDeal, 'bundleLabel')} className="font-black uppercase tracking-widest text-[10px] text-accent-orange mb-3">{packageDeal?.bundleLabel}</p>
+                <p data-tina-field={tinaField(packageDeal, 'bundleDescription')} className="text-sm leading-relaxed">
+                  {packageDeal?.bundleDescription}
                 </p>
               </div>
             </div>
             <div className="lg:col-span-5 flex flex-col gap-4">
               <Link
-                to="/appointment"
+                to={packageDeal?.primaryCtaPath || "/appointment"}
                 className="px-10 py-6 rounded-full bg-cream text-bronze-dark text-[10px] font-black uppercase tracking-[0.2em] hover:bg-accent-orange hover:text-white transition-all text-center shadow-xl transform hover:-translate-y-1"
               >
-                Book Aesthetic Circle
+                {packageDeal?.primaryCtaLabel}
               </Link>
               <Link
-                to="/screening-circle"
+                to={packageDeal?.secondaryCtaPath || "/screening-circle"}
                 className="px-10 py-6 rounded-full border border-white/20 text-cream text-[10px] font-black uppercase tracking-[0.2em] hover:bg-white/10 transition-colors text-center"
               >
-                Choose Your Screening Circle
+                {packageDeal?.secondaryCtaLabel}
               </Link>
             </div>
           </div>

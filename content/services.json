@@ -1,35 +1,42 @@
-[
-  {
-    "title": "Preventive & Wellness Care",
-    "category": "Foundation",
-    "description": "Prevention is the cornerstone of our practice. Our team works with you to build a personalized wellness plan centered on Naturopathy and Ayurvedic principles of diet and lifestyle.",
-    "features": [
-      "Cutting-edge Nadi gear to detect exact Dosha percentages.",
-      "Curated diets and nutrition based on constitution results.",
-      "Daily routines, herbal remedies, Yoga, and Pranayama."
-    ],
-    "image": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1920&auto=format&fit=crop"
+{
+  "header": {
+    "tagline": "Our Pillars",
+    "title": "Our Services!",
+    "subtitle": "Healing the subtle bodies to restore physical form."
   },
-  {
-    "title": "Acute & Interventional Care",
-    "category": "Intervention",
-    "description": "Our board-certified oncologist and intensivist provide expert care for critical conditions, ensuring the highest standard of medical treatment when you need it most.",
-    "features": [
-      "State-of-the-art diagnostics and interventional procedures.",
-      "Stabilization integrated with supportive integrative therapies.",
-      "Compassionate critical care with a human-centered approach."
-    ],
-    "image": "https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=1920&auto=format&fit=crop"
-  },
-  {
-    "title": "Spiritual & Chronic Care",
-    "category": "Transcendence",
-    "description": "Focus shifts to healing beyond the physical. From end-stage renal disease to metastatic cancer, we offer therapies to soothe the mind and spirit.",
-    "features": [
-      "Reiki, Past-Life Regression, and Energy Healing.",
-      "Sound healing, Mantras, Gita verses, and Simple Pranayama.",
-      "Holotropic breathing to address karmic imprints."
-    ],
-    "image": "https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1920&auto=format&fit=crop"
-  }
-]
+  "items": [
+    {
+      "title": "Preventive & Wellness Care",
+      "category": "Foundation",
+      "description": "Prevention is the cornerstone of our practice. Our team works with you to build a personalized wellness plan centered on Naturopathy and Ayurvedic principles of diet and lifestyle.",
+      "features": [
+        "Cutting-edge Nadi gear to detect exact Dosha percentages.",
+        "Curated diets and nutrition based on constitution results.",
+        "Daily routines, herbal remedies, Yoga, and Pranayama."
+      ],
+      "image": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1920&auto=format&fit=crop"
+    },
+    {
+      "title": "Acute & Interventional Care",
+      "category": "Intervention",
+      "description": "Our board-certified oncologist and intensivist provide expert care for critical conditions, ensuring the highest standard of medical treatment when you need it most.",
+      "features": [
+        "State-of-the-art diagnostics and interventional procedures.",
+        "Stabilization integrated with supportive integrative therapies.",
+        "Compassionate critical care with a human-centered approach."
+      ],
+      "image": "https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=1920&auto=format&fit=crop"
+    },
+    {
+      "title": "Spiritual & Chronic Care",
+      "category": "Transcendence",
+      "description": "Focus shifts to healing beyond the physical. From end-stage renal disease to metastatic cancer, we offer therapies to soothe the mind and spirit.",
+      "features": [
+        "Reiki, Past-Life Regression, and Energy Healing.",
+        "Sound healing, Mantras, Gita verses, and Simple Pranayama.",
+        "Holotropic breathing to address karmic imprints."
+      ],
+      "image": "https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1920&auto=format&fit=crop"
+    }
+  ]
+}

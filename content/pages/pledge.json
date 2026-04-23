@@ -3,6 +3,41 @@
   "title": "The Living Legacy",
   "subtitle": "\"At Full Circle, we believe the highest expression of 'Consciousness' is the recognition that we are all connected.\"",
   "description": "In our clinic, the \"Art of Dying\" is about the grace of the handoff. Dr. Prerna and every member of our staff are Pledged Organ Donors.",
+  "signBox": {
+    "title": "Sign the Circle",
+    "subtitle": "The 100% Commitment",
+    "submitLabel": "I have signed the circle",
+    "incompleteAlert": "Please commit to all three aspects of the circle to sign."
+  },
+  "giftLabels": {
+    "physicalTitle": "1. The Physical Gift",
+    "spiritualTitle": "2. The Spiritual Gift",
+    "givingTitle": "3. The Art of Giving"
+  },
+  "successCard": {
+    "title": "Welcome to the Circle",
+    "subtitle": "I have signed the circle.",
+    "badge": "Full Circle Conscious Donor",
+    "officialRegistryLabel": "Official Registry",
+    "reviewLabel": "Review the Pact"
+  },
+  "impactCards": [
+    {
+      "title": "Neutralizing Karma",
+      "description": "Transforming transition into selfless merit.",
+      "dark": false
+    },
+    {
+      "title": "EWS Support",
+      "description": "United by biological hope. High Spiritual Quotient.",
+      "dark": true
+    },
+    {
+      "title": "Raising Frequency",
+      "description": "From scarcity to abundance and gift of life.",
+      "dark": false
+    }
+  ],
   "pledges": {
     "physical": "I pledge my organs and tissues. My transition becomes another’s beginning.",
     "spiritual": "I pledge to share my decision with my family today, ensuring peace and legacy.",
