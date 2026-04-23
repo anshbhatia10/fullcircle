@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import { TinaProvider, TinaCMS } from "tinacms";
-import config from "./tina/config";
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {
@@ -10,13 +8,8 @@ if (!rootElement) {
 }
 
 const root = ReactDOM.createRoot(rootElement);
-
-const cms = new TinaCMS(config);
-
 root.render(
   <React.StrictMode>
-    <TinaProvider cms={cms}>
-      <App />
-    </TinaProvider>
+    <App />
   </React.StrictMode>
 );
