@@ -16,11 +16,27 @@ const IconMap: any = {
 };
 
 export const PageBuilder = ({ blocks }: { blocks: any[] }) => {
+  const getBlockType = (block: any) => {
+    if (block?._template) {
+      return block._template;
+    }
+    if (block?.__typename === 'PagesBlocksHero') {
+      return 'hero';
+    }
+    if (block?.__typename === 'PagesBlocksContentSection') {
+      return 'contentSection';
+    }
+    if (block?.__typename === 'PagesBlocksGrid') {
+      return 'grid';
+    }
+    return null;
+  };
+
   return (
     <>
       {blocks
         ? blocks.map((block, i) => {
-            switch (block._template) {
+            switch (getBlockType(block)) {
               case 'hero':
                 return <Hero key={i} data={block} />;
               case 'contentSection':

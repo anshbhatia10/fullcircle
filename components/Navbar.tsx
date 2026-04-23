@@ -4,6 +4,12 @@ import { Menu, X, Circle, Aperture, Heart } from 'lucide-react';
 import { useTina } from 'tinacms/dist/react';
 import globalData from '../content/global/index.json';
 
+const normalizeInternalPath = (path: string) => {
+  if (!path) return '/';
+  if (/^https?:\/\//i.test(path)) return path;
+  return path.startsWith('/') ? path : `/${path}`;
+};
+
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
@@ -25,6 +31,9 @@ const Navbar: React.FC = () => {
   });
 
   const toggleMenu = () => setIsOpen(!isOpen);
+  React.useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
 
   const { logoText, navLinks } = data.global.navbar;
 
@@ -38,14 +47,23 @@ const Navbar: React.FC = () => {
             <div className="hidden xl:flex items-center space-x-4 lg:space-x-6">
               {navLinks.map((link: any, index: number) => (
                 <React.Fragment key={link.path}>
+                  {(() => {
+                    const normalizedPath = normalizeInternalPath(link.path);
+                    const isActive =
+                      normalizedPath === '/'
+                        ? location.pathname === '/'
+                        : location.pathname === normalizedPath || location.pathname.startsWith(`${normalizedPath}/`);
+                    return (
                   <Link 
-                    to={link.path} 
+                    to={normalizedPath}
                     className={`font-sans text-[10px] font-bold tracking-[0.2em] uppercase transition-colors ${
-                      location.pathname === link.path ? 'text-[#8E5D52]' : 'text-[#4A314D]/70 hover:text-[#8E5D52]'
+                      isActive ? 'text-[#8E5D52]' : 'text-[#4A314D]/70 hover:text-[#8E5D52]'
                     }`}
                   >
                     {link.label}
                   </Link>
+                    );
+                  })()}
                   {index < navLinks.length - 1 && <div className="h-4 w-[1px] bg-[#4A314D]/10"></div>}
                 </React.Fragment>
               ))}
@@ -53,7 +71,7 @@ const Navbar: React.FC = () => {
 
             {/* Mobile Menu Button */}
             <div className="xl:hidden">
-              <button onClick={toggleMenu} className="text-[#4A314D] p-2">
+              <button onClick={toggleMenu} className="text-[#4A314D] p-2" aria-expanded={isOpen} aria-label="Toggle menu">
                 <Menu size={24} />
               </button>
             </div>
@@ -96,13 +114,13 @@ const Navbar: React.FC = () => {
       </nav>
 
       {/* Mobile Menu Overlay */}
-      <div className={`fixed inset-0 bg-[#FAF3F0] z-[60] transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-500 xl:hidden pt-28 px-8 overflow-y-auto pb-10`}>
+      <div className={`fixed inset-0 bg-[#FAF3F0] z-[60] transform ${isOpen ? 'translate-x-0 pointer-events-auto' : '-translate-x-full pointer-events-none'} transition-transform duration-500 xl:hidden pt-28 px-8 overflow-y-auto pb-10`}>
         <div className="flex flex-col space-y-6 items-center text-center">
           <Link to="/" onClick={toggleMenu} className="text-4xl font-display text-[#4A314D] hover:text-[#8E5D52]">Home</Link>
           {navLinks.map((link) => (
             <Link 
               key={link.path} 
-              to={link.path} 
+              to={normalizeInternalPath(link.path)}
               onClick={toggleMenu} 
               className="text-4xl font-display text-[#4A314D] hover:text-[#8E5D52]"
             >

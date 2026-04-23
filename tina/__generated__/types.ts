@@ -100,6 +100,8 @@ export type Query = {
   pledgeConnection: PledgeConnection;
   guidelines: Guidelines;
   guidelinesConnection: GuidelinesConnection;
+  appointment: Appointment;
+  appointmentConnection: AppointmentConnection;
   pages: Pages;
   pagesConnection: PagesConnection;
 };
@@ -261,6 +263,21 @@ export type QueryGuidelinesConnectionArgs = {
 };
 
 
+export type QueryAppointmentArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryAppointmentConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<AppointmentFilter>;
+};
+
+
 export type QueryPagesArgs = {
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
@@ -285,6 +302,7 @@ export type DocumentFilter = {
   aesthetics?: InputMaybe<AestheticsFilter>;
   pledge?: InputMaybe<PledgeFilter>;
   guidelines?: InputMaybe<GuidelinesFilter>;
+  appointment?: InputMaybe<AppointmentFilter>;
   pages?: InputMaybe<PagesFilter>;
 };
 
@@ -325,7 +343,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Global | Home | Doctors | Services | Screening | Pcp | Aesthetics | Pledge | Guidelines | Pages | Folder;
+export type DocumentNode = Global | Home | Doctors | Services | Screening | Pcp | Aesthetics | Pledge | Guidelines | Appointment | Pages | Folder;
 
 export type GlobalNavbarNavLinks = {
   __typename?: 'GlobalNavbarNavLinks';
@@ -821,6 +839,110 @@ export type GuidelinesConnection = Connection & {
   edges?: Maybe<Array<Maybe<GuidelinesConnectionEdges>>>;
 };
 
+export type AppointmentHero = {
+  __typename?: 'AppointmentHero';
+  title?: Maybe<Scalars['String']['output']>;
+  quote?: Maybe<Scalars['String']['output']>;
+  clinicalText?: Maybe<Scalars['String']['output']>;
+  spiritualText?: Maybe<Scalars['String']['output']>;
+  aestheticText?: Maybe<Scalars['String']['output']>;
+};
+
+export type AppointmentContact = {
+  __typename?: 'AppointmentContact';
+  headingHours?: Maybe<Scalars['String']['output']>;
+  hours?: Maybe<Scalars['String']['output']>;
+  specialHoursTitle?: Maybe<Scalars['String']['output']>;
+  specialHours?: Maybe<Scalars['String']['output']>;
+  locationHeading?: Maybe<Scalars['String']['output']>;
+  location?: Maybe<Scalars['String']['output']>;
+  whatsappNumber?: Maybe<Scalars['String']['output']>;
+};
+
+export type AppointmentForm = {
+  __typename?: 'AppointmentForm';
+  serviceLabel?: Maybe<Scalars['String']['output']>;
+  timeLabel?: Maybe<Scalars['String']['output']>;
+  submitLabel?: Maybe<Scalars['String']['output']>;
+  weekdayOnlyError?: Maybe<Scalars['String']['output']>;
+  wednesdayOnlyError?: Maybe<Scalars['String']['output']>;
+};
+
+export type AppointmentServices = {
+  __typename?: 'AppointmentServices';
+  name?: Maybe<Scalars['String']['output']>;
+  wednesdayOnly?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type Appointment = Node & Document & {
+  __typename?: 'Appointment';
+  hero?: Maybe<AppointmentHero>;
+  contact?: Maybe<AppointmentContact>;
+  form?: Maybe<AppointmentForm>;
+  services?: Maybe<Array<Maybe<AppointmentServices>>>;
+  timeSlots?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type AppointmentHeroFilter = {
+  title?: InputMaybe<StringFilter>;
+  quote?: InputMaybe<StringFilter>;
+  clinicalText?: InputMaybe<StringFilter>;
+  spiritualText?: InputMaybe<StringFilter>;
+  aestheticText?: InputMaybe<StringFilter>;
+};
+
+export type AppointmentContactFilter = {
+  headingHours?: InputMaybe<StringFilter>;
+  hours?: InputMaybe<StringFilter>;
+  specialHoursTitle?: InputMaybe<StringFilter>;
+  specialHours?: InputMaybe<StringFilter>;
+  locationHeading?: InputMaybe<StringFilter>;
+  location?: InputMaybe<StringFilter>;
+  whatsappNumber?: InputMaybe<StringFilter>;
+};
+
+export type AppointmentFormFilter = {
+  serviceLabel?: InputMaybe<StringFilter>;
+  timeLabel?: InputMaybe<StringFilter>;
+  submitLabel?: InputMaybe<StringFilter>;
+  weekdayOnlyError?: InputMaybe<StringFilter>;
+  wednesdayOnlyError?: InputMaybe<StringFilter>;
+};
+
+export type BooleanFilter = {
+  eq?: InputMaybe<Scalars['Boolean']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type AppointmentServicesFilter = {
+  name?: InputMaybe<StringFilter>;
+  wednesdayOnly?: InputMaybe<BooleanFilter>;
+};
+
+export type AppointmentFilter = {
+  hero?: InputMaybe<AppointmentHeroFilter>;
+  contact?: InputMaybe<AppointmentContactFilter>;
+  form?: InputMaybe<AppointmentFormFilter>;
+  services?: InputMaybe<AppointmentServicesFilter>;
+  timeSlots?: InputMaybe<StringFilter>;
+};
+
+export type AppointmentConnectionEdges = {
+  __typename?: 'AppointmentConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Appointment>;
+};
+
+export type AppointmentConnection = Connection & {
+  __typename?: 'AppointmentConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<AppointmentConnectionEdges>>>;
+};
+
 export type PagesBlocksHero = {
   __typename?: 'PagesBlocksHero';
   tagline?: Maybe<Scalars['String']['output']>;
@@ -935,6 +1057,8 @@ export type Mutation = {
   createPledge: Pledge;
   updateGuidelines: Guidelines;
   createGuidelines: Guidelines;
+  updateAppointment: Appointment;
+  createAppointment: Appointment;
   updatePages: Pages;
   createPages: Pages;
 };
@@ -1081,6 +1205,18 @@ export type MutationCreateGuidelinesArgs = {
 };
 
 
+export type MutationUpdateAppointmentArgs = {
+  relativePath: Scalars['String']['input'];
+  params: AppointmentMutation;
+};
+
+
+export type MutationCreateAppointmentArgs = {
+  relativePath: Scalars['String']['input'];
+  params: AppointmentMutation;
+};
+
+
 export type MutationUpdatePagesArgs = {
   relativePath: Scalars['String']['input'];
   params: PagesMutation;
@@ -1102,6 +1238,7 @@ export type DocumentUpdateMutation = {
   aesthetics?: InputMaybe<AestheticsMutation>;
   pledge?: InputMaybe<PledgeMutation>;
   guidelines?: InputMaybe<GuidelinesMutation>;
+  appointment?: InputMaybe<AppointmentMutation>;
   pages?: InputMaybe<PagesMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
@@ -1116,6 +1253,7 @@ export type DocumentMutation = {
   aesthetics?: InputMaybe<AestheticsMutation>;
   pledge?: InputMaybe<PledgeMutation>;
   guidelines?: InputMaybe<GuidelinesMutation>;
+  appointment?: InputMaybe<AppointmentMutation>;
   pages?: InputMaybe<PagesMutation>;
 };
 
@@ -1275,6 +1413,45 @@ export type GuidelinesMutation = {
   subtitle?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type AppointmentHeroMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  quote?: InputMaybe<Scalars['String']['input']>;
+  clinicalText?: InputMaybe<Scalars['String']['input']>;
+  spiritualText?: InputMaybe<Scalars['String']['input']>;
+  aestheticText?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AppointmentContactMutation = {
+  headingHours?: InputMaybe<Scalars['String']['input']>;
+  hours?: InputMaybe<Scalars['String']['input']>;
+  specialHoursTitle?: InputMaybe<Scalars['String']['input']>;
+  specialHours?: InputMaybe<Scalars['String']['input']>;
+  locationHeading?: InputMaybe<Scalars['String']['input']>;
+  location?: InputMaybe<Scalars['String']['input']>;
+  whatsappNumber?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AppointmentFormMutation = {
+  serviceLabel?: InputMaybe<Scalars['String']['input']>;
+  timeLabel?: InputMaybe<Scalars['String']['input']>;
+  submitLabel?: InputMaybe<Scalars['String']['input']>;
+  weekdayOnlyError?: InputMaybe<Scalars['String']['input']>;
+  wednesdayOnlyError?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AppointmentServicesMutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  wednesdayOnly?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type AppointmentMutation = {
+  hero?: InputMaybe<AppointmentHeroMutation>;
+  contact?: InputMaybe<AppointmentContactMutation>;
+  form?: InputMaybe<AppointmentFormMutation>;
+  services?: InputMaybe<Array<InputMaybe<AppointmentServicesMutation>>>;
+  timeSlots?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
 export type PagesBlocksHeroMutation = {
   tagline?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
@@ -1325,6 +1502,8 @@ export type AestheticsPartsFragment = { __typename: 'Aesthetics', tagline?: stri
 export type PledgePartsFragment = { __typename: 'Pledge', tagline?: string | null, title?: string | null, subtitle?: string | null, description?: string | null, registryUrl?: string | null, pledges?: { __typename: 'PledgePledges', physical?: string | null, spiritual?: string | null, giving?: string | null } | null };
 
 export type GuidelinesPartsFragment = { __typename: 'Guidelines', tagline?: string | null, title?: string | null, subtitle?: string | null };
+
+export type AppointmentPartsFragment = { __typename: 'Appointment', timeSlots?: Array<string | null> | null, hero?: { __typename: 'AppointmentHero', title?: string | null, quote?: string | null, clinicalText?: string | null, spiritualText?: string | null, aestheticText?: string | null } | null, contact?: { __typename: 'AppointmentContact', headingHours?: string | null, hours?: string | null, specialHoursTitle?: string | null, specialHours?: string | null, locationHeading?: string | null, location?: string | null, whatsappNumber?: string | null } | null, form?: { __typename: 'AppointmentForm', serviceLabel?: string | null, timeLabel?: string | null, submitLabel?: string | null, weekdayOnlyError?: string | null, wednesdayOnlyError?: string | null } | null, services?: Array<{ __typename: 'AppointmentServices', name?: string | null, wednesdayOnly?: boolean | null } | null> | null };
 
 export type PagesPartsFragment = { __typename: 'Pages', title: string, blocks?: Array<{ __typename: 'PagesBlocksHero', tagline?: string | null, title?: string | null, subtitle?: string | null } | { __typename: 'PagesBlocksContentSection', title?: string | null, body?: any | null, image?: string | null } | { __typename: 'PagesBlocksGrid', items?: Array<{ __typename: 'PagesBlocksGridItems', title?: string | null, description?: string | null, icon?: string | null } | null> | null } | null> | null };
 
@@ -1498,6 +1677,25 @@ export type GuidelinesConnectionQueryVariables = Exact<{
 
 
 export type GuidelinesConnectionQuery = { __typename?: 'Query', guidelinesConnection: { __typename?: 'GuidelinesConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'GuidelinesConnectionEdges', cursor: string, node?: { __typename: 'Guidelines', id: string, tagline?: string | null, title?: string | null, subtitle?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+
+export type AppointmentQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type AppointmentQuery = { __typename?: 'Query', appointment: { __typename: 'Appointment', id: string, timeSlots?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero?: { __typename: 'AppointmentHero', title?: string | null, quote?: string | null, clinicalText?: string | null, spiritualText?: string | null, aestheticText?: string | null } | null, contact?: { __typename: 'AppointmentContact', headingHours?: string | null, hours?: string | null, specialHoursTitle?: string | null, specialHours?: string | null, locationHeading?: string | null, location?: string | null, whatsappNumber?: string | null } | null, form?: { __typename: 'AppointmentForm', serviceLabel?: string | null, timeLabel?: string | null, submitLabel?: string | null, weekdayOnlyError?: string | null, wednesdayOnlyError?: string | null } | null, services?: Array<{ __typename: 'AppointmentServices', name?: string | null, wednesdayOnly?: boolean | null } | null> | null } };
+
+export type AppointmentConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<AppointmentFilter>;
+}>;
+
+
+export type AppointmentConnectionQuery = { __typename?: 'Query', appointmentConnection: { __typename?: 'AppointmentConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'AppointmentConnectionEdges', cursor: string, node?: { __typename: 'Appointment', id: string, timeSlots?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero?: { __typename: 'AppointmentHero', title?: string | null, quote?: string | null, clinicalText?: string | null, spiritualText?: string | null, aestheticText?: string | null } | null, contact?: { __typename: 'AppointmentContact', headingHours?: string | null, hours?: string | null, specialHoursTitle?: string | null, specialHours?: string | null, locationHeading?: string | null, location?: string | null, whatsappNumber?: string | null } | null, form?: { __typename: 'AppointmentForm', serviceLabel?: string | null, timeLabel?: string | null, submitLabel?: string | null, weekdayOnlyError?: string | null, wednesdayOnlyError?: string | null } | null, services?: Array<{ __typename: 'AppointmentServices', name?: string | null, wednesdayOnly?: boolean | null } | null> | null } | null } | null> | null } };
 
 export type PagesQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1675,6 +1873,43 @@ export const GuidelinesPartsFragmentDoc = gql`
   tagline
   title
   subtitle
+}
+    `;
+export const AppointmentPartsFragmentDoc = gql`
+    fragment AppointmentParts on Appointment {
+  __typename
+  hero {
+    __typename
+    title
+    quote
+    clinicalText
+    spiritualText
+    aestheticText
+  }
+  contact {
+    __typename
+    headingHours
+    hours
+    specialHoursTitle
+    specialHours
+    locationHeading
+    location
+    whatsappNumber
+  }
+  form {
+    __typename
+    serviceLabel
+    timeLabel
+    submitLabel
+    weekdayOnlyError
+    wednesdayOnlyError
+  }
+  services {
+    __typename
+    name
+    wednesdayOnly
+  }
+  timeSlots
 }
     `;
 export const PagesPartsFragmentDoc = gql`
@@ -2217,6 +2452,63 @@ export const GuidelinesConnectionDocument = gql`
   }
 }
     ${GuidelinesPartsFragmentDoc}`;
+export const AppointmentDocument = gql`
+    query appointment($relativePath: String!) {
+  appointment(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...AppointmentParts
+  }
+}
+    ${AppointmentPartsFragmentDoc}`;
+export const AppointmentConnectionDocument = gql`
+    query appointmentConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: AppointmentFilter) {
+  appointmentConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...AppointmentParts
+      }
+    }
+  }
+}
+    ${AppointmentPartsFragmentDoc}`;
 export const PagesDocument = gql`
     query pages($relativePath: String!) {
   pages(relativePath: $relativePath) {
@@ -2330,6 +2622,12 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     guidelinesConnection(variables?: GuidelinesConnectionQueryVariables, options?: C): Promise<{data: GuidelinesConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GuidelinesConnectionQueryVariables, query: string}> {
         return requester<{data: GuidelinesConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GuidelinesConnectionQueryVariables, query: string}, GuidelinesConnectionQueryVariables>(GuidelinesConnectionDocument, variables, options);
+      },
+    appointment(variables: AppointmentQueryVariables, options?: C): Promise<{data: AppointmentQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AppointmentQueryVariables, query: string}> {
+        return requester<{data: AppointmentQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AppointmentQueryVariables, query: string}, AppointmentQueryVariables>(AppointmentDocument, variables, options);
+      },
+    appointmentConnection(variables?: AppointmentConnectionQueryVariables, options?: C): Promise<{data: AppointmentConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AppointmentConnectionQueryVariables, query: string}> {
+        return requester<{data: AppointmentConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AppointmentConnectionQueryVariables, query: string}, AppointmentConnectionQueryVariables>(AppointmentConnectionDocument, variables, options);
       },
     pages(variables: PagesQueryVariables, options?: C): Promise<{data: PagesQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PagesQueryVariables, query: string}> {
         return requester<{data: PagesQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PagesQueryVariables, query: string}, PagesQueryVariables>(PagesDocument, variables, options);

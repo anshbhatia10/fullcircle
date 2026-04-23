@@ -1,5 +1,5 @@
 import { createClient } from "tinacms/dist/client";
 import { queries } from "./types";
-export const client = createClient({ url: 'http://localhost:4001/graphql', token: '3e9f627cb40a81185033dc88a58be90d2b941ffc', queries,  });
+export const client = createClient({ url: 'http://localhost:4001/graphql', token: '0d89a43db4e89b743b0dd93fe10fbc2c8ed643a3', queries,  });
 export default client;
   

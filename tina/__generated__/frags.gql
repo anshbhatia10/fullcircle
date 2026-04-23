@@ -148,6 +148,42 @@ fragment GuidelinesParts on Guidelines {
   subtitle
 }
 
+fragment AppointmentParts on Appointment {
+  __typename
+  hero {
+    __typename
+    title
+    quote
+    clinicalText
+    spiritualText
+    aestheticText
+  }
+  contact {
+    __typename
+    headingHours
+    hours
+    specialHoursTitle
+    specialHours
+    locationHeading
+    location
+    whatsappNumber
+  }
+  form {
+    __typename
+    serviceLabel
+    timeLabel
+    submitLabel
+    weekdayOnlyError
+    wednesdayOnlyError
+  }
+  services {
+    __typename
+    name
+    wednesdayOnly
+  }
+  timeSlots
+}
+
 fragment PagesParts on Pages {
   __typename
   title

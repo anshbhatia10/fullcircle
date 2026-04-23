@@ -72,6 +72,8 @@ type Query {
   pledgeConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PledgeFilter): PledgeConnection!
   guidelines(relativePath: String): Guidelines!
   guidelinesConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: GuidelinesFilter): GuidelinesConnection!
+  appointment(relativePath: String): Appointment!
+  appointmentConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: AppointmentFilter): AppointmentConnection!
   pages(relativePath: String): Pages!
   pagesConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PagesFilter): PagesConnection!
 }
@@ -86,6 +88,7 @@ input DocumentFilter {
   aesthetics: AestheticsFilter
   pledge: PledgeFilter
   guidelines: GuidelinesFilter
+  appointment: AppointmentFilter
   pages: PagesFilter
 }
 
@@ -112,7 +115,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Global | Home | Doctors | Services | Screening | Pcp | Aesthetics | Pledge | Guidelines | Pages | Folder
+union DocumentNode = Global | Home | Doctors | Services | Screening | Pcp | Aesthetics | Pledge | Guidelines | Appointment | Pages | Folder
 
 type GlobalNavbarNavLinks {
   label: String
@@ -566,6 +569,103 @@ type GuidelinesConnection implements Connection {
   edges: [GuidelinesConnectionEdges]
 }
 
+type AppointmentHero {
+  title: String
+  quote: String
+  clinicalText: String
+  spiritualText: String
+  aestheticText: String
+}
+
+type AppointmentContact {
+  headingHours: String
+  hours: String
+  specialHoursTitle: String
+  specialHours: String
+  locationHeading: String
+  location: String
+  whatsappNumber: String
+}
+
+type AppointmentForm {
+  serviceLabel: String
+  timeLabel: String
+  submitLabel: String
+  weekdayOnlyError: String
+  wednesdayOnlyError: String
+}
+
+type AppointmentServices {
+  name: String
+  wednesdayOnly: Boolean
+}
+
+type Appointment implements Node & Document {
+  hero: AppointmentHero
+  contact: AppointmentContact
+  form: AppointmentForm
+  services: [AppointmentServices]
+  timeSlots: [String]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input AppointmentHeroFilter {
+  title: StringFilter
+  quote: StringFilter
+  clinicalText: StringFilter
+  spiritualText: StringFilter
+  aestheticText: StringFilter
+}
+
+input AppointmentContactFilter {
+  headingHours: StringFilter
+  hours: StringFilter
+  specialHoursTitle: StringFilter
+  specialHours: StringFilter
+  locationHeading: StringFilter
+  location: StringFilter
+  whatsappNumber: StringFilter
+}
+
+input AppointmentFormFilter {
+  serviceLabel: StringFilter
+  timeLabel: StringFilter
+  submitLabel: StringFilter
+  weekdayOnlyError: StringFilter
+  wednesdayOnlyError: StringFilter
+}
+
+input BooleanFilter {
+  eq: Boolean
+  exists: Boolean
+}
+
+input AppointmentServicesFilter {
+  name: StringFilter
+  wednesdayOnly: BooleanFilter
+}
+
+input AppointmentFilter {
+  hero: AppointmentHeroFilter
+  contact: AppointmentContactFilter
+  form: AppointmentFormFilter
+  services: AppointmentServicesFilter
+  timeSlots: StringFilter
+}
+
+type AppointmentConnectionEdges {
+  cursor: String!
+  node: Appointment
+}
+
+type AppointmentConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [AppointmentConnectionEdges]
+}
+
 type PagesBlocksHero {
   tagline: String
   title: String
@@ -672,6 +772,8 @@ type Mutation {
   createPledge(relativePath: String!, params: PledgeMutation!): Pledge!
   updateGuidelines(relativePath: String!, params: GuidelinesMutation!): Guidelines!
   createGuidelines(relativePath: String!, params: GuidelinesMutation!): Guidelines!
+  updateAppointment(relativePath: String!, params: AppointmentMutation!): Appointment!
+  createAppointment(relativePath: String!, params: AppointmentMutation!): Appointment!
   updatePages(relativePath: String!, params: PagesMutation!): Pages!
   createPages(relativePath: String!, params: PagesMutation!): Pages!
 }
@@ -686,6 +788,7 @@ input DocumentUpdateMutation {
   aesthetics: AestheticsMutation
   pledge: PledgeMutation
   guidelines: GuidelinesMutation
+  appointment: AppointmentMutation
   pages: PagesMutation
   relativePath: String
 }
@@ -700,6 +803,7 @@ input DocumentMutation {
   aesthetics: AestheticsMutation
   pledge: PledgeMutation
   guidelines: GuidelinesMutation
+  appointment: AppointmentMutation
   pages: PagesMutation
 }
 
@@ -857,6 +961,45 @@ input GuidelinesMutation {
   tagline: String
   title: String
   subtitle: String
+}
+
+input AppointmentHeroMutation {
+  title: String
+  quote: String
+  clinicalText: String
+  spiritualText: String
+  aestheticText: String
+}
+
+input AppointmentContactMutation {
+  headingHours: String
+  hours: String
+  specialHoursTitle: String
+  specialHours: String
+  locationHeading: String
+  location: String
+  whatsappNumber: String
+}
+
+input AppointmentFormMutation {
+  serviceLabel: String
+  timeLabel: String
+  submitLabel: String
+  weekdayOnlyError: String
+  wednesdayOnlyError: String
+}
+
+input AppointmentServicesMutation {
+  name: String
+  wednesdayOnly: Boolean
+}
+
+input AppointmentMutation {
+  hero: AppointmentHeroMutation
+  contact: AppointmentContactMutation
+  form: AppointmentFormMutation
+  services: [AppointmentServicesMutation]
+  timeSlots: [String]
 }
 
 input PagesBlocksHeroMutation {

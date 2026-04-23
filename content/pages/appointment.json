@@ -1,0 +1,74 @@
+{
+  "hero": {
+    "title": "Begin Your Journey",
+    "quote": "You will always have a doctor who knows your full circle.",
+    "clinicalText": "Expert diagnostics & treatment.",
+    "spiritualText": "Healing the subtle bodies.",
+    "aestheticText": "Harmony in physical form."
+  },
+  "contact": {
+    "headingHours": "General Hours",
+    "hours": "Mon - Fri: 11:00 AM - 08:00 PM",
+    "specialHoursTitle": "Dr. NK Sharma (Wednesdays)",
+    "specialHours": "10:00 AM - 07:00 PM",
+    "locationHeading": "Location",
+    "location": "Gurgaon Clinic, India",
+    "whatsappNumber": "919910930108"
+  },
+  "form": {
+    "serviceLabel": "Service",
+    "timeLabel": "Preferred Time",
+    "submitLabel": "Request Booking on WhatsApp",
+    "weekdayOnlyError": "Please select a weekday (Monday to Friday). We are closed on weekends.",
+    "wednesdayOnlyError": "This service is only available on Wednesdays. Please select a Wednesday."
+  },
+  "services": [
+    {
+      "name": "Wellness Consultation (Dosha)",
+      "wednesdayOnly": false
+    },
+    {
+      "name": "Acute/Medical Care",
+      "wednesdayOnly": false
+    },
+    {
+      "name": "Spiritual Healing / Reiki (Dr. NK Sharma - Wed Only)",
+      "wednesdayOnly": true
+    },
+    {
+      "name": "Naturopathy Consultation (Dr. NK Sharma - Wed Only)",
+      "wednesdayOnly": true
+    },
+    {
+      "name": "Palliative Support",
+      "wednesdayOnly": false
+    },
+    {
+      "name": "Aesthetic Consultation",
+      "wednesdayOnly": false
+    }
+  ],
+  "timeSlots": [
+    "10:00 AM",
+    "10:30 AM",
+    "11:00 AM",
+    "11:30 AM",
+    "12:00 PM",
+    "12:30 PM",
+    "01:00 PM",
+    "01:30 PM",
+    "02:00 PM",
+    "02:30 PM",
+    "03:00 PM",
+    "03:30 PM",
+    "04:00 PM",
+    "04:30 PM",
+    "05:00 PM",
+    "05:30 PM",
+    "06:00 PM",
+    "06:30 PM",
+    "07:00 PM",
+    "07:30 PM",
+    "08:00 PM"
+  ]
+}

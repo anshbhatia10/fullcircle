@@ -127,6 +127,9 @@ var config_default = defineConfig({
         label: "Doctors",
         path: "content/doctors",
         format: "json",
+        ui: {
+          router: ({ document }) => `/dr-${document._sys.filename}`
+        },
         fields: [
           { type: "string", name: "name", label: "Name" },
           { type: "string", name: "lastName", label: "Last Name" },
@@ -201,7 +204,8 @@ var config_default = defineConfig({
           allowedActions: {
             create: false,
             delete: false
-          }
+          },
+          router: () => "/screening-circle"
         },
         fields: [
           { type: "string", name: "tagline", label: "Tagline" },
@@ -241,7 +245,8 @@ var config_default = defineConfig({
           allowedActions: {
             create: false,
             delete: false
-          }
+          },
+          router: () => "/full-circle-pcp"
         },
         fields: [
           { type: "string", name: "tagline", label: "Tagline" },
@@ -272,7 +277,8 @@ var config_default = defineConfig({
           allowedActions: {
             create: false,
             delete: false
-          }
+          },
+          router: () => "/aesthetic-circle"
         },
         fields: [
           { type: "string", name: "tagline", label: "Tagline" },
@@ -303,7 +309,8 @@ var config_default = defineConfig({
           allowedActions: {
             create: false,
             delete: false
-          }
+          },
+          router: () => "/pledge"
         },
         fields: [
           { type: "string", name: "tagline", label: "Tagline" },
@@ -335,12 +342,85 @@ var config_default = defineConfig({
           allowedActions: {
             create: false,
             delete: false
-          }
+          },
+          router: () => "/guidelines"
         },
         fields: [
           { type: "string", name: "tagline", label: "Tagline" },
           { type: "string", name: "title", label: "Title" },
           { type: "string", name: "subtitle", label: "Subtitle", ui: { component: "textarea" } }
+        ]
+      },
+      {
+        name: "appointment",
+        label: "Appointment Page",
+        path: "content/pages",
+        format: "json",
+        match: {
+          include: "appointment"
+        },
+        ui: {
+          allowedActions: {
+            create: false,
+            delete: false
+          },
+          router: () => "/appointment"
+        },
+        fields: [
+          {
+            type: "object",
+            name: "hero",
+            label: "Hero",
+            fields: [
+              { type: "string", name: "title", label: "Title" },
+              { type: "string", name: "quote", label: "Quote", ui: { component: "textarea" } },
+              { type: "string", name: "clinicalText", label: "Clinical Line" },
+              { type: "string", name: "spiritualText", label: "Spiritual Line" },
+              { type: "string", name: "aestheticText", label: "Aesthetic Line" }
+            ]
+          },
+          {
+            type: "object",
+            name: "contact",
+            label: "Contact Panel",
+            fields: [
+              { type: "string", name: "headingHours", label: "Hours Heading" },
+              { type: "string", name: "hours", label: "Hours" },
+              { type: "string", name: "specialHoursTitle", label: "Special Hours Heading" },
+              { type: "string", name: "specialHours", label: "Special Hours" },
+              { type: "string", name: "locationHeading", label: "Location Heading" },
+              { type: "string", name: "location", label: "Location" },
+              { type: "string", name: "whatsappNumber", label: "WhatsApp Number (country code + number)" }
+            ]
+          },
+          {
+            type: "object",
+            name: "form",
+            label: "Form Labels",
+            fields: [
+              { type: "string", name: "serviceLabel", label: "Service Label" },
+              { type: "string", name: "timeLabel", label: "Time Label" },
+              { type: "string", name: "submitLabel", label: "Submit Button Label" },
+              { type: "string", name: "weekdayOnlyError", label: "Weekend Error", ui: { component: "textarea" } },
+              { type: "string", name: "wednesdayOnlyError", label: "Wednesday-only Error", ui: { component: "textarea" } }
+            ]
+          },
+          {
+            type: "object",
+            list: true,
+            name: "services",
+            label: "Services",
+            fields: [
+              { type: "string", name: "name", label: "Service Name" },
+              { type: "boolean", name: "wednesdayOnly", label: "Wednesday-only Service" }
+            ]
+          },
+          {
+            type: "string",
+            list: true,
+            name: "timeSlots",
+            label: "Time Slots"
+          }
         ]
       },
       {

@@ -1,54 +1,96 @@
 import React, { useState } from 'react';
+import { tinaField, useTina } from 'tinacms/dist/react';
+import appointmentData from '../content/pages/appointment.json';
+
+type AppointmentService = {
+  name: string;
+  wednesdayOnly?: boolean;
+};
+
+const parseDateLocal = (dateString: string) => {
+  const [year, month, day] = dateString.split('-').map(Number);
+  return new Date(year, (month || 1) - 1, day || 1);
+};
 
 const Appointment: React.FC = () => {
+  const { data } = useTina({
+    query: `{
+      appointment(relativePath: "appointment.json") {
+        hero {
+          title
+          quote
+          clinicalText
+          spiritualText
+          aestheticText
+        }
+        contact {
+          headingHours
+          hours
+          specialHoursTitle
+          specialHours
+          locationHeading
+          location
+          whatsappNumber
+        }
+        form {
+          serviceLabel
+          timeLabel
+          submitLabel
+          weekdayOnlyError
+          wednesdayOnlyError
+        }
+        services {
+          name
+          wednesdayOnly
+        }
+        timeSlots
+      }
+    }`,
+    variables: { relativePath: 'appointment.json' },
+    data: { appointment: appointmentData },
+  });
+
+  const { hero, contact, form, services, timeSlots } = data.appointment;
+  const defaultService = services[0]?.name || '';
+  const defaultTime = timeSlots[0] || '';
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     date: '',
-    time: '11:00 AM',
-    service: 'Wellness Consultation (Dosha)',
+    time: defaultTime,
+    service: defaultService,
     notes: ''
   });
 
   const [error, setError] = useState('');
 
-  const timeSlots = [
-    '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', 
-    '01:00 PM', '01:30 PM', '02:00 PM', '02:30 PM', '03:00 PM', '03:30 PM', 
-    '04:00 PM', '04:30 PM', '05:00 PM', '05:30 PM', '06:00 PM', '06:30 PM', 
-    '07:00 PM', '07:30 PM', '08:00 PM'
-  ];
+  const getDateError = (dateValue: string, requiresWednesday: boolean) => {
+    if (!dateValue) {
+      return '';
+    }
+
+    const selectedDate = parseDateLocal(dateValue);
+    const day = selectedDate.getDay();
+
+    if (requiresWednesday && day !== 3) {
+      return form.wednesdayOnlyError;
+    }
+
+    if (day === 0 || day === 6) {
+      return form.weekdayOnlyError;
+    }
+
+    return '';
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    
-    if (name === 'date') {
-      const selectedDate = new Date(value);
-      const day = selectedDate.getUTCDay();
-      
-      if (formData.service.includes('Dr. NK Sharma') && day !== 3) {
-        setError('Dr. NK Sharma is only available on Wednesdays. Please select a Wednesday.');
-      } else if (day === 0 || day === 6) {
-        setError('Please select a weekday (Monday to Friday). We are closed on weekends.');
-      } else {
-        setError('');
-      }
-    }
-
-    if (name === 'service') {
-      if (value.includes('Dr. NK Sharma') && formData.date) {
-        const day = new Date(formData.date).getUTCDay();
-        if (day !== 3) {
-          setError('Dr. NK Sharma is only available on Wednesdays. Please select a Wednesday.');
-        } else {
-          setError('');
-        }
-      } else {
-        setError('');
-      }
-    }
-    
-    setFormData({ ...formData, [name]: value });
+    const nextFormData = { ...formData, [name]: value };
+    const nextService = services.find((service: AppointmentService) => service.name === nextFormData.service);
+    const nextError = getDateError(nextFormData.date, Boolean(nextService?.wednesdayOnly));
+    setError(nextError);
+    setFormData(nextFormData);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -59,7 +101,7 @@ const Appointment: React.FC = () => {
       return;
     }
 
-    const phoneNumber = '919910930108';
+    const phoneNumber = contact.whatsappNumber;
     const message = `I want to request a booking for ${formData.service} on ${formData.date} at ${formData.time}.
 Name: ${formData.name}
 Email: ${formData.email}
@@ -80,29 +122,29 @@ Notes: ${formData.notes || 'None'}`;
           <div className="absolute top-[-20%] right-[-20%] w-64 h-64 bg-white rounded-full opacity-10 filter blur-3xl"></div>
           
           <div>
-            <h2 className="font-display text-4xl mb-6 uppercase tracking-tighter">Begin Your Journey</h2>
-            <p className="font-serif italic text-lg opacity-90 mb-8 leading-relaxed">
-              "You will always have a doctor who knows your full circle."
+            <h2 data-tina-field={tinaField(hero, 'title')} className="font-display text-4xl mb-6 uppercase tracking-tighter">{hero.title}</h2>
+            <p data-tina-field={tinaField(hero, 'quote')} className="font-serif italic text-lg opacity-90 mb-8 leading-relaxed">
+              "{hero.quote}"
             </p>
             <div className="space-y-6 text-sm opacity-90 font-sans">
-              <p><strong className="text-white uppercase tracking-widest text-[10px] block mb-1">Clinical:</strong> Expert diagnostics & treatment.</p>
-              <p><strong className="text-white uppercase tracking-widest text-[10px] block mb-1">Spiritual:</strong> Healing the subtle bodies.</p>
-              <p><strong className="text-white uppercase tracking-widest text-[10px] block mb-1">Aesthetic:</strong> Harmony in physical form.</p>
+              <p><strong className="text-white uppercase tracking-widest text-[10px] block mb-1">Clinical:</strong> <span data-tina-field={tinaField(hero, 'clinicalText')}>{hero.clinicalText}</span></p>
+              <p><strong className="text-white uppercase tracking-widest text-[10px] block mb-1">Spiritual:</strong> <span data-tina-field={tinaField(hero, 'spiritualText')}>{hero.spiritualText}</span></p>
+              <p><strong className="text-white uppercase tracking-widest text-[10px] block mb-1">Aesthetic:</strong> <span data-tina-field={tinaField(hero, 'aestheticText')}>{hero.aestheticText}</span></p>
             </div>
           </div>
 
           <div className="mt-12 space-y-4">
             <div>
-              <p className="text-[10px] uppercase tracking-widest text-[#FAF3F0] mb-1 font-bold opacity-60">General Hours</p>
-              <p className="text-sm font-sans">Mon - Fri: 11:00 AM - 08:00 PM</p>
+              <p data-tina-field={tinaField(contact, 'headingHours')} className="text-[10px] uppercase tracking-widest text-[#FAF3F0] mb-1 font-bold opacity-60">{contact.headingHours}</p>
+              <p data-tina-field={tinaField(contact, 'hours')} className="text-sm font-sans">{contact.hours}</p>
             </div>
             <div className="bg-white/10 p-4 rounded-2xl border border-white/10">
-              <p className="text-[10px] uppercase tracking-widest text-white mb-1 font-bold">Dr. NK Sharma (Wednesdays)</p>
-              <p className="text-sm font-sans">10:00 AM - 07:00 PM</p>
+              <p data-tina-field={tinaField(contact, 'specialHoursTitle')} className="text-[10px] uppercase tracking-widest text-white mb-1 font-bold">{contact.specialHoursTitle}</p>
+              <p data-tina-field={tinaField(contact, 'specialHours')} className="text-sm font-sans">{contact.specialHours}</p>
             </div>
             <div>
-              <p className="text-[10px] uppercase tracking-widest text-[#FAF3F0] mb-1 font-bold opacity-60">Location</p>
-              <p className="text-sm font-sans">Gurgaon Clinic, India</p>
+              <p data-tina-field={tinaField(contact, 'locationHeading')} className="text-[10px] uppercase tracking-widest text-[#FAF3F0] mb-1 font-bold opacity-60">{contact.locationHeading}</p>
+              <p data-tina-field={tinaField(contact, 'location')} className="text-sm font-sans">{contact.location}</p>
             </div>
           </div>
         </div>
@@ -135,19 +177,16 @@ Notes: ${formData.notes || 'None'}`;
             </div>
 
             <div>
-              <label className="block text-[10px] uppercase tracking-widest text-[#4A314D]/40 mb-2 font-bold font-sans">Service</label>
+              <label data-tina-field={tinaField(form, 'serviceLabel')} className="block text-[10px] uppercase tracking-widest text-[#4A314D]/40 mb-2 font-bold font-sans">{form.serviceLabel}</label>
               <select 
                 name="service"
                 value={formData.service}
                 onChange={handleChange}
                 className="w-full border-b border-[#4A314D]/10 py-2 focus:outline-none focus:border-[#B5838D] bg-transparent transition-colors font-sans appearance-none text-[#4A314D]"
               >
-                <option>Wellness Consultation (Dosha)</option>
-                <option>Acute/Medical Care</option>
-                <option>Spiritual Healing / Reiki (Dr. NK Sharma - Wed Only)</option>
-                <option>Naturopathy Consultation (Dr. NK Sharma - Wed Only)</option>
-                <option>Palliative Support</option>
-                <option>Aesthetic Consultation</option>
+                {services.map((service: AppointmentService, index: number) => (
+                  <option key={`${service.name}-${index}`} value={service.name}>{service.name}</option>
+                ))}
               </select>
             </div>
 
@@ -164,7 +203,7 @@ Notes: ${formData.notes || 'None'}`;
                 />
               </div>
               <div>
-                <label className="block text-[10px] uppercase tracking-widest text-[#4A314D]/40 mb-2 font-bold font-sans">Preferred Time</label>
+                <label data-tina-field={tinaField(form, 'timeLabel')} className="block text-[10px] uppercase tracking-widest text-[#4A314D]/40 mb-2 font-bold font-sans">{form.timeLabel}</label>
                 <select 
                   name="time"
                   value={formData.time}
@@ -193,7 +232,7 @@ Notes: ${formData.notes || 'None'}`;
             </div>
 
             <button type="submit" className="w-full bg-[#4A314D] text-white py-4 rounded-full font-bold uppercase tracking-widest hover:bg-[#8E5D52] transition-all mt-4 text-[10px] shadow-xl transform hover:-translate-y-1">
-              Request Booking on WhatsApp
+              <span data-tina-field={tinaField(form, 'submitLabel')}>{form.submitLabel}</span>
             </button>
           </form>
         </div>

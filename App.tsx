@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -26,7 +26,7 @@ const ScrollToTop = () => {
 
 const App: React.FC = () => {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <ScrollToTop />
       <div className="flex flex-col min-h-screen bg-cream font-sans text-dark-brown overflow-x-hidden selection:bg-accent-orange selection:text-white">
         <Navbar />
@@ -45,11 +45,12 @@ const App: React.FC = () => {
             <Route path="/guidelines" element={<HealthGuidelines />} />
             <Route path="/dr-nk-sharma" element={<DrNKSharma />} />
             <Route path="/dr-prerna-kumar" element={<DrPrernaKumar />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
         <Footer />
       </div>
-    </HashRouter>
+    </BrowserRouter>
   );
 };
 
