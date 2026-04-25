@@ -2,11 +2,20 @@ import { defineConfig } from "tinacms";
 
 // Your hosting provider will pass these as environment variables.
 const branch = "main";
+const clientId =
+  process.env.NEXT_PUBLIC_TINA_CLIENT_ID ||
+  process.env.TINA_CLIENT_ID ||
+  process.env.VITE_TINA_CLIENT_ID ||
+  "";
+const token =
+  process.env.TINA_TOKEN ||
+  process.env.NEXT_PUBLIC_TINA_TOKEN ||
+  "";
 
 export default defineConfig({
   branch,
-  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID, // Get this from tina.io
-  token: process.env.TINA_TOKEN, // Get this from tina.io
+  clientId, // Get this from tina.io
+  token, // Get this from tina.io
   build: {
     outputFolder: "admin",
     publicFolder: "public",
