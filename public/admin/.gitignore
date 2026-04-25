@@ -1,2 +1,1 @@
-index.html
-assets/
+# Keep Tina admin assets versioned so hash changes deploy correctly.
