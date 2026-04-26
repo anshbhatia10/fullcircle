@@ -1,6 +1,7 @@
 import React from 'react';
 import { Instagram, Facebook, Heart, Circle } from 'lucide-react';
 import { useTina } from 'tinacms/dist/react';
+import { Link } from 'react-router-dom';
 import globalData from '../content/global/index.json';
 
 const Footer: React.FC = () => {
@@ -27,10 +28,10 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           
           <div className="col-span-1 md:col-span-2">
-             <div className="flex items-center gap-2 mb-6">
+             <Link to="/" className="flex items-center gap-2 mb-6">
                 <Circle size={24} strokeWidth={2} className="text-[#FAF3F0]" />
                 <span className="font-display text-2xl font-bold uppercase tracking-tight text-[#FAF3F0]">Full Circle</span>
-            </div>
+            </Link>
             <p className="font-serif italic text-lg text-[#FAF3F0]/80 mb-6 max-w-md">
               "{quote}"
             </p>
@@ -42,12 +43,12 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="uppercase tracking-widest text-xs font-bold text-[#FAF3F0] mb-6 opacity-80">Navigation</h3>
             <ul className="space-y-4 font-sans text-sm">
-              <li><a href="/screening-circle" className="hover:text-white transition-colors">Screening Circle</a></li>
-              <li><a href="/full-circle-pcp" className="hover:text-white transition-colors">Full Circle PCP</a></li>
-              <li><a href="/aesthetic-circle" className="hover:text-white transition-colors">Aesthetic Circle</a></li>
-              <li><a href="/inverted-tree" className="hover:text-white transition-colors">Mission</a></li>
-              <li><a href="/partners" className="hover:text-white transition-colors">Meet Partners</a></li>
-              <li><a href="/pledge" className="hover:text-white transition-colors font-bold text-white">The Pledge</a></li>
+              <li><Link to="/screening-circle" className="hover:text-white transition-colors">Screening Circle</Link></li>
+              <li><Link to="/full-circle-pcp" className="hover:text-white transition-colors">Full Circle PCP</Link></li>
+              <li><Link to="/aesthetic-circle" className="hover:text-white transition-colors">Aesthetic Circle</Link></li>
+              <li><Link to="/inverted-tree" className="hover:text-white transition-colors">Mission</Link></li>
+              <li><Link to="/partners" className="hover:text-white transition-colors">Meet Partners</Link></li>
+              <li><Link to="/pledge" className="hover:text-white transition-colors font-bold text-white">The Pledge</Link></li>
             </ul>
           </div>
 
@@ -57,14 +58,14 @@ const Footer: React.FC = () => {
                <a href={instagram} target="_blank" rel="noreferrer" className="p-2 border border-[#FAF3F0]/30 rounded-full hover:bg-[#FAF3F0] hover:text-[#B5838D] transition-all">
                  <Instagram size={20} />
                </a>
-               <a href={facebook} className="p-2 border border-[#FAF3F0]/30 rounded-full hover:bg-[#FAF3F0] hover:text-[#B5838D] transition-all">
+               <a href={facebook} target="_blank" rel="noreferrer" className="p-2 border border-[#FAF3F0]/30 rounded-full hover:bg-[#FAF3F0] hover:text-[#B5838D] transition-all">
                  <Facebook size={20} />
                </a>
              </div>
              <div className="mt-8">
-                <a href="/appointment" className="inline-block px-6 py-3 border border-[#FAF3F0] text-[#FAF3F0] rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-[#FAF3F0] hover:text-[#B5838D] transition-all">
+                <Link to="/appointment" className="inline-block px-6 py-3 border border-[#FAF3F0] text-[#FAF3F0] rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-[#FAF3F0] hover:text-[#B5838D] transition-all">
                    Book Appointment
-                </a>
+                </Link>
              </div>
           </div>
         </div>

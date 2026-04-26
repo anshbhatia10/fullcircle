@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import { Menu, X, Circle, Aperture, Heart } from 'lucide-react';
 import { useTina } from 'tinacms/dist/react';
 import globalData from '../content/global/index.json';
@@ -9,6 +9,8 @@ const normalizeInternalPath = (path: string) => {
   if (/^https?:\/\//i.test(path)) return path;
   return path.startsWith('/') ? path : `/${path}`;
 };
+
+const isExternal = (path: string) => /^https?:\/\//i.test(path);
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -45,28 +47,36 @@ const Navbar: React.FC = () => {
             
             {/* Left: Navigation Links */}
             <div className="hidden xl:flex items-center space-x-4 lg:space-x-6">
-              {navLinks.map((link: any, index: number) => (
-                <React.Fragment key={link.path}>
-                  {(() => {
-                    const normalizedPath = normalizeInternalPath(link.path);
-                    const isActive =
-                      normalizedPath === '/'
-                        ? location.pathname === '/'
-                        : location.pathname === normalizedPath || location.pathname.startsWith(`${normalizedPath}/`);
-                    return (
-                  <a
-                    href={normalizedPath}
-                    className={`font-sans text-[10px] font-bold tracking-[0.2em] uppercase transition-colors ${
-                      isActive ? 'text-[#8E5D52]' : 'text-[#4A314D]/70 hover:text-[#8E5D52]'
-                    }`}
-                  >
+              {navLinks.map((link: any, index: number) => {
+                const normalizedPath = normalizeInternalPath(link.path);
+                const isActive =
+                  normalizedPath === '/'
+                    ? location.pathname === '/'
+                    : location.pathname === normalizedPath || location.pathname.startsWith(`${normalizedPath}/`);
+                
+                const linkContent = (
+                  <span className={`font-sans text-[10px] font-bold tracking-[0.2em] uppercase transition-colors ${
+                    isActive ? 'text-[#8E5D52]' : 'text-[#4A314D]/70 hover:text-[#8E5D52]'
+                  }`}>
                     {link.label}
-                  </a>
-                    );
-                  })()}
-                  {index < navLinks.length - 1 && <div className="h-4 w-[1px] bg-[#4A314D]/10"></div>}
-                </React.Fragment>
-              ))}
+                  </span>
+                );
+
+                return (
+                  <React.Fragment key={link.path}>
+                    {isExternal(normalizedPath) ? (
+                      <a href={normalizedPath} target="_blank" rel="noopener noreferrer">
+                        {linkContent}
+                      </a>
+                    ) : (
+                      <Link to={normalizedPath}>
+                        {linkContent}
+                      </Link>
+                    )}
+                    {index < navLinks.length - 1 && <div className="h-4 w-[1px] bg-[#4A314D]/10"></div>}
+                  </React.Fragment>
+                );
+              })}
             </div>
 
             {/* Mobile Menu Button */}
@@ -77,36 +87,36 @@ const Navbar: React.FC = () => {
             </div>
 
             {/* Center: Logo */}
-            <a href="/" className="flex items-center space-x-3 group md:mx-4 lg:mx-8">
+            <Link to="/" className="flex items-center space-x-3 group md:mx-4 lg:mx-8">
                <div className="relative flex items-center justify-center">
                  <Circle size={24} className="text-[#4A314D]/10 absolute" strokeWidth={1} />
                  <Aperture size={18} className="text-[#4A314D] animate-spin-slow group-hover:text-[#8E5D52] transition-colors" strokeWidth={1.5} />
                </div>
                <span className="font-display text-xl md:text-2xl lg:text-3xl text-[#4A314D] tracking-tighter font-bold uppercase whitespace-nowrap">{logoText}</span>
-            </a>
+            </Link>
 
             {/* Right: Actions */}
             <div className="hidden md:flex items-center space-x-3 lg:space-x-4">
-              <a
-                href="/pledge"
+              <Link
+                to="/pledge"
                 className="flex items-center gap-2 px-4 py-2 bg-accent-orange/10 text-accent-orange rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-accent-orange hover:text-white transition-all group"
               >
                 <Heart size={14} className="group-hover:fill-current" />
                 <span>The Pledge</span>
-              </a>
-              <a
-                href="/appointment"
+              </Link>
+              <Link
+                to="/appointment"
                 className="px-5 lg:px-6 py-2 border border-[#4A314D]/20 rounded-full text-[#4A314D] text-[10px] lg:text-xs font-bold uppercase tracking-widest hover:bg-[#4A314D] hover:text-white transition-all whitespace-nowrap"
               >
                 Book Appointment
-              </a>
+              </Link>
             </div>
 
              <div className="md:hidden flex items-center gap-2">
-                <a href="/pledge" className="p-2 bg-accent-orange/10 text-accent-orange rounded-full">
+                <Link to="/pledge" className="p-2 bg-accent-orange/10 text-accent-orange rounded-full">
                   <Heart size={18} fill="currentColor" />
-                </a>
-                <a href="/appointment" className="text-[10px] font-bold uppercase border border-[#4A314D]/20 bg-[#4A314D] text-white rounded-full px-4 py-2">Book</a>
+                </Link>
+                <Link to="/appointment" className="text-[10px] font-bold uppercase border border-[#4A314D]/20 bg-[#4A314D] text-white rounded-full px-4 py-2">Book</Link>
              </div>
 
           </div>
@@ -116,24 +126,38 @@ const Navbar: React.FC = () => {
       {/* Mobile Menu Overlay */}
       <div className={`fixed inset-0 bg-[#FAF3F0] z-[60] transform ${isOpen ? 'translate-x-0 pointer-events-auto' : '-translate-x-full pointer-events-none'} transition-transform duration-500 xl:hidden pt-28 px-8 overflow-y-auto pb-10`}>
         <div className="flex flex-col space-y-6 items-center text-center">
-          <a href="/" onClick={toggleMenu} className="text-4xl font-display text-[#4A314D] hover:text-[#8E5D52]">Home</a>
-          {navLinks.map((link) => (
-            <a
-              key={link.path} 
-              href={normalizeInternalPath(link.path)}
-              onClick={toggleMenu} 
-              className="text-4xl font-display text-[#4A314D] hover:text-[#8E5D52]"
-            >
-              {link.label}
-            </a>
-          ))}
+          <Link to="/" onClick={toggleMenu} className="text-4xl font-display text-[#4A314D] hover:text-[#8E5D52]">Home</Link>
+          {navLinks.map((link) => {
+            const normalizedPath = normalizeInternalPath(link.path);
+            return isExternal(normalizedPath) ? (
+              <a
+                key={link.path}
+                href={normalizedPath}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={toggleMenu}
+                className="text-4xl font-display text-[#4A314D] hover:text-[#8E5D52]"
+              >
+                {link.label}
+              </a>
+            ) : (
+              <Link
+                key={link.path} 
+                to={normalizedPath}
+                onClick={toggleMenu} 
+                className="text-4xl font-display text-[#4A314D] hover:text-[#8E5D52]"
+              >
+                {link.label}
+              </Link>
+            );
+          })}
           
           <div className="pt-10 w-full flex flex-col space-y-4">
-            <a href="/pledge" onClick={toggleMenu} className="w-full py-4 bg-accent-orange text-white rounded-full font-bold uppercase tracking-widest text-sm flex items-center justify-center gap-2">
+            <Link to="/pledge" onClick={toggleMenu} className="w-full py-4 bg-accent-orange text-white rounded-full font-bold uppercase tracking-widest text-sm flex items-center justify-center gap-2">
               <Heart size={18} fill="white" />
               <span>Sign The Pledge</span>
-            </a>
-            <a href="/appointment" onClick={toggleMenu} className="w-full py-4 bg-[#4A314D] text-white rounded-full font-bold uppercase tracking-widest text-sm">Book Appointment</a>
+            </Link>
+            <Link to="/appointment" onClick={toggleMenu} className="w-full py-4 bg-[#4A314D] text-white rounded-full font-bold uppercase tracking-widest text-sm">Book Appointment</Link>
           </div>
         </div>
         <button onClick={toggleMenu} className="absolute top-8 right-8 text-[#4A314D]">

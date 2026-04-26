@@ -179,16 +179,18 @@ var config_default = defineConfig({
               { type: "string", name: "visionHeading", label: "Vision Heading" },
               { type: "string", name: "visionQuote", label: "Vision Quote", ui: { component: "textarea" } },
               { type: "string", name: "ctaLabel", label: "CTA Label" },
-              {
-                type: "object",
-                list: true,
-                name: "stats",
-                label: "Stats",
-                fields: [
-                  { type: "string", name: "value", label: "Value" },
-                  { type: "string", name: "label", label: "Label" }
-                ]
-              },
+              /*
+                            {
+                              type: "object",
+                              list: true,
+                              name: "stats",
+                              label: "Stats",
+                              fields: [
+                                { type: "string", name: "value", label: "Value" },
+                                { type: "string", name: "label", label: "Label" },
+                              ],
+                            },
+              */
               { type: "string", list: true, name: "philosophyPillars", label: "Philosophy Pillars" }
             ]
           }

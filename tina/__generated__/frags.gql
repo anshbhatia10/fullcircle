@@ -82,11 +82,6 @@ fragment DoctorsParts on Doctors {
     visionHeading
     visionQuote
     ctaLabel
-    stats {
-      __typename
-      value
-      label
-    }
     philosophyPillars
   }
 }

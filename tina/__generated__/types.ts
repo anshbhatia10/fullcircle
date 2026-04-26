@@ -520,12 +520,6 @@ export type DoctorsExpertise = {
   description?: Maybe<Scalars['String']['output']>;
 };
 
-export type DoctorsUiStats = {
-  __typename?: 'DoctorsUiStats';
-  value?: Maybe<Scalars['String']['output']>;
-  label?: Maybe<Scalars['String']['output']>;
-};
-
 export type DoctorsUi = {
   __typename?: 'DoctorsUi';
   consultationButtonLabel?: Maybe<Scalars['String']['output']>;
@@ -541,7 +535,6 @@ export type DoctorsUi = {
   visionHeading?: Maybe<Scalars['String']['output']>;
   visionQuote?: Maybe<Scalars['String']['output']>;
   ctaLabel?: Maybe<Scalars['String']['output']>;
-  stats?: Maybe<Array<Maybe<DoctorsUiStats>>>;
   philosophyPillars?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
 };
 
@@ -573,11 +566,6 @@ export type DoctorsExpertiseFilter = {
   description?: InputMaybe<StringFilter>;
 };
 
-export type DoctorsUiStatsFilter = {
-  value?: InputMaybe<StringFilter>;
-  label?: InputMaybe<StringFilter>;
-};
-
 export type DoctorsUiFilter = {
   consultationButtonLabel?: InputMaybe<StringFilter>;
   consultationButtonUrl?: InputMaybe<StringFilter>;
@@ -592,7 +580,6 @@ export type DoctorsUiFilter = {
   visionHeading?: InputMaybe<StringFilter>;
   visionQuote?: InputMaybe<StringFilter>;
   ctaLabel?: InputMaybe<StringFilter>;
-  stats?: InputMaybe<DoctorsUiStatsFilter>;
   philosophyPillars?: InputMaybe<StringFilter>;
 };
 
@@ -1669,11 +1656,6 @@ export type DoctorsExpertiseMutation = {
   description?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DoctorsUiStatsMutation = {
-  value?: InputMaybe<Scalars['String']['input']>;
-  label?: InputMaybe<Scalars['String']['input']>;
-};
-
 export type DoctorsUiMutation = {
   consultationButtonLabel?: InputMaybe<Scalars['String']['input']>;
   consultationButtonUrl?: InputMaybe<Scalars['String']['input']>;
@@ -1688,7 +1670,6 @@ export type DoctorsUiMutation = {
   visionHeading?: InputMaybe<Scalars['String']['input']>;
   visionQuote?: InputMaybe<Scalars['String']['input']>;
   ctaLabel?: InputMaybe<Scalars['String']['input']>;
-  stats?: InputMaybe<Array<InputMaybe<DoctorsUiStatsMutation>>>;
   philosophyPillars?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
@@ -2001,7 +1982,7 @@ export type GlobalPartsFragment = { __typename: 'Global', navbar?: { __typename:
 
 export type HomePartsFragment = { __typename: 'Home', hero?: { __typename: 'HomeHero', titlePart1?: string | null, titlePart2?: string | null, subtitle?: string | null, video?: string | null } | null, founder?: { __typename: 'HomeFounder', quote?: string | null, image?: string | null, bio?: string | null } | null, philosophy?: { __typename: 'HomePhilosophy', hinduismText?: string | null, ayurvedaText?: string | null, rootSoulText?: string | null, branchSymptomText?: string | null } | null, individualCare?: Array<{ __typename: 'HomeIndividualCare', title?: string | null, description?: string | null } | null> | null };
 
-export type DoctorsPartsFragment = { __typename: 'Doctors', name?: string | null, lastName?: string | null, title?: string | null, quote?: string | null, tags?: Array<string | null> | null, image?: string | null, academicBio?: string | null, philosophy?: Array<string | null> | null, excellence?: Array<{ __typename: 'DoctorsExcellence', title?: string | null, description?: string | null } | null> | null, expertise?: Array<{ __typename: 'DoctorsExpertise', title?: string | null, description?: string | null } | null> | null, ui?: { __typename: 'DoctorsUi', consultationButtonLabel?: string | null, consultationButtonUrl?: string | null, heroBadgeLabel?: string | null, heroBadgeText?: string | null, journeyHeading?: string | null, expertiseHeading?: string | null, philosophyBadge?: string | null, philosophyHeading?: string | null, bridgingHeading?: string | null, legacyHeading?: string | null, visionHeading?: string | null, visionQuote?: string | null, ctaLabel?: string | null, philosophyPillars?: Array<string | null> | null, stats?: Array<{ __typename: 'DoctorsUiStats', value?: string | null, label?: string | null } | null> | null } | null };
+export type DoctorsPartsFragment = { __typename: 'Doctors', name?: string | null, lastName?: string | null, title?: string | null, quote?: string | null, tags?: Array<string | null> | null, image?: string | null, academicBio?: string | null, philosophy?: Array<string | null> | null, excellence?: Array<{ __typename: 'DoctorsExcellence', title?: string | null, description?: string | null } | null> | null, expertise?: Array<{ __typename: 'DoctorsExpertise', title?: string | null, description?: string | null } | null> | null, ui?: { __typename: 'DoctorsUi', consultationButtonLabel?: string | null, consultationButtonUrl?: string | null, heroBadgeLabel?: string | null, heroBadgeText?: string | null, journeyHeading?: string | null, expertiseHeading?: string | null, philosophyBadge?: string | null, philosophyHeading?: string | null, bridgingHeading?: string | null, legacyHeading?: string | null, visionHeading?: string | null, visionQuote?: string | null, ctaLabel?: string | null, philosophyPillars?: Array<string | null> | null } | null };
 
 export type ServicesPartsFragment = { __typename: 'Services', header?: { __typename: 'ServicesHeader', tagline?: string | null, title?: string | null, subtitle?: string | null } | null, items?: Array<{ __typename: 'ServicesItems', title?: string | null, category?: string | null, description?: string | null, features?: Array<string | null> | null, image?: string | null } | null> | null };
 
@@ -2062,7 +2043,7 @@ export type DoctorsQueryVariables = Exact<{
 }>;
 
 
-export type DoctorsQuery = { __typename?: 'Query', doctors: { __typename: 'Doctors', id: string, name?: string | null, lastName?: string | null, title?: string | null, quote?: string | null, tags?: Array<string | null> | null, image?: string | null, academicBio?: string | null, philosophy?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, excellence?: Array<{ __typename: 'DoctorsExcellence', title?: string | null, description?: string | null } | null> | null, expertise?: Array<{ __typename: 'DoctorsExpertise', title?: string | null, description?: string | null } | null> | null, ui?: { __typename: 'DoctorsUi', consultationButtonLabel?: string | null, consultationButtonUrl?: string | null, heroBadgeLabel?: string | null, heroBadgeText?: string | null, journeyHeading?: string | null, expertiseHeading?: string | null, philosophyBadge?: string | null, philosophyHeading?: string | null, bridgingHeading?: string | null, legacyHeading?: string | null, visionHeading?: string | null, visionQuote?: string | null, ctaLabel?: string | null, philosophyPillars?: Array<string | null> | null, stats?: Array<{ __typename: 'DoctorsUiStats', value?: string | null, label?: string | null } | null> | null } | null } };
+export type DoctorsQuery = { __typename?: 'Query', doctors: { __typename: 'Doctors', id: string, name?: string | null, lastName?: string | null, title?: string | null, quote?: string | null, tags?: Array<string | null> | null, image?: string | null, academicBio?: string | null, philosophy?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, excellence?: Array<{ __typename: 'DoctorsExcellence', title?: string | null, description?: string | null } | null> | null, expertise?: Array<{ __typename: 'DoctorsExpertise', title?: string | null, description?: string | null } | null> | null, ui?: { __typename: 'DoctorsUi', consultationButtonLabel?: string | null, consultationButtonUrl?: string | null, heroBadgeLabel?: string | null, heroBadgeText?: string | null, journeyHeading?: string | null, expertiseHeading?: string | null, philosophyBadge?: string | null, philosophyHeading?: string | null, bridgingHeading?: string | null, legacyHeading?: string | null, visionHeading?: string | null, visionQuote?: string | null, ctaLabel?: string | null, philosophyPillars?: Array<string | null> | null } | null } };
 
 export type DoctorsConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -2074,7 +2055,7 @@ export type DoctorsConnectionQueryVariables = Exact<{
 }>;
 
 
-export type DoctorsConnectionQuery = { __typename?: 'Query', doctorsConnection: { __typename?: 'DoctorsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'DoctorsConnectionEdges', cursor: string, node?: { __typename: 'Doctors', id: string, name?: string | null, lastName?: string | null, title?: string | null, quote?: string | null, tags?: Array<string | null> | null, image?: string | null, academicBio?: string | null, philosophy?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, excellence?: Array<{ __typename: 'DoctorsExcellence', title?: string | null, description?: string | null } | null> | null, expertise?: Array<{ __typename: 'DoctorsExpertise', title?: string | null, description?: string | null } | null> | null, ui?: { __typename: 'DoctorsUi', consultationButtonLabel?: string | null, consultationButtonUrl?: string | null, heroBadgeLabel?: string | null, heroBadgeText?: string | null, journeyHeading?: string | null, expertiseHeading?: string | null, philosophyBadge?: string | null, philosophyHeading?: string | null, bridgingHeading?: string | null, legacyHeading?: string | null, visionHeading?: string | null, visionQuote?: string | null, ctaLabel?: string | null, philosophyPillars?: Array<string | null> | null, stats?: Array<{ __typename: 'DoctorsUiStats', value?: string | null, label?: string | null } | null> | null } | null } | null } | null> | null } };
+export type DoctorsConnectionQuery = { __typename?: 'Query', doctorsConnection: { __typename?: 'DoctorsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'DoctorsConnectionEdges', cursor: string, node?: { __typename: 'Doctors', id: string, name?: string | null, lastName?: string | null, title?: string | null, quote?: string | null, tags?: Array<string | null> | null, image?: string | null, academicBio?: string | null, philosophy?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, excellence?: Array<{ __typename: 'DoctorsExcellence', title?: string | null, description?: string | null } | null> | null, expertise?: Array<{ __typename: 'DoctorsExpertise', title?: string | null, description?: string | null } | null> | null, ui?: { __typename: 'DoctorsUi', consultationButtonLabel?: string | null, consultationButtonUrl?: string | null, heroBadgeLabel?: string | null, heroBadgeText?: string | null, journeyHeading?: string | null, expertiseHeading?: string | null, philosophyBadge?: string | null, philosophyHeading?: string | null, bridgingHeading?: string | null, legacyHeading?: string | null, visionHeading?: string | null, visionQuote?: string | null, ctaLabel?: string | null, philosophyPillars?: Array<string | null> | null } | null } | null } | null> | null } };
 
 export type ServicesQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -2315,11 +2296,6 @@ export const DoctorsPartsFragmentDoc = gql`
     visionHeading
     visionQuote
     ctaLabel
-    stats {
-      __typename
-      value
-      label
-    }
     philosophyPillars
   }
 }
