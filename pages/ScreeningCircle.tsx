@@ -1,75 +1,22 @@
 import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Activity, HeartPulse, Sparkles, Stethoscope, ArrowRight, Layers } from 'lucide-react';
-import { useTina, tinaField } from 'tinacms/dist/react';
+import { HeartPulse, Sparkles, Stethoscope, Layers } from 'lucide-react';
 import screeningData from '../content/pages/screening-circle.json';
 
 type QuizAnswer = 'A' | 'B' | null;
 type QuizQuestion = { prompt: string; a: string; b: string; aLabel?: string; bLabel?: string };
 
 const ScreeningCircle: React.FC = () => {
-  const { data } = useTina({
-    query: `{
-      screening(relativePath: "screening-circle.json") {
-        tagline
-        title
-        subtitle
-        pathwayALabel
-        pathwayATag
-        pathwayBLabel
-        pathwayBTag
-        pathwayA {
-          title
-          description
-          features
-        }
-        pathwayB {
-          title
-          description
-          features
-        }
-        quiz {
-          badge
-          title
-          resetLabel
-          incompleteText
-          recommendationLabel
-          ctaLabel
-          ctaPath
-          defaultResult {
-            title
-            description
-          }
-          usaResult {
-            title
-            description
-          }
-          ancientResult {
-            title
-            description
-          }
-          questions {
-            prompt
-            a
-            b
-            aLabel
-            bLabel
-          }
-        }
-      }
-    }`,
-    variables: { relativePath: "screening-circle.json" },
-    data: { screening: screeningData },
-  });
+  const data = screeningData;
 
-  const { tagline, title, subtitle, pathwayA, pathwayB, quiz, pathwayALabel, pathwayATag, pathwayBLabel, pathwayBTag } = data.screening;
+  const { tagline, title, subtitle, pathwayA, pathwayB, quiz, pathwayALabel, pathwayATag, pathwayBLabel, pathwayBTag } = data;
   const questions: QuizQuestion[] = quiz?.questions || [];
   const [answers, setAnswers] = useState<QuizAnswer[]>(() => questions.map(() => null));
   React.useEffect(() => {
     setAnswers(questions.map(() => null));
   }, [questions.length]);
 
-  const { aCount, bCount, resultType, recommendation } = useMemo(() => {
+  const { resultType, recommendation } = useMemo(() => {
     const aCount = answers.filter((a) => a === 'A').length;
     const bCount = answers.filter((a) => a === 'B').length;
 
@@ -97,7 +44,7 @@ const ScreeningCircle: React.FC = () => {
     }
 
     return { aCount, bCount, resultType, recommendation };
-  }, [answers]);
+  }, [answers, quiz]);
 
   const allAnswered = answers.every(Boolean);
 
@@ -111,11 +58,11 @@ const ScreeningCircle: React.FC = () => {
     <div className="bg-cream min-h-screen pt-32 pb-20 px-6 font-sans">
       <div className="max-w-7xl mx-auto">
         <header className="text-center mb-16">
-          <span data-tina-field={tinaField(data.screening, 'tagline')} className="uppercase tracking-widest font-black text-xs text-accent-orange mb-3 block">
+          <span className="uppercase tracking-widest font-black text-xs text-accent-orange mb-3 block">
             {tagline}
           </span>
-          <h1 data-tina-field={tinaField(data.screening, 'title')} className="font-display text-5xl md:text-8xl text-dark-brown mt-4 mb-6 leading-tight">{title}</h1>
-          <p data-tina-field={tinaField(data.screening, 'subtitle')} className="max-w-3xl mx-auto text-dark-brown/70 font-serif italic text-xl md:text-2xl leading-relaxed">
+          <h1 className="font-display text-5xl md:text-8xl text-dark-brown mt-4 mb-6 leading-tight">{title}</h1>
+          <p className="max-w-3xl mx-auto text-dark-brown/70 font-serif italic text-xl md:text-2xl leading-relaxed">
             {subtitle}
           </p>
         </header>
@@ -128,16 +75,16 @@ const ScreeningCircle: React.FC = () => {
               <div className="w-16 h-16 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform">
                 <Stethoscope size={32} />
               </div>
-              <div data-tina-field={tinaField(pathwayA)}>
-                <p data-tina-field={tinaField(data.screening, 'pathwayALabel')} className="text-[10px] uppercase tracking-widest font-black text-dark-brown/40 mb-1">{pathwayALabel}</p>
-                <h2 data-tina-field={tinaField(pathwayA, 'title')} className="font-display text-4xl text-dark-brown">{pathwayA.title}</h2>
-                <p data-tina-field={tinaField(data.screening, 'pathwayATag')} className="text-xs text-accent-orange font-black uppercase tracking-widest mt-1">{pathwayATag}</p>
+              <div>
+                <p className="text-[10px] uppercase tracking-widest font-black text-dark-brown/40 mb-1">{pathwayALabel}</p>
+                <h2 className="font-display text-4xl text-dark-brown">{pathwayA.title}</h2>
+                <p className="text-xs text-accent-orange font-black uppercase tracking-widest mt-1">{pathwayATag}</p>
               </div>
             </div>
-            <p data-tina-field={tinaField(pathwayA, 'description')} className="text-dark-brown/70 text-lg leading-relaxed mb-10">
+            <p className="text-dark-brown/70 text-lg leading-relaxed mb-10">
               {pathwayA.description}
             </p>
-            <div data-tina-field={tinaField(pathwayA, 'features')} className="space-y-6 text-dark-brown/60 text-sm">
+            <div className="space-y-6 text-dark-brown/60 text-sm">
                {pathwayA.features && pathwayA.features.map((f: string, i: number) => (
                  <div key={i} className="flex gap-4"><HeartPulse size={18} className="text-accent-orange shrink-0" /> <span>{f}</span></div>
                ))}
@@ -151,16 +98,16 @@ const ScreeningCircle: React.FC = () => {
               <div className="w-16 h-16 rounded-2xl bg-white/10 text-white flex items-center justify-center group-hover:scale-110 transition-transform">
                 <Sparkles size={32} />
               </div>
-              <div data-tina-field={tinaField(pathwayB)}>
-                <p data-tina-field={tinaField(data.screening, 'pathwayBLabel')} className="text-[10px] uppercase tracking-widest font-black text-white/40 mb-1">{pathwayBLabel}</p>
-                <h2 data-tina-field={tinaField(pathwayB, 'title')} className="font-display text-4xl text-white">{pathwayB.title}</h2>
-                <p data-tina-field={tinaField(data.screening, 'pathwayBTag')} className="text-xs text-accent-orange font-black uppercase tracking-widest mt-1">{pathwayBTag}</p>
+              <div>
+                <p className="text-[10px] uppercase tracking-widest font-black text-white/40 mb-1">{pathwayBLabel}</p>
+                <h2 className="font-display text-4xl text-white">{pathwayB.title}</h2>
+                <p className="text-xs text-accent-orange font-black uppercase tracking-widest mt-1">{pathwayBTag}</p>
               </div>
             </div>
-            <p data-tina-field={tinaField(pathwayB, 'description')} className="text-cream/70 text-lg leading-relaxed mb-10 italic font-serif">
+            <p className="text-cream/70 text-lg leading-relaxed mb-10 italic font-serif">
               {pathwayB.description}
             </p>
-            <div data-tina-field={tinaField(pathwayB, 'features')} className="space-y-6 text-cream/60 text-sm relative z-10">
+            <div className="space-y-6 text-cream/60 text-sm relative z-10">
                {pathwayB.features && pathwayB.features.map((f: string, i: number) => (
                  <div key={i} className="flex gap-4"><Sparkles size={18} className="text-accent-orange shrink-0" /> <span>{f}</span></div>
                ))}
@@ -172,13 +119,13 @@ const ScreeningCircle: React.FC = () => {
         <section className="bg-white rounded-[4rem] shadow-xl p-8 md:p-20 border border-dark-brown/5 relative overflow-hidden">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-10 mb-16 relative z-10">
             <div>
-              <span data-tina-field={tinaField(quiz, 'badge')} className="uppercase tracking-widest font-black text-xs text-accent-orange mb-4 block">{quiz?.badge}</span>
-              <h2 data-tina-field={tinaField(quiz, 'title')} className="font-display text-5xl md:text-6xl text-dark-brown leading-tight">{quiz?.title}</h2>
+              <span className="uppercase tracking-widest font-black text-xs text-accent-orange mb-4 block">{quiz?.badge}</span>
+              <h2 className="font-display text-5xl md:text-6xl text-dark-brown leading-tight">{quiz?.title}</h2>
             </div>
             <button onClick={reset} className="px-8 py-3 rounded-full border border-dark-brown/10 text-[10px] font-black uppercase tracking-widest text-dark-brown/40 hover:text-accent-orange transition-all">{quiz?.resetLabel}</button>
           </div>
 
-          <div data-tina-field={tinaField(quiz, 'questions')} className="space-y-12 relative z-10 mb-20">
+          <div className="space-y-12 relative z-10 mb-20">
             {questions.map((q, index) => (
               <div key={index} className="border-b border-dark-brown/5 pb-12 last:border-0">
                 <p className="font-display text-3xl text-dark-brown mb-8"><span className="text-accent-orange mr-4 font-sans text-xl font-black">0{index + 1}</span> {q.prompt}</p>
@@ -210,7 +157,7 @@ const ScreeningCircle: React.FC = () => {
                   {recommendation.icon}
                 </div>
                 <div className="flex-grow">
-                  <p data-tina-field={tinaField(quiz, 'recommendationLabel')} className="text-[10px] uppercase tracking-widest font-black text-accent-orange mb-2">{quiz?.recommendationLabel}</p>
+                  <p className="text-[10px] uppercase tracking-widest font-black text-accent-orange mb-2">{quiz?.recommendationLabel}</p>
                   <h3 className="font-display text-4xl md:text-5xl mb-4 text-white uppercase tracking-tighter">{recommendation.title}</h3>
                   <p className="text-cream/70 text-lg font-serif italic max-w-2xl">{recommendation.desc}</p>
                 </div>
@@ -222,7 +169,7 @@ const ScreeningCircle: React.FC = () => {
           )}
           {!allAnswered && (
             <div className="text-center py-10 border-2 border-dashed border-dark-brown/10 rounded-[3rem]">
-              <p data-tina-field={tinaField(quiz, 'incompleteText')} className="text-dark-brown/40 uppercase tracking-[0.2em] font-black text-xs">{quiz?.incompleteText}</p>
+              <p className="text-dark-brown/40 uppercase tracking-[0.2em] font-black text-xs">{quiz?.incompleteText}</p>
             </div>
           )}
         </section>

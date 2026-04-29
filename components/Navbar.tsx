@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { Menu, X, Circle, Aperture, Heart } from 'lucide-react';
-import { useTina } from 'tinacms/dist/react';
 import globalData from '../content/global/index.json';
 
 const normalizeInternalPath = (path: string) => {
@@ -16,28 +15,12 @@ const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
-  const { data } = useTina({
-    query: `{
-      global(relativePath: "index.json") {
-        navbar {
-          logoText
-          navLinks {
-            label
-            path
-          }
-        }
-      }
-    }`,
-    variables: { relativePath: "index.json" },
-    data: { global: globalData },
-  });
-
   const toggleMenu = () => setIsOpen(!isOpen);
   React.useEffect(() => {
     setIsOpen(false);
   }, [location.pathname]);
 
-  const { logoText, navLinks } = data.global.navbar;
+  const { logoText, navLinks } = globalData.navbar;
 
   return (
     <>
@@ -127,7 +110,7 @@ const Navbar: React.FC = () => {
       <div className={`fixed inset-0 bg-[#FAF3F0] z-[60] transform ${isOpen ? 'translate-x-0 pointer-events-auto' : '-translate-x-full pointer-events-none'} transition-transform duration-500 xl:hidden pt-28 px-8 overflow-y-auto pb-10`}>
         <div className="flex flex-col space-y-6 items-center text-center">
           <Link to="/" onClick={toggleMenu} className="text-4xl font-display text-[#4A314D] hover:text-[#8E5D52]">Home</Link>
-          {navLinks.map((link) => {
+          {navLinks.map((link: any) => {
             const normalizedPath = normalizeInternalPath(link.path);
             return isExternal(normalizedPath) ? (
               <a

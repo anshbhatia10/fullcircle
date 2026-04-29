@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Flower2, ShieldCheck, Stethoscope, Sparkles, Wind, ArrowRight } from 'lucide-react';
-import { useTina, tinaField } from 'tinacms/dist/react';
 import pcpData from '../content/pages/full-circle-pcp.json';
 
 const IconMap: any = {
@@ -11,22 +10,7 @@ const IconMap: any = {
 };
 
 const FullCirclePCP: React.FC = () => {
-  const { data } = useTina({
-    query: `{
-      pcp(relativePath: "full-circle-pcp.json") {
-        tagline
-        title
-        subtitle
-        features {
-          title
-          description
-          icon
-        }
-      }
-    }`,
-    variables: { relativePath: "full-circle-pcp.json" },
-    data: { pcp: pcpData },
-  });
+  const data = { pcp: pcpData };
 
   const { tagline, title, subtitle, features } = data.pcp;
 
@@ -34,9 +18,9 @@ const FullCirclePCP: React.FC = () => {
     <div className="bg-cream min-h-screen pt-32 pb-20 px-6 font-sans">
       <div className="max-w-7xl mx-auto">
         <header className="text-center mb-16">
-          <span data-tina-field={tinaField(data.pcp, 'tagline')} className="uppercase tracking-widest font-black text-xs text-accent-orange mb-3 block">{tagline}</span>
-          <h1 data-tina-field={tinaField(data.pcp, 'title')} className="font-display text-5xl md:text-8xl text-dark-brown mt-4 mb-6 leading-tight">{title}</h1>
-          <p data-tina-field={tinaField(data.pcp, 'subtitle')} className="max-w-3xl mx-auto text-dark-brown/70 font-serif italic text-xl md:text-2xl leading-relaxed">
+          <span className="uppercase tracking-widest font-black text-xs text-accent-orange mb-3 block">{tagline}</span>
+          <h1 className="font-display text-5xl md:text-8xl text-dark-brown mt-4 mb-6 leading-tight">{title}</h1>
+          <p className="max-w-3xl mx-auto text-dark-brown/70 font-serif italic text-xl md:text-2xl leading-relaxed">
             {subtitle}
           </p>
         </header>
@@ -96,8 +80,8 @@ const FullCirclePCP: React.FC = () => {
                 <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-8 relative z-10 group-hover:scale-110 transition-transform ${i === 1 ? 'bg-white/10 text-white' : i === 0 ? 'bg-blue-50 text-blue-600' : 'bg-orange-50 text-accent-orange'}`}>
                   <Icon size={32} />
                 </div>
-                <h3 data-tina-field={tinaField(feature, 'title')} className={`font-display text-4xl mb-4 relative z-10 ${i === 1 ? 'text-white' : 'text-dark-brown'}`}>{feature.title}</h3>
-                <p data-tina-field={tinaField(feature, 'description')} className={`text-sm leading-relaxed font-sans relative z-10 ${i === 1 ? 'text-cream/60' : 'text-dark-brown/60'}`}>
+                <h3 className={`font-display text-4xl mb-4 relative z-10 ${i === 1 ? 'text-white' : 'text-dark-brown'}`}>{feature.title}</h3>
+                <p className={`text-sm leading-relaxed font-sans relative z-10 ${i === 1 ? 'text-cream/60' : 'text-dark-brown/60'}`}>
                   {feature.description}
                 </p>
               </div>

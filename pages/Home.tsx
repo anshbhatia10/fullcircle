@@ -4,41 +4,10 @@ import { ArrowRight, Activity, Heart, Sparkles, Compass, ShieldCheck, Palette, C
 import treeVideo from '../The_tree_featured_1080p_smooth.mp4';
 import ownerImage from '../PHOTO-2026-04-05-16-06-43.jpg';
 import drImage from '../1456482892.jpg';
-import { useTina } from "tinacms/dist/react";
 import homeContent from '../content/home.json';
 
-const Home: React.FC = (props) => {
-  const { data } = useTina({
-    query: `{
-      home(relativePath: "home.json") {
-        hero {
-          titlePart1
-          titlePart2
-          subtitle
-          video
-        }
-        founder {
-          quote
-          image
-          bio
-        }
-        philosophy {
-          hinduismText
-          ayurvedaText
-          rootSoulText
-          branchSymptomText
-        }
-        individualCare {
-          title
-          description
-        }
-      }
-    }`,
-    variables: { relativePath: "home.json" },
-    data: { home: homeContent },
-  });
-
-  const { hero, founder, philosophy, individualCare } = data.home;
+const Home: React.FC = () => {
+  const { hero, founder, philosophy, individualCare } = homeContent;
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -171,7 +140,7 @@ const Home: React.FC = (props) => {
                 <p className="text-lg font-serif italic text-dark-brown/90 mb-6">
                   "{founder.quote}"
                 </p>
-                {founder.bio.split('\n\n').map((paragraph, i) => (
+                {founder.bio.split('\n\n').map((paragraph: string, i: number) => (
                     <p key={i}>{paragraph}</p>
                 ))}
               </div>
